@@ -1,0 +1,1 @@
+[07-Dec-2017 00:35:01 Asia/Bangkok] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home/cp525119/public_html/dist/home/users.php on line 17

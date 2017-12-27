@@ -1,0 +1,140 @@
+/*!
+ * Start Bootstrap - Creative v4.0.0-beta.2 (https://startbootstrap.com/template-overviews/creative)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-creative/blob/master/LICENSE)
+ */
+@import url('https://fonts.googleapis.com/css?family=Kanit:400,600');
+
+body,
+html {
+  width: 100%;
+  height: 100%; }
+
+hr {
+  max-width: 50px;
+  border-width: 3px;
+  border-color: #F05F40; }
+
+hr.light {
+  border-color: #fff; }
+
+a {
+  color: #F05F40;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s; }
+  a:hover {
+    color: #f05f40; }
+
+.bg-primary {
+  background-color: #F05F40 !important; }
+
+.bg-dark {
+  background-color: #212529 !important; }
+
+.text-faded {
+  color: rgba(255, 255, 255, 0.7); }
+
+section {
+  padding: 8rem 0; }
+
+.section-heading {
+  margin-top: 0; }
+
+::-moz-selection {
+  color: #fff;
+  background: #212529;
+  text-shadow: none; }
+
+::selection {
+  color: #fff;
+  background: #212529;
+  text-shadow: none; }
+
+img::selection {
+  color: #fff;
+  background: transparent; }
+
+img::-moz-selection {
+  color: #fff;
+  background: transparent; }
+
+body {
+  -webkit-tap-highlight-color: #212529; }
+
+.text-primary {
+  color: #F05F40 !important; }
+
+.btn {
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  border-radius: 300px;
+  font-family: 'Kanit', sans-serif; }
+
+.btn-xl {
+  padding: 1rem 2rem; }
+
+.btn-primary {
+  background-color: #F05F40;
+  border-color: #F05F40; }
+  .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    color: #fff;
+    background-color: #ee4b28 !important; }
+  .btn-primary:active, .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important; }
+    .btn-primary.disabled, .btn-primary:disabled{
+      background-color: #F05F40 !important;
+      border: 1px solid #F05F40;
+    }
+
+.top-content{
+  margin-top:50px;
+}
+
+.form-box{
+  font-family: 'Kanit', sans-serif;
+  background: #fff;
+  padding: 20px;
+  color: #333;
+  text-align: left;
+  margin-bottom: 60px;
+  box-shadow: 0px 0px 10px #444;
+}
+
+.form-box .form-top {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.form-box .form-top h2{
+  font-family: 'Kanit', sans-serif;
+  font-weight: 600;
+}
+
+.form-box .form-bottom{
+  padding: 0 40px;
+  margin: 40px 0;
+}
+
+.form-box .form-bottom label{
+  padding-left: 5px;
+}
+
+.form-box .form-bottom input{
+  font-family: 'Tahoma', sans-serif;
+}
+
+.form-box .form-bottom .invalid{
+  border-color: #dc3545;
+}
+
+.form-box .form-bottom .valid{
+  border-color: #28a745;
+}
+
+footer{
+  color: #fff;
+  margin-bottom: 50px;
+}
