@@ -33,7 +33,9 @@ $user = mysqli_fetch_assoc($user);
             <div class="col-md-12 form-group text-center">
               <h3>Profile Picture</h3>
               <img src="/uploads/profile_image/<?=$user['profile_image']?>" style="border: 2px solid white; margin-right:10px;" class="img-circle" width="150px" /> <button id="btnChangePic" type="submit" class="btn btn-success btn-lg">Change</button>
-              <input type="file" id="profilepic" />
+              <div class="hiddenfile">
+                <input name="profilepic" type="file" id="profilepic" accept="image/*"/>
+              </div>
             </div>
             
           </div>
