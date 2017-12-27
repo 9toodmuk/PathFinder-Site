@@ -194,6 +194,12 @@ class JobController {
     }
   }
 
+  public static function getAllDisabilityType(){
+    $conn = Database::connection();
+    $sql = "SELECT * FROM user_disability";
+    return $conn->query($sql);
+  }
+
   public static function getJobCategory($id){
     $conn = Database::connection();
     $sql = "SELECT * FROM job_categories WHERE id = '$id';";
