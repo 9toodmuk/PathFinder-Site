@@ -145,6 +145,10 @@ img { max-width: 100%; }
 	text-align: left;
 }
 
+.form-bottom form label {
+	margin-left: 5px;
+}
+
 .form-bottom form textarea {
 	height: 100px;
 }

@@ -32,62 +32,95 @@ $user = mysqli_fetch_assoc($user);
 
             <div class="col-md-12 form-group text-center">
               <h3>Profile Picture</h3>
-              <img src="/uploads/profile_image/default.png" style="border: 2px solid white; margin-right:10px;" class="img-circle" width="150px" /> <button id="btnChangePic" type="submit" class="btn btn-success btn-lg">Upload</button>
+              <img src="/uploads/profile_image/<?=$user['profile_image']?>" style="border: 2px solid white; margin-right:10px;" class="img-circle" width="150px" /> <button id="btnChangePic" type="submit" class="btn btn-success btn-lg">Change</button>
+              <input type="file" id="profilepic" />
             </div>
             
           </div>
           
           <div class="tab">
-
+            <h3 class="text-center" style="margin-bottom: 40px;">Personal Details</h3>
             <div class="col-md-6 form-group">
+              <label>ชื่อ</label>
               <input type="text" name="firstname" id="firstname" class="form-control" placeholder="<?=$lang['name']?>" value="<?=$user['first_name']?>" required>
             </div>
 
             <div class="col-md-6 form-group">
+              <label>นามสกุล</label>
               <input type="text" name="lastname" id="lastname" class="form-control" placeholder="<?=$lang['lastname']?>" value="<?=$user['last_name']?>" required>
             </div>
 
             <div class="col-md-12 form-group">
+              <label>เพศ</label>
               <select name="gender" class='form-control' required>
                 <option value="">กรุณาเลือกเพศ</option>
-                <option value="0"><?=$lang['male']?></option>
-                <option value="1"><?=$lang['female']?></option>
+                <option value="0" <?=$user['sex'] == 0 ? "selected" : "" ?>><?=$lang['male']?></option>
+                <option value="1" <?=$user['sex'] == 1 ? "selected" : "" ?>><?=$lang['female']?></option>
               </select>
             </div>
 
             <div class="col-md-12 form-group">
+              <label>วันเกิด</label>
               <input type='text' class="form-control" value='<?=$user['birthdate']?>' id='datetimepicker' data-date-format="yyyy-mm-dd" data-link-field="birthday" data-link-format="yyyy-mm-dd"/>
               <input type="hidden" name="birthday" id="birthday" value="<?=$user['birthdate']?>"/>
             </div>
 
             <div class="col-md-12 form-group">
+              <label>ความบกพร่องในตัวคุณ</label>
               <select name="gender" class='form-control' required>
-                <option value="">ความบกพร่องในตัวคุณ</option>
-                <option value="0">ไม่มีความบกพร่อง</option>
+                <option value="">กรุณาเลือก</option>
+                <option value="0" <?=$user['disability'] == 0 ? "selected" : "" ?>>ไม่มีความบกพร่อง</option>
                   <?php
                     while($row = $disability->fetch_assoc()){
-                      echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                      $selected = $user['disability'] == $row['id'] ? "selected" : "";
+                      echo "<option value='".$row['id']."' ".$selected.">".$row['name']."</option>";
                     }
                   ?>
               </select>
             </div>
 
             <div class="col-md-12 form-group">
-              <input type="text" name="telephone" id="telephone" class="form-control" placeholder="Telephone" value="">
+              <label>หมายเลขโทรศัพท์</label>
+              <input type="text" name="telephone" id="telephone" class="form-control" placeholder="Telephone" value="<?=$user['telephone']?>">
             </div>
 
             <div class="col-md-12 form-group">
-              <input type="text" name="Facebook" id="facebook" class="form-control" placeholder="Facebook" value="">
+              <label>Facebook</label>
+              <input type="text" name="Facebook" id="facebook" class="form-control" placeholder="Facebook" value="<?=$user['facebook']?>">
             </div>
 
             <div class="col-md-12 form-group">
-              <input type="text" name="Twitter" id="twitter" class="form-control" placeholder="Twitter" value="">
+              <label>Twitter</label>
+              <input type="text" name="Twitter" id="twitter" class="form-control" placeholder="Twitter" value="<?=$user['twitter']?>">
             </div>
-
+            
             <div class="col-md-12 form-group">
-              <input type="text" name="Line" id="line" class="form-control" placeholder="Line" value="">
+              <label>LINE</label>
+              <input type="text" name="Line" id="line" class="form-control" placeholder="Line" value="<?=$user['line']?>">
             </div>
 
+          </div>
+
+          <div class="tab">
+            <h3 class="text-center" style="margin-bottom: 40px;">Job Experiences</h3>
+            <div class="col-md-12 form-group">
+              <label>ประสบการณ์ของคุณ</label>
+              <select name="exp" class="form-control" id="exp" required>
+                    <option value="">กรุณาเลือก</option>
+                    <option value="-1">ไม่มีประสบการณ์</option>
+                    <option value="0">น้อยกว่า 1 ปี</option>
+                    <?php
+                      for ($x = 1; $x<=20; $x++) {
+                        if ($x > 1) {
+                          echo "<option value=".$x.">".$x." ปี</option>";
+                        } else {
+                          echo "<option value=".$x.">".$x." ปี</option>";
+                        }
+                    }
+                  ?>
+                <option value="21">มากกว่า 20 ปี</option>
+              </select>
+            </div>
           </div>
 
           <div class="col-md-12">
