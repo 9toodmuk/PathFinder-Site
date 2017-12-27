@@ -149,7 +149,7 @@ img { max-width: 100%; }
 	height: 100px;
 }
 
-.form-bottom form button.btn {
+.form-bottom form button.btn-main {
 	width: 100%;
 }
 
@@ -170,7 +170,7 @@ img { max-width: 100%; }
 }
 
 .btn {
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   border: none;
   cursor: pointer;
@@ -182,6 +182,10 @@ img { max-width: 100%; }
 .btn-primary {
   background-color: #F05F40;
   border-color: #F05F40; }
+
+.btn-default {
+  background-color: #eee;
+  border-color: #eee; }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   color: #fff;
@@ -209,3 +213,27 @@ img { max-width: 100%; }
 
 
 .g-recaptcha div { margin-left: auto; margin-right: auto;}
+
+.step {
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	background-color: #bbbbbb;
+	border: none; 
+	border-radius: 50%;
+	display: inline-block;
+	opacity: 0.5;
+}
+
+.step.active {
+	opacity: 1;
+}
+
+.step.finish {
+	background-color: #4CAF50;
+}
+
+.pull-mid{
+	margin-left: auto;
+	margin-right: auto;
+}

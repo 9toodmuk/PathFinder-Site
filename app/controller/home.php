@@ -10,6 +10,7 @@ class Home extends Controller{
   protected $timeline = 'app/view/layouts/main/timeline/index.php';
   protected $formlogin = 'app/view/layouts/index/forms/formlogin.php';
   protected $registerlogin = 'app/view/layouts/index/forms/formregister.php';
+  protected $createprofile = 'app/view/layouts/index/forms/formcreateprofile.php';
   protected $favorite = 'app/view/layouts/main/user/favorite.php';
 
   public function __construct(){
@@ -30,6 +31,15 @@ class Home extends Controller{
       exit();
     }else{
       echo View::render($this->indexlayout, $this->registerlogin);
+    }
+  }
+
+  public static function createprofile(){
+    if(!isset($_SESSION['social_id'])){
+      header("Location: /");
+      exit();
+    }else{
+      echo View::render($this->indexlayout, $this->createprofile);
     }
   }
 
