@@ -67,6 +67,11 @@ option {
   color: black;
 }
 
+.invalid {
+  border-color: #d9534f !important;
+  color: gray;
+}
+
 select:required:invalid {
   color: gray;
 }

@@ -9,10 +9,10 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment-with-locales.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.5.1/croppie.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.2.1/cropper.min.js"></script>
   <link rel="stylesheet" href="/themes/stylesheets/bootstrap-datetimepicker.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.5.1/croppie.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.2.1/cropper.min.css">
   <link rel="stylesheet" href="/themes/stylesheets/form-elements.css">
   <link rel="stylesheet" href="/themes/stylesheets/style.css">
   <script type="text/javascript" src="/themes/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
