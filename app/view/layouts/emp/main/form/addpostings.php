@@ -1,5 +1,7 @@
 <?php
 use Controller\Employer\Detail;
+use Controller\Job\JobController;
+
 $compid = Detail::getEmpId($_SESSION['emp_id']);
 $location = Detail::getLocation($compid);
 ?>
