@@ -30,9 +30,9 @@ $user = mysqli_fetch_assoc($user);
 
           <div class="tab">
 
-            <div class="col-md-12 form-group text-center">
-              <h3>Profile Picture</h3>
-              <img src="/uploads/profile_image/<?=$user['profile_image']?>" style="border: 2px solid white; margin-right:10px;" class="img-circle" width="150px" /> <button id="btnChangePic" type="submit" class="btn btn-success btn-lg">Change</button>
+            <div class="col-md-12 form-group text-center" style="margin-bottom: 40px;">
+              <h3 style="margin-bottom: 40px;">Profile Picture</h3>
+              <img src="/uploads/profile_image/<?=$user['profile_image']?>" id="finalmyimage" style="border: 2px solid white; margin-right:10px;" class="img-circle" width="150px" /> <button id="btnChangePic" type="submit" class="btn btn-success btn-lg" onclick="uploadProfilePic()">Change</button>
               <div class="hiddenfile">
                 <input name="profilepic" type="file" id="profilepic" accept="image/*"/>
               </div>
@@ -151,4 +151,57 @@ $user = mysqli_fetch_assoc($user);
   </div>
 </div>
 
+<div class="modal fade" id="editprofilepic" tabindex="-1" role="dialog" aria-labelledby="editprofilepic" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title custom_align" id="Heading"> แก้ไขรูปโปรไฟล์</h4>
+      </div>
+      <div class="modal-body">
+
+      <div class="demo"></div>
+
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-success" onclick="upload()"><i class="fa fa-check" aria-hidden="true"></i> Upload</a>
+        <a href="#" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> <?=$lang['Close']?></a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="/themes/js/createprofile.js"></script>
+
+<script type="text/javascript">
+	function readURL(input){
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				$('.demo').croppie({
+          url: e.target.result,
+          viewport: { width: 280, height: 280, type: 'square' },
+          boundary: { width: 300, height: 300 },
+          showZoomer: true,
+          setZoom: 0.2,
+          enableOrientation: true
+        });
+			}
+		}
+
+		reader.readAsDataURL(input.files[0]);
+	}
+
+	function uploadProfilePic(){
+		var picture = $("input#profilepic");
+
+		picture.click();
+
+		picture.change(function(){
+			readURL(this);
+      console.log(profilepic.files.length);
+      $('#editprofilepic').modal('show');
+		});
+  }
+</script>
