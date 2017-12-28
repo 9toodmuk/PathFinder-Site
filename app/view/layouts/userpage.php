@@ -86,6 +86,96 @@ $lang = Language::loadLanguage($language);
     }
   </script>
 
+<script type="text/javascript">
+
+var formData = new FormData();
+  var image = document.getElementById('demo');
+
+var cropper = new Cropper(image, {
+  minContainerWidth: 350,
+  minContainerHeight: 350,
+  aspectRatio: 1/1,
+  viewMode: 1
+});
+
+function readURL(input){
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      setPicture(e.target.result);
+    }
+  }
+
+  reader.readAsDataURL(input.files[0]);
+}
+
+function setPicture(picture){
+    cropper.replace(picture);
+  }
+
+function removeProfilePic(){
+  var id = <?=$_SESSION['social_id']?>;
+  $.ajax({
+    url: '/user/removepropic/',
+    type: 'POST',
+    data: {id: id},
+    dataType: "json",
+    success: function(result){
+      if(result.status){
+        $("#headerprofilepic").attr('src', result.url);
+        alert("Success");
+      }
+    }
+  });
+}
+
+function uploadProfilePic(){
+  var picture = $("input#profilepic");
+
+  $(picture).click();
+
+  picture.change(function(){
+    readURL(this);
+    console.log(profilepic.files.length);
+    $('#editprofilepic').modal('show');
+  });
+}
+
+function upload(){
+  var formData = new FormData();
+  var uploader = <?=$_SESSION['social_id']?>;
+
+  $('#btnSubmit').button('loading');
+
+  var newimage = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+
+  cropper.getCroppedCanvas().toBlob(function (blob) {
+    var fileext = blob.type;
+    var filetype = fileext.replace("image/","");
+    var filename = "profilePic."+filetype;
+    console.log(blob);
+    formData.append("file", blob, filename);
+    formData.append("uploader", uploader);
+
+    $.ajax({
+      url: '/user/uploadpic/',
+      type: 'POST',
+      data: formData,
+      contentType: false,
+      processData: false,
+      dataType: 'json',
+      success: function(result){
+        if(result.status){
+          alert("Success")
+          location.reload();
+        }
+      }
+    });
+  });  
+}
+</script>
+
 </body>
 
 </html>

@@ -108,7 +108,7 @@ a:hover {
   text-decoration: none;
 }
 
-:focus {d
+:focus {
   outline: none;
 }
 
@@ -1196,4 +1196,8 @@ h3 {
 .job-card strong{
   margin:0px;
   font-weight: 700;
+}
+
+.cropper-container{
+	margin: 0 auto;
 }

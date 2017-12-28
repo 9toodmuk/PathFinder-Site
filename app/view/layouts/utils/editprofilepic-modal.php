@@ -11,15 +11,13 @@
           <input name="profilepic" type="file" id="profilepic" accept="image/*"/>
         </div>
 
-      <div class="demo">
-        <center>
-          <img id="myimage" src="/uploads/profile_image/default.png" width="500px" height="500px" />
-        </center>
-      </div>
+        <div class="text-center">
+          <img id="demo">
+        </div>
 
       </div>
       <div class="modal-footer">
-        <a href="#" class="btn btn-success" onclick="upload()"><i class="fa fa-check" aria-hidden="true"></i> Upload</a>
+        <button id="btnSubmit" type="button" class="btn btn-success" onclick="upload()" data-loading-text="<?=$lang['processing']?>"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
         <a href="#" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> <?=$lang['Close']?></a>
       </div>
     </div>

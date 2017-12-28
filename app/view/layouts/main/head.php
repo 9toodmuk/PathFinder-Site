@@ -11,11 +11,11 @@
   <link rel="stylesheet" href="/themes/stylesheets/bootstrap-multiselect.css" type="text/css" />
   <link rel="stylesheet" href="/themes/stylesheets/bootstrap-datetimepicker.min.css">
   <link rel="stylesheet" href="/themes/stylesheets/typeaheadjs.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.1.3/cropper.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.2.1/cropper.min.css">
   <script type="text/javascript" src="/themes/js/bootstrap-multiselect.js"></script>
   <script type="text/javascript" src="/themes/js/main.js"></script>
   <script type="text/javascript" src="/themes/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.1.3/cropper.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.2.1/cropper.min.js"></script>
   <script src="/themes/js/typeahead.jquery.min.js" type="text/javascript"></script>
   <script src="/themes/js/bloodhound.min.js" type="text/javascript"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote-bs4.css" rel="stylesheet">
