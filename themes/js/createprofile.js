@@ -1,5 +1,6 @@
 $("#errorbox").hide();
 $("#expdetail").hide();
+$("#edudetail").hide();
 
 var currenttab = 0;
 showTab(currenttab);
@@ -95,6 +96,40 @@ $(function () {
         locale: 'th'
     });
     moment().format();
+
+    $('#start').datetimepicker({
+        viewMode: 'years',
+        format: 'yyyy-mm',
+        weekStart: 0,
+        autoclose: 1,
+        startView: 4,
+        minView: 3,
+        forceParse: 1,
+        locale: 'th'
+      });
+  
+      $('#end').datetimepicker({
+        viewMode: 'years',
+        format: 'yyyy-mm',
+        weekStart: 0,
+        autoclose: 1,
+        startView: 4,
+        minView: 3,
+        forceParse: 1,
+        locale: 'th'
+      });
+      moment().format();
+});
+
+$('select#edu').on('change', function(){
+    console.log($(this).val());
+    if($(this).val() >= 1){
+        $("#edudetail").show();
+        $("#edudetail input").prop('required', true);
+    }else{
+        $("#edudetail").hide();
+        $("#edudetail input").prop('required', false);
+    }
 });
 
 $('select#exp').on('change', function(){
@@ -106,4 +141,14 @@ $('select#exp').on('change', function(){
         $("#expdetail").hide();
         $("#expdetail input").prop('required', false);
     }
-})
+});
+
+$('#now').click(function(){
+    if($(this).is(":checked")) {
+      $("#end").prop('disabled', true);
+      $("#end").prop('required', false);
+    }else{
+      $("#end").prop('disabled', false);
+      $("#end").prop('required', true);
+    }
+});

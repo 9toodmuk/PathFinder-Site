@@ -1,6 +1,7 @@
 <?php
 use Controller\Job\JobController;
 use Controller\User\Profile;
+use Controller\Admin\Postings;
 
 $disability = JobController::getAllDisabilityType();
 $user = Profile::profileLoad($_SESSION['social_id']);
@@ -132,6 +133,19 @@ $user = mysqli_fetch_assoc($user);
                 <label>ชื่อบริษัท</label>
                 <input type="text" name="recent_emp" id="recent_emp" class="form-control" placeholder="ชื่อบริษัท" value="">
               </div>
+
+              <div class="col-md-12 form-group">
+                <label>ระยะเวลา</label>
+                <div class="input-group">
+                  <input type="text" name="start" id="start" class="form-control" value="" placeholder="<?=$lang['From']?>" data-date-format="yyyy-mm" data-link-field="startdate" data-link-format="yyyy-mm">
+                  <span class="input-group-addon"> <?=$lang['To']?> </span>
+                  <input type="text" name="end" id="end" class="form-control" value="" placeholder="<?=$lang['To']?>" data-date-format="yyyy-mm" data-link-field="enddate" data-link-format="yyyy-mm">
+                  <label class="input-group-addon"><input type="checkbox" name="now" id="now"> <?=$lang['now']?></label>
+                </div>
+
+                <input type='hidden' id='startdate' value=''/>
+                <input type='hidden' id='enddate' value=''/>
+              </div>
             </div>
             
           </div>
@@ -139,33 +153,34 @@ $user = mysqli_fetch_assoc($user);
           <div class="tab">
             <h3 class="text-center" style="margin-bottom: 40px;">Job Experiences</h3>
             <div class="col-md-12 form-group">
-              <label>ประสบการณ์ของคุณ</label>
-              <select name="exp" class="form-control" id="exp" required>
+              <label>การศึกษาสูงสุด</label>
+              <select name="edu" class="form-control" id="edu" required>
                     <option value="" disabled selected>กรุณาเลือก</option>
-                    <option value="-1">ไม่มีประสบการณ์</option>
-                    <option value="0">น้อยกว่า 1 ปี</option>
+                    <option value="0">ไม่มีประวัติการศึกษา</option>
                     <?php
-                      for ($x = 1; $x<=20; $x++) {
-                        if ($x > 1) {
-                          echo "<option value=".$x.">".$x." ปี</option>";
-                        } else {
-                          echo "<option value=".$x.">".$x." ปี</option>";
-                        }
-                    }
-                  ?>
-                <option value="21">มากกว่า 20 ปี</option>
+                      for ($i=1; $i <= 5 ; $i++) {
+                        echo "<option value=".$i.">";
+                        Postings::eduLevel($i);
+                        echo "</option>";
+                      }
+                    ?>
               </select>
             </div>
 
-            <div id="expdetail">
+            <div id="edudetail">
               <div class="col-md-12 form-group">
-                <label>ตำแหน่งงานล่าสุด</label>
-                <input type="text" name="recent_work" id="recent_work" class="form-control" placeholder="ตำแหน่งงานล่าสุด" value="">
+                <label>ชื่อสถาบัน</label>
+                <input type="text" name="highest_insitute" id="highest_insitute" class="form-control" placeholder="ชื่อสถาบัน" value="">
               </div>
 
               <div class="col-md-12 form-group">
-                <label>ชื่อบริษัท</label>
-                <input type="text" name="recent_emp" id="recent_emp" class="form-control" placeholder="ชื่อบริษัท" value="">
+                <label>วิชาเอก</label>
+                <input type="text" name="highest_edu_level" id="highest_edu_level" class="form-control" placeholder="วิชาเอก" value="">
+              </div>
+
+              <div class="col-md-12 form-group">
+                <label>เกรดเฉลี่ย</label>
+                <input type="text" name="gpa" id="gpa" class="form-control" placeholder="เกรดเฉลี่ย" value="">
               </div>
             </div>
             
@@ -273,5 +288,18 @@ $user = mysqli_fetch_assoc($user);
     cropper.getCroppedCanvas().toBlob(function (blob) {
       formData.append('file', blob);
     });
+  }
+
+  $('#createProfileForm').submit(function(e){
+    e.preventDefault();
+    var data = createProfileForm.serialize();
+
+    formData.append('data', data);
+
+    console.log(formData);
+  });
+
+  function createProfile(){
+
   }
 </script>
