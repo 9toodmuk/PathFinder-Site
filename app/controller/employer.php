@@ -168,7 +168,7 @@ class Employer extends Controller{
   public static function uploadlogo(){
     $uploader = $_POST['uploader'];
     $file = $_FILES['file'];
-    Utils::uploadPic($file, $uploader);
+    echo Utils::uploadPic($file, $uploader);
   }
 
   public static function addlocation(){

@@ -12,12 +12,22 @@ function showTab(n){
         tab[i].style.display = "none";
     }
 
+    console.log("CurrentTab: "+currenttab == tab.length);
+
     tab[n].style.display = "block";
 
     if(n == 0){
+        document.getElementById("btnSubmit").style.display = "none";
         document.getElementById("btnPrev").style.display = "none";
-    }else{
+        document.getElementById("btnNext").style.display = "inline";
+    }else if(n == 3){
+        document.getElementById("btnSubmit").style.display = "inline";
         document.getElementById("btnPrev").style.display = "inline";
+        document.getElementById("btnNext").style.display = "none";
+    }else{
+        document.getElementById("btnSubmit").style.display = "none";
+        document.getElementById("btnPrev").style.display = "inline";
+        document.getElementById("btnNext").style.display = "inline";
     }
 
     fixStepIndicator(n)
@@ -31,10 +41,14 @@ function nextPrev(n){
 
     tab[currenttab].style.display = "none";
     currenttab = currenttab + n;
-    if (currenttab >= tab.length) {
-        document.getElementById("createProfileForm").submit();
+
+    console.log(currenttab);
+
+    if (currenttab > tab.length) {
+        currenttab = currenttab - n;
         return false;
     }
+
     showTab(currenttab);
 }
 
@@ -50,8 +64,6 @@ function fixStepIndicator(n){
 function validateForm(){
     var x, y, i, valid = true;
 
-    console.log(valid);
-
     x = document.getElementsByClassName("tab");
     y = x[currenttab].getElementsByTagName("input");
     z = x[currenttab].getElementsByTagName("select");
@@ -65,22 +77,27 @@ function validateForm(){
     }
 
     for (i = 0; i < y.length; i++) {
+        console.log(y[i].name);
         if (y[i].required == true && y[i].value == "") {
             y[i].className += " invalid";
             valid = false;
         }
+        console.log(valid);
     }
 
     for (i = 0; i < z.length; i++) {
+        console.log(z[i].name);
         if (z[i].required == true && z[i].value == "") {
             z[i].className += " invalid";
             valid = false;
         }
+        console.log(valid);
     }
 
     if (valid) {
         document.getElementsByClassName("step")[currenttab].className += " finish";
     }
+    
     return valid;
 }
 
@@ -137,6 +154,7 @@ $('select#exp').on('change', function(){
     if($(this).val() >= 0){
         $("#expdetail").show();
         $("#expdetail input").prop('required', true);
+        $("#expdetail input#now").prop('required', false);
     }else{
         $("#expdetail").hide();
         $("#expdetail input").prop('required', false);

@@ -109,7 +109,7 @@ class User extends Controller{
       $end = $_POST['end']."-01";
     }
 
-    Experiences::newExp($id, $title, $emp, $start, $end, $now);
+    echo Experiences::newExp($id, $title, $emp, $start, $end, $now);
   }
 
   public static function newedu(){
@@ -119,7 +119,7 @@ class User extends Controller{
     $major = $_POST['major'];
     $gpa = $_POST['gpa'];
 
-    Educations::newEdu($id, $institue, $level, $major, $gpa);
+    echo Educations::newEdu($id, $institue, $level, $major, $gpa);
   }
 
   public static function editexp(){
@@ -133,7 +133,7 @@ class User extends Controller{
       $end = $_POST['end']."-01";
     }
 
-    Experiences::editExp($id, $title, $emp, $start, $end, $now);
+    echo Experiences::editExp($id, $title, $emp, $start, $end, $now);
   }
 
   public static function editedu(){
@@ -143,25 +143,25 @@ class User extends Controller{
     $major = $_POST['major'];
     $gpa = $_POST['gpa'];
 
-    Educations::editEdu($id, $institue, $level, $major, $gpa);
+    echo Educations::editEdu($id, $institue, $level, $major, $gpa);
   }
 
   public static function removeexp(){
     $id = $_POST['id'];
 
-    Experiences::removeExp($id);
+    echo Experiences::removeExp($id);
   }
 
   public static function removeedu(){
     $id = $_POST['id'];
 
-    Educations::removeEdu($id);
+    echo Educations::removeEdu($id);
   }
 
   public static function uploadpic(){
     $uploader = $_POST['uploader'];
     $file = $_FILES['file'];
-    Utils::uploadPic($file, $uploader);
+    echo Utils::uploadPic($file, $uploader);
   }
 
   public static function removepropic(){
@@ -214,5 +214,92 @@ class User extends Controller{
     $id = $_POST['id'];
 
     Skills::removeSkill($id);
+  }
+
+  public static function skipCreateProfile(){
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+      echo Profile::skipCreateProfile($_SESSION['social_id']);
+    }else{
+      header("HTTP/1.0 404 Not Found");
+      exit();
+    }
+  }
+
+  public static function createProfile(){
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+      $valid = true;
+      $error = 0;
+
+      if(isset($_FILES['file'])){
+        $photo = Utils::uploadPic($_FILES['file'], $_SESSION['social_id']);
+        $photo = json_decode($photo, true);
+        if($photo["status"] !== TRUE){
+          $valid = false;
+          $error = 1;
+          echo json_encode(array('status' => $valid, 'error' => $error));
+          return false;
+        }
+      }
+
+      $firstname = $_POST['firstname'];
+      $lastname = $_POST['lastname'];
+      $gender = $_POST['gender'];
+      $birthday = $_POST['birthday'];
+      $telephone = $_POST['telephone'];
+      $facebook = $_POST['Facebook'];
+      $twitter = $_POST['Twitter'];
+      $line = $_POST['Line'];
+      $disability = $_POST['disability'];
+
+      $profile = Profile::createProfile($_SESSION['social_id'], $firstname, $lastname, $gender, $birthday, $telephone, $facebook, $twitter, $line, $disability);
+      $profile = json_decode($profile, true);
+      if($profile["status"] !== TRUE){
+        $valid = false;
+        $error = 2;
+        echo json_encode(array('status' => $valid, 'error' => $error));
+        return false;
+      }
+
+      $exp = $_POST['exp'];
+      if($exp >= 0){
+        $recent_work = $_POST['recent_work'];
+        $recent_emp = $_POST['recent_emp'];
+        $start = $_POST['start']."-01";
+        $end = "1900-00-00";
+        $now = 1;
+        if(!isset($_POST['now'])){
+          $now = 0;
+          $end = $_POST['end']."-01";
+        }
+
+        $exp = Experiences::newExp($_SESSION['social_id'], $recent_work, $recent_emp, $start, $end, $now);
+        if($exp != "Success"){
+          $valid = false;
+          $error = 3;
+          echo json_encode(array('status' => $valid, 'error' => $error));
+          return false;
+        }
+      }
+      
+      $edu = $_POST['edu'];
+      if($edu > 0){
+        $institue = $_POST['highest_insitute'];
+        $major = $_POST['highest_edu_level'];
+        $gpa = $_POST['gpa'];
+
+        $edu = Educations::newEdu($_SESSION['social_id'], $institue, $edu, $major, $gpa);
+        if($edu != "Success"){
+          $valid = false;
+          $error = 4;
+          echo json_encode(array('status' => $valid, 'error' => $error));
+          return false;
+        }
+      }
+
+      echo json_encode(array('status' => $valid));
+    }else{
+      header("HTTP/1.0 404 Not Found");
+      exit();
+    }
   }
 }

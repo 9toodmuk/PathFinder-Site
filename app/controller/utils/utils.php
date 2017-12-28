@@ -119,7 +119,7 @@ class Utils {
       $result = array(
         'status' => false, 'error' => $error
       );
-      echo json_encode($result);
+      return json_encode($result);
     } else {
         if (move_uploaded_file($file["tmp_name"], $newfilename)) {
           if($user){
@@ -138,13 +138,13 @@ class Utils {
               'url' => '/'.$newfilename,
               'uploader' => $uploader
           );
-          echo json_encode($result);
+          return json_encode($result);
         } else {
           $error = 3;
           $result = array(
             'status' => false, 'error' => $error
           );
-          echo json_encode($result);
+          return json_encode($result);
         }
     }
   }

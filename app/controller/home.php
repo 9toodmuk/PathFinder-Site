@@ -3,6 +3,7 @@
 use Controller\View\View;
 use Controller\Auth\Login;
 use Controller\Auth\Register;
+use Controller\User\Profile;
 
 class Home extends Controller{
   protected $indexlayout = 'app/view/layouts/index.php';
@@ -19,7 +20,14 @@ class Home extends Controller{
 
   public static function index(){
     if(isset($_SESSION['social_id'])){
-      echo View::render($this->homelayout, "home");
+      $user = Profile::profileLoad($_SESSION['social_id']);
+      $user = mysqli_fetch_assoc($user);
+      if($user['status'] == 0 && $user['skip'] == 0){
+        header("Location: /home/createprofile/");
+        exit();
+      }else{
+        echo View::render($this->homelayout, "home");
+      }
     }else{
       echo View::render($this->indexlayout, $this->formlogin);
     }
@@ -39,7 +47,17 @@ class Home extends Controller{
       header("Location: /");
       exit();
     }else{
-      echo View::render($this->indexlayout, $this->createprofile);
+      $user = Profile::profileLoad($_SESSION['social_id']);
+      $user = mysqli_fetch_assoc($user);
+      if($user['status'] == 0){
+        echo View::render($this->indexlayout, $this->createprofile);
+      }else if($user['skip'] == 1){
+        header("Location: /");
+        exit();
+      }else{
+        header("Location: /");
+        exit();
+      }
     }
   }
 

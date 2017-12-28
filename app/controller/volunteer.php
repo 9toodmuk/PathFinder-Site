@@ -171,7 +171,7 @@ class Volunteer extends Controller{
 
   public static function editProfilePic($id, $filename){
       $file = $_FILES['file'];
-      Utils::uploadPic($file, $id, false, $filename);
+      echo Utils::uploadPic($file, $id, false, $filename);
   }
 
   public static function editProfile($id){

@@ -6,9 +6,35 @@ use Controller\Auth\Login;
 use Controller\Timeline\Notification;
 
 class Profile{
+  public static function createProfile($id, $first_name, $last_name, $sex, $birthdate, $telephone, $facebook, $twitter, $line, $disability){
+    $conn = Database::connection();
+    $sql = "UPDATE personal_details SET first_name = '$first_name', last_name = '$last_name', 
+    sex = '$sex', birthdate = '$birthdate', telephone = '$telephone', facebook = '$facebook', twitter = '$twitter', line = '$line', disability = '$disability' 
+    WHERE user_id = '$id';";
+    if($conn->query($sql)){
+      $arr = array("status" => true);
+      return json_encode($arr);
+    }else{
+      $arr = array("status" => false);
+      return json_encode($arr);
+    }
+  }
+
+  public static function skipCreateProfile($id){
+    $conn = Database::connection();
+    $sql = "UPDATE users SET skip = '1' WHERE id = '$id';";
+    if($conn->query($sql)){
+      $arr = array("status" => true);
+      return json_encode($arr);
+    }else{
+      $arr = array("status" => false);
+      return json_encode($arr);
+    }
+  }
+
   public static function profileLoad($uid){
     $conn = Database::connection();
-    $sql = "SELECT users.id, users.guid, users.email, users.user_group, users.status, users.on_order, users.validate,
+    $sql = "SELECT users.id, users.guid, users.email, users.user_group, users.status, users.skip, users.on_order, users.validate,
     users.profile_image, users.header_image, personal_details.first_name, personal_details.last_name, personal_details.sex, personal_details.birthdate,
     personal_details.telephone, personal_details.facebook, personal_details.twitter, personal_details.line, personal_details.other_link, personal_details.disability
     FROM users JOIN personal_details ON users.id = personal_details.user_id WHERE users.id = '$uid';";
@@ -18,7 +44,7 @@ class Profile{
 
   public static function allProfilesLoad(){
     $conn = Database::connection();
-    $sql = "SELECT users.id, users.guid, users.email, users.user_group, users.status, users.on_order, users.validate,
+    $sql = "SELECT users.id, users.guid, users.email, users.user_group, users.status, users.skip, users.on_order, users.validate,
     users.profile_image, users.header_image, personal_details.first_name, personal_details.last_name, personal_details.sex, personal_details.birthdate,
     personal_details.telephone, personal_details.facebook, personal_details.twitter, personal_details.line, personal_details.other_link, personal_details.disability
     FROM users JOIN personal_details ON users.id = personal_details.user_id;";

@@ -8,9 +8,9 @@ class Educations{
     $conn = Database::connection();
     $sql = "INSERT INTO education_lists (institute_name, background, major, gpa, user_id) VALUES ('$institue', '$level', '$major', '$gpa', '$id')";
     if($conn->query($sql)){
-      echo "Success";
+      return "Success";
     }else{
-      echo "Error";
+      return "Error";
     }
   }
 
@@ -18,9 +18,9 @@ class Educations{
     $conn = Database::connection();
     $sql = "UPDATE education_lists SET institute_name = '$institue', background = '$level', major = '$major', gpa = '$gpa' WHERE id = '$id'";
     if($conn->query($sql)){
-      echo "Success";
+      return "Success";
     }else{
-      echo "Error";
+      return "Error";
     }
   }
 
@@ -28,9 +28,9 @@ class Educations{
     $conn = Database::connection();
     $sql = "DELETE FROM education_lists WHERE id = '$id'";
     if($conn->query($sql)){
-      echo "Success";
+      return "Success";
     }else{
-      echo "Error";
+      return "Error";
     }
   }
 

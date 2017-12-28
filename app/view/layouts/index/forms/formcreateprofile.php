@@ -22,7 +22,7 @@ $user = mysqli_fetch_assoc($user);
       <div class="row">
 
         <div class="col-md-12">
-          <div class="alert alert-danger" id="errorbox"></div>
+          <div class="alert" id="errorbox"></div>
         </div>
 
         <form id="createProfileForm" method="post" role="form" style="display: block;">
@@ -64,13 +64,12 @@ $user = mysqli_fetch_assoc($user);
 
             <div class="col-md-12 form-group">
               <label>วันเกิด <span style="color:red">*</span></label>
-              <input type='text' class="form-control" placeholder="<?=$lang['Birthdate']?>" value='' id='datetimepicker' data-date-format="yyyy-mm-dd" data-link-field="birthday" data-link-format="yyyy-mm-dd" required/>
-              <input type="hidden" name="birthday" id="birthday" value=""/>
+              <input type='text' name="birthday" class="form-control" placeholder="<?=$lang['Birthdate']?>" value='' id='datetimepicker' data-date-format="yyyy-mm-dd" data-link-field="birthday" data-link-format="yyyy-mm-dd" required/>
             </div>
 
             <div class="col-md-12 form-group">
               <label>ความบกพร่องในตัวคุณ <span style="color:red">*</span></label>
-              <select name="gender" class='form-control' required>
+              <select name="disability" class='form-control' required>
                 <option value="" disabled selected>กรุณาเลือก</option>
                   <?php
                     while($row = $disability->fetch_assoc()){
@@ -142,9 +141,6 @@ $user = mysqli_fetch_assoc($user);
                   <input type="text" name="end" id="end" class="form-control" value="" placeholder="<?=$lang['To']?>" data-date-format="yyyy-mm" data-link-field="enddate" data-link-format="yyyy-mm">
                   <label class="input-group-addon"><input type="checkbox" name="now" id="now"> <?=$lang['now']?></label>
                 </div>
-
-                <input type='hidden' id='startdate' value=''/>
-                <input type='hidden' id='enddate' value=''/>
               </div>
             </div>
             
@@ -191,6 +187,7 @@ $user = mysqli_fetch_assoc($user);
             <div class="pull-right">
               <button id="btnPrev" type="button" class="btn btn-primary btn-lg" onclick="nextPrev(-1)">กลับ</button>
               <button id="btnNext" type="button" class="btn btn-primary btn-lg" onclick="nextPrev(1)">ต่อไป</button>
+              <button id="btnSubmit" type="submit" class="btn btn-primary btn-lg" data-loading-text="<?=$lang['processing']?>">สร้างโปรไฟล์</button>
             </div>
             
             <div class="pull-left">
@@ -228,7 +225,7 @@ $user = mysqli_fetch_assoc($user);
 
       </div>
       <div class="modal-footer">
-        <a href="#" class="btn btn-success" onclick="upload()"><i class="fa fa-check" aria-hidden="true"></i> เลือก</a>
+        <a href="#" class="btn btn-success" onclick="upload()"><i class="fa fa-check" aria-hidden="true"></i> เลือก</a> 
         <a href="#" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> <?=$lang['Close']?></a>
       </div>
     </div>
@@ -286,20 +283,71 @@ $user = mysqli_fetch_assoc($user);
     myimage.src = newimage;
 
     cropper.getCroppedCanvas().toBlob(function (blob) {
-      formData.append('file', blob);
+      var fileext = blob.type;
+      var filetype = fileext.replace("image/","");
+      var filename = "profilePic."+filetype;
+      formData.append('file', blob, filename);
     });
   }
 
+  $('#btnSkip').click(function(){
+    $.ajax({
+      url: "/user/skipCreateProfile/",
+      type: "POST",
+      dataType: 'json',
+      success: function(result){
+        console.log(result);
+
+        if(result.status){
+          setTimeout(function(){ window.location = "/home/"; }, 100);
+        }else{
+          $('#btnSubmit').button('reset');
+          $("#errorbox").addClass("alert-danger");
+          $("#errorbox").removeClass("alert-success");
+          $("#errorbox").html("<?=$lang['AlertErrorText']?>");
+          $("#errorbox").fadeIn();
+          $("div#errorbox").delay(3000).fadeOut(300);
+        }
+        
+      }
+    });
+  })
+
   $('#createProfileForm').submit(function(e){
     e.preventDefault();
-    var data = createProfileForm.serialize();
 
-    formData.append('data', data);
+    $.each($(this).serializeArray(), function(_, field) { formData.append(field.name, field.value); });
 
     console.log(formData);
+
+    $('#btnSubmit').button('loading');
+
+    $.ajax({
+      url: "/user/createprofile/",
+      type: "POST",
+      dataType: 'json',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function(result){
+        console.log(result);
+
+        if(result.status){
+          $("#errorbox").removeClass("alert-danger");
+          $("#errorbox").addClass("alert-success");
+          $("#errorbox").html("<?=$lang['AlertSuccessText']?>");
+          $("#errorbox").fadeIn();
+          setTimeout(function(){ window.location = "/home/"; }, 3000);
+        }else{
+          $('#btnSubmit').button('reset');
+          $("#errorbox").addClass("alert-danger");
+          $("#errorbox").removeClass("alert-success");
+          $("#errorbox").html("<?=$lang['AlertErrorText']?>");
+          $("#errorbox").fadeIn();
+          $("div#errorbox").delay(3000).fadeOut(300);
+        }
+        
+      }
+    });
   });
-
-  function createProfile(){
-
-  }
 </script>

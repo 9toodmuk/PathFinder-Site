@@ -8,9 +8,9 @@ class Experiences{
     $conn = Database::connection();
     $sql = "INSERT INTO experience_lists (name, company, status, start_at, end_at, user_id) VALUES ('$title', '$emp', '$now', '$start', '$end', '$id')";
     if($conn->query($sql)){
-      echo "Success";
+      return "Success";
     }else{
-      echo "Error";
+      return "Error";
     }
   }
 
@@ -18,9 +18,9 @@ class Experiences{
     $conn = Database::connection();
     $sql = "UPDATE experience_lists SET name = '$title', company = '$emp', start_at = '$start', end_at = '$end', status = '$now' WHERE id = '$id'";
     if($conn->query($sql)){
-      echo "Success";
+      return "Success";
     }else{
-      echo "Error";
+      return "Error";
     }
   }
 
@@ -28,9 +28,9 @@ class Experiences{
     $conn = Database::connection();
     $sql = "DELETE FROM experience_lists WHERE id = '$id'";
     if($conn->query($sql)){
-      echo "Success";
+      return "Success";
     }else{
-      echo "Error";
+      return "Error";
     }
   }
 
