@@ -12,8 +12,14 @@ class Profile{
     sex = '$sex', birthdate = '$birthdate', telephone = '$telephone', facebook = '$facebook', twitter = '$twitter', line = '$line', disability = '$disability' 
     WHERE user_id = '$id';";
     if($conn->query($sql)){
-      $arr = array("status" => true);
-      return json_encode($arr);
+      $sql = "UPDATE users SET status = 1 WHERE id = '$id';";
+      if($conn->query($sql)){
+        $arr = array("status" => true);
+        return json_encode($arr);
+      }else{
+        $arr = array("status" => false);
+        return json_encode($arr);
+      }
     }else{
       $arr = array("status" => false);
       return json_encode($arr);

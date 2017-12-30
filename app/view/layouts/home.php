@@ -35,6 +35,7 @@ $lang = Language::loadLanguage($language);
         <?php
           if($variables == "home"){
             include_once 'app/view/layouts/main/block/topjob.php';
+            include_once 'app/view/layouts/main/block/recommendjob.php';
             include_once 'app/view/layouts/main/block/topemp.php';
           }else{
             include_once $variables[1];

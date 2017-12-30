@@ -49,6 +49,20 @@ class JobController {
     return $conn->query($sql);
   }
 
+  public static function getRecommendedJob($id, $limit = 0){
+    $conn = Database::connection();
+    $user = Profile::profileload($id);
+    $user = mysqli_fetch_assoc($user);
+
+    $disability = $user['disability'];
+
+    $sql = "SELECT * FROM job_lists WHERE disability_req = '$disability' ORDER BY RAND()";
+    if($limit != 0){
+      $sql = $sql . " LIMIT $limit";
+    }
+    return $conn->query($sql);
+  }
+
   public static function loadByCategory($category, $limit = NULL, $offset = NULL){
     $conn = Database::connection();
     $sql = "SELECT * FROM job_lists";

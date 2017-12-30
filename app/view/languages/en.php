@@ -5,6 +5,7 @@
     'FeaturedCategories' => "Featured Categories",
     'FeaturedJobs' => "Featured Jobs",
     'FeaturedEmployer' => "Featured Employer",
+    'RecommendedJob' => "Recommended",
     'More' => "More",
     'Read More' => "Read More",
     'SearchTitle' => "Search",

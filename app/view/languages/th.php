@@ -5,6 +5,7 @@
     'FeaturedCategories' => "หมวดหมู่ที่น่าสนใจ",
     'FeaturedJobs' => "ตำแหน่งงานแนะนำ",
     'FeaturedEmployer' => "บริษัทแนะนำ",
+    'RecommendedJob' => "งานที่เหมาะกับคุณ",
     'More' => "ดูเพิ่ม",
     'Read More' => "อ่านรายละเอียด",
     'SearchTitle' => "ค้นหางาน",
