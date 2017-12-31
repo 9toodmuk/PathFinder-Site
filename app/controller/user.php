@@ -3,6 +3,7 @@
 use Controller\View\View;
 use Controller\Auth\Login;
 use Controller\Auth\Register;
+use Controller\Job\JobController;
 use Controller\Timeline\Post;
 use Controller\Timeline\Like;
 use Controller\Timeline\Comment;
@@ -301,5 +302,14 @@ class User extends Controller{
       header("HTTP/1.0 404 Not Found");
       exit();
     }
+  }
+
+  public static function getAllDisabilityType(){
+    $disability = JobController::getAllDisabilityType();
+    $jsonData = array();
+    while($row = $disability->fetch_assoc()){
+      array_push($jsonData, $row['name']);
+    }
+    echo json_encode($jsonData);
   }
 }
