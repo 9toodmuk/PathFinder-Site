@@ -310,6 +310,6 @@ class User extends Controller{
     while($row = $disability->fetch_assoc()){
       array_push($jsonData, $row['name']);
     }
-    echo json_encode($jsonData);
+    echo json_encode($jsonData, JSON_UNESCAPED_UNICODE);
   }
 }
