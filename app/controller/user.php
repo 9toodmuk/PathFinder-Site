@@ -169,8 +169,9 @@ class User extends Controller{
     Utils::removeProPic($id);
   }
 
-  public static function editprofilepic(){
-    $id = $_POST['id'];
+  public static function editprofilepic($uid, $filename){
+    $file = $_FILES['file'];
+    echo Utils::uploadPic($file, $uid, true, $filename);
   }
 
   public static function addRelative(){
