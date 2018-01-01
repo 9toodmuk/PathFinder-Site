@@ -228,11 +228,16 @@ class User extends Controller{
 
   public static function createProfile(){
     if($_SERVER['REQUEST_METHOD'] == "POST"){
+      if(isset($_POST['id'])){
+        $uid = $_POST['id'];
+      }else{
+        $uid = $_SESSION['social_id'];
+      }
       $valid = true;
       $error = 0;
 
       if(isset($_FILES['file'])){
-        $photo = Utils::uploadPic($_FILES['file'], $_SESSION['social_id']);
+        $photo = Utils::uploadPic($_FILES['file'], $uid);
         $photo = json_decode($photo, true);
         if($photo["status"] !== TRUE){
           $valid = false;
@@ -252,7 +257,7 @@ class User extends Controller{
       $line = $_POST['Line'];
       $disability = $_POST['disability'];
 
-      $profile = Profile::createProfile($_SESSION['social_id'], $firstname, $lastname, $gender, $birthday, $telephone, $facebook, $twitter, $line, $disability);
+      $profile = Profile::createProfile($uid, $firstname, $lastname, $gender, $birthday, $telephone, $facebook, $twitter, $line, $disability);
       $profile = json_decode($profile, true);
       if($profile["status"] !== TRUE){
         $valid = false;
@@ -273,7 +278,7 @@ class User extends Controller{
           $end = $_POST['end']."-01";
         }
 
-        $exp = Experiences::newExp($_SESSION['social_id'], $recent_work, $recent_emp, $start, $end, $now);
+        $exp = Experiences::newExp($uid, $recent_work, $recent_emp, $start, $end, $now);
         if($exp != "Success"){
           $valid = false;
           $error = 3;
@@ -281,14 +286,14 @@ class User extends Controller{
           return false;
         }
       }
-      
+
       $edu = $_POST['edu'];
       if($edu > 0){
         $institue = $_POST['highest_insitute'];
         $major = $_POST['highest_edu_level'];
         $gpa = $_POST['gpa'];
 
-        $edu = Educations::newEdu($_SESSION['social_id'], $institue, $edu, $major, $gpa);
+        $edu = Educations::newEdu($uid, $institue, $edu, $major, $gpa);
         if($edu != "Success"){
           $valid = false;
           $error = 4;
