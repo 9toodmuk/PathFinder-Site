@@ -103,7 +103,27 @@ class JobController {
     }else{
       JobController::deleteFavJob($uid, $jid);
     }
+  }
 
+  public static function getDisabilityType($id, $lang = 'th'){
+    $conn = Database::connection();
+    $sql = "SELECT * FROM user_disability WHERE id = '$id'";
+    $result = $conn->query($sql);
+    $result = mysqli_fetch_assoc($result);
+    if($lang == 'th'){
+      return $result['name'];
+    }else{
+      return $result['name_eng'];
+    }
+  }
+
+  public static function getSimilarJob($id){
+    $current = JobController::loadJobPosting($id);
+    $category = $current['category_id'];
+    $disability = $current['disability_req'];
+    $conn = Database::connection();
+    $sql = "SELECT * FROM job_lists WHERE category_id = '$category' AND disability_req = '$disability' LIMIT 3";
+    return $conn->query($sql);
   }
 
   public static function addFavJob($uid, $jid){

@@ -55,6 +55,7 @@ $location = mysqli_fetch_array($location);
                         ?>
                       </td>
                     </tr>
+                    <tr><td><strong>จำกัดเฉพาะ</strong></td><td><?=JobController::getDisabilityType($currentjob['disability_req'], $language); ?></td></tr>
                     <tr><td><strong><?=$lang['jobLevel']?></strong></td><td><?php JobController::getJobLevel($currentjob['level']); ?></td></tr>
                     <tr><td><strong><?=$lang['Wage']?></strong></td><td><?=$currentjob['salary']?> บาท <?=JobController::getGetSalaryType($currentjob['salary_type']);?> <?php if(JobController::isNegetiable($variables[2])) echo "ต่อรองได้" ?></td></tr>
                     <tr><td><strong><?=$lang['Exp_req']?></strong></td><td><?=JobController::getExpRequired($currentjob['exp_req']);?></td></tr>
@@ -80,6 +81,25 @@ $location = mysqli_fetch_array($location);
               <?php } ?>
               <li><a onclick="window.print()" class="btn btn-info"><i class="fa fa-print" aria-hidden="true"></i> <?=$lang["Print"]?> </a></li>
             </ul>
+          </div>
+        </div>
+
+        <div class="portlet margin-bottom-30">
+          <div class="portlet-title">
+            <div class="caption caption-green">
+              <i class="fa fa-tag" aria-hidden="true"></i>
+              <span class="caption-subject text-uppercase"> งานที่คล้ายกัน</span>
+            </div>
+          </div>
+          <div class="portlet-body margin-bottom-10">
+            <div class="row">
+              <?php 
+                $jobs = JobController::getSimilarJob($variables[2]);
+                while($row = mysqli_fetch_assoc($jobs)){
+                  include 'app/view/layouts/main/job/jobcard.vertical.php'; 
+                }
+              ?>
+            </div>
           </div>
         </div>
 
