@@ -44,7 +44,7 @@ class Email {
     }
 
     public static function createEmail($type){
-        return (include 'app/view/layouts/emails/register.confirmation.php');
+        return file_get_contents('app/view/layouts/emails/register.confirmation.php');
     }
 
     public static function createTitle($type){
