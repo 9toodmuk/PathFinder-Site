@@ -6,6 +6,8 @@ function edit(element){
     loadgendereditor(element);
   }else if(id == "birthdate"){
     loaddateeditor(element);
+  }else if(id == "disability"){
+    loaddisabilityeditor(element);
   }else{
     loadfieldeditor(element);
   }
@@ -156,6 +158,18 @@ function loadgendereditor(element){
   var id = $('input#uid').val();
   $.ajax({
     url: '/utilities/gendereditor',
+    type: 'POST',
+    data: {id:id},
+    success: function(result){
+      $(element).parent().html(result);
+    }
+  });
+}
+
+function loaddisabilityeditor(element){
+  var id = $('input#uid').val();
+  $.ajax({
+    url: '/utilities/disabilityeditor',
     type: 'POST',
     data: {id:id},
     success: function(result){

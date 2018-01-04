@@ -189,6 +189,7 @@
     'PersonalDetail' => 'ประวัติส่วนตัว',
     'Contact' => 'ข้อมูลการติดต่อ',
     'Gender' => 'เพศ',
+    'Disability' => 'ความบกพร่อง',
     'Birthdate' => 'วันเกิด',
     'Telephone' => 'โทรศัพท์',
     'now' => 'ปัจจุบัน',

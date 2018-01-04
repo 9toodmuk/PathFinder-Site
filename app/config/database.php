@@ -8,6 +8,11 @@ class Database{
     $pass = "AemzaLanla159";
     $database = "cp525119_pathfinder";
 
+    // $host = "localhost";
+    // $user = "root";
+    // $pass = "";
+    // $database = "pathfinder";
+
     $conn = mysqli_connect($host,$user,$pass,$database);
     date_default_timezone_set("Asia/Bangkok");
     mysqli_set_charset($conn,"UTF8");

@@ -170,4 +170,17 @@ class Utils {
         return $uuid;
     }
   }
+
+  public static function dateThai($date, $full = false){
+    $strYear = date("Y", strtotime($date))+543;
+    $strMonth = date("n", strtotime($date));
+    $strDate = date("d", strtotime($date));
+    $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+    if($full){
+      $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฏาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+    }
+    $strMonthThai = $strMonthCut[$strMonth];
+
+    return $strDate." ".$strMonthThai." ".$strYear;
+  }
 }

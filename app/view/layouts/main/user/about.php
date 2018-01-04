@@ -1,11 +1,17 @@
 <?php
+use Controller\Job\JobController;
 use Controller\User\Profile;
 use Controller\User\Experiences;
 use Controller\User\Educations;
 use Controller\User\Skills;
 use Controller\Admin\Postings;
+use Controller\Utils\Utils;
 $user = Profile::profileLoad($variables[2]);
 $user = mysqli_fetch_array($user);
+$birthdate = $startdate = date("d F Y", strtotime($user['birthdate']));
+if($language == 'th'){
+  $birthdate = Utils::dateThai($user['birthdate'], true);
+}
 $relate = Profile::getRelatives($variables[2]);
 $exp = Experiences::expLoad($variables[2]);
 $edu = Educations::eduLoad($variables[2]);
@@ -24,7 +30,8 @@ $skill = Skills::skillLoad($variables[2]);
       <table class="table table-bordered">
         <tr><td width="30%"><strong><?=$lang['name']?></strong></td><td><?=$user['first_name']?> <?=$user['last_name']?></td></tr>
           <tr><td><strong><?=$lang['Gender']?></strong></td><td><?=$lang[Profile::gender($user['sex'])]?></td></tr>
-          <?php if($user['birthdate'] != '1900-01-01') { ?><tr><td><strong><?=$lang['Birthdate']?></strong></td><td><?=$user['birthdate']?></td></tr><?php } ?>
+          <tr><td><strong><?=$lang['Disability']?></strong></td><td><?=JobController::getDisabilityType($user['disability'], $language)?></td></tr>
+          <?php if($user['birthdate'] != '1900-01-01') { ?><tr><td><strong><?=$lang['Birthdate']?></strong></td><td><?=$birthdate?></td></tr><?php } ?>
           <?php if($user['telephone'] != '') { ?><tr><td><strong><?=$lang['Telephone']?></strong></td><td><?=$user['telephone']?></td></tr><?php } ?>
           <?php if($user['facebook'] != '') { ?><tr><td><strong>Facebook</strong></td><td><?=$user['facebook']?></td></tr><?php } ?>
           <?php if($user['twitter'] != '') { ?><tr><td><strong>Twitter</strong></td><td><?=$user['twitter']?></td></tr><?php } ?>

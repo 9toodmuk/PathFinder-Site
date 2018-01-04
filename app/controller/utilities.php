@@ -29,6 +29,10 @@ class Utilities extends Controller{
     include 'app/view/layouts/main/user/block/gendereditor.php';
   }
 
+  public static function disabilityeditor(){
+    include 'app/view/layouts/main/user/block/disabilityeditor.php';
+  }
+
   public static function fieldeditor(){
     include 'app/view/layouts/main/user/block/fieldeditor.php';
   }

@@ -3,6 +3,7 @@ use Controller\User\Profile;
 use Controller\User\Experiences;
 use Controller\User\Educations;
 use Controller\User\Skills;
+use Controller\Job\JobController;
 $user = Profile::profileLoad($variables[2]);
 $user = mysqli_fetch_array($user);
 $relate = Profile::getRelatives($variables[2]);
@@ -37,6 +38,14 @@ $request = Profile::getRequestRelatives($variables[2]);
           </td>
           <td id="gender">
             <span><?=$lang[Profile::gender($user['sex'])]?></span> <a onclick="edit(this)" class="btn btn-edit pull-right"><i class="fa fa-pencil-square-o"></i> <?=$lang['editlocationbtn']?></a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong><?=$lang['Disability']?></strong>
+          </td>
+          <td id="disability">
+            <span><?=JobController::getDisabilityType($user['disability'], $language)?></span> <a onclick="edit(this)" class="btn btn-edit pull-right"><i class="fa fa-pencil-square-o"></i> <?=$lang['editlocationbtn']?></a>
           </td>
         </tr>
         <tr>

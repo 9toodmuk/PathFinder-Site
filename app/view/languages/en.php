@@ -189,6 +189,7 @@
     'PersonalDetail' => 'Personal Details',
     'Contact' => 'Contact',
     'Gender' => 'Gender',
+    'Disability' => 'Disability',
     'Birthdate' => 'Birthdate',
     'Telephone' => 'Telephone',
     'now' => 'Now',
