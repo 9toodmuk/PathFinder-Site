@@ -17,6 +17,7 @@ class Employer extends Controller{
   protected $settingslayout = 'app/view/layouts/emp/main/settings.php';
   protected $formlogin = 'app/view/layouts/emp/forms/formlogin.php';
   protected $formregister = 'app/view/layouts/emp/forms/formregister.php';
+  protected $applydetail = 'app/view/layouts/emp/main/block/application_detail.php';
 
   public function __construct(){
 
@@ -39,13 +40,29 @@ class Employer extends Controller{
     }
   }
 
-  public static function applications(){
+  public static function applications($page = NULL, $id = NULL){
     if(isset($_SESSION['emp_id'])){
-      echo View::render($this->homelayout, array("Applications", $this->applicationslayout));
+      if($page != NULL){
+        if($page == "detail")
+        if($id != NULL){
+          echo View::render($this->homelayout, array("APPLY_DETAILS", $this->applydetail, $id));
+        }else{
+          header("Location: /employer/");
+          exit();
+        }
+      }else{
+        echo View::render($this->homelayout, array("Applications", $this->applicationslayout));
+      }
     }else{
       header("Location: /employer/");
       exit();
     }
+  }
+
+  public static function replyapply(){
+    $apply_id = $_POST['id'];
+    $message = $_POST['message'];
+    echo Detail::replyApplication($apply_id, $message);
   }
 
   public static function details(){
@@ -111,6 +128,7 @@ class Employer extends Controller{
       $cap_type = 0;
       $capacity = $_POST['capacity'];
     }
+    $disability_req = $_POST['disability_req'];
     $location = $_POST['location'];
     $level = $_POST['joblevel'];
     $edulevel = $_POST['eduLevel'];
@@ -122,7 +140,7 @@ class Employer extends Controller{
     if(isset($_POST['negetiable'])){
       $negetiable = 1;
     }
-    Postings::addpostings($name, $responsibility, $qualification, $benefit, $capacity, $cap_type, $salary, $salarytype, $negetiable, $location, $type, $level, $exp, $edulevel, $cat, $company);
+    Postings::addpostings($name, $responsibility, $qualification, $benefit, $capacity, $cap_type, $disability_req, $salary, $salarytype, $negetiable, $location, $type, $level, $exp, $edulevel, $cat, $company);
   }
 
   public static function editpostings(){
@@ -139,6 +157,7 @@ class Employer extends Controller{
       $cap_type = 0;
       $capacity = $_POST['editcapacity'];
     }
+    $disability_req = $_POST['editdisability_req'];
     $location = $_POST['location'];
     $level = $_POST['editjoblevel'];
     $edulevel = $_POST['editeduLevel'];
@@ -150,7 +169,7 @@ class Employer extends Controller{
     if(isset($_POST['editnegetiable'])){
       $negetiable = 1;
     }
-    Postings::editpostings($id, $name, $responsibility, $qualification, $benefit, $capacity, $cap_type, $salary, $salarytype, $negetiable, $location, $type, $level, $exp, $edulevel, $cat, $company);
+    Postings::editpostings($id, $name, $responsibility, $qualification, $benefit, $capacity, $cap_type, $disability_req, $salary, $salarytype, $negetiable, $location, $type, $level, $exp, $edulevel, $cat, $company);
   }
 
   public static function rempost(){

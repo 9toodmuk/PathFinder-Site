@@ -222,5 +222,12 @@
     'acceptrequest' => 'ตอบรับคำขอ',
     'friend' => 'เพื่อน',
     'UpdatePhoto' => 'อัพโหลดรูปภาพ',
+    'APPLICATIONS_SENT' => 'ส่งใบสมัคร',
+    'APPLICATIONS_OPEN' => 'เปิดอ่านแล้ว',
+    'APPLICATIONS_REPLY' => 'ตอบกลับแล้ว',
+    'APPLICATIONS_INTERVIEWED' => 'สัมภาษณ์แล้ว',
+    'APPLICATIONS_REJECTED' => 'ปฏิเสธ',
+    'APPLICATIONS_ACCEPTED' => 'ตอบรับ',
+    'APPLY_DETAILS' => 'รายละเอียดใบสมัครงาน'
   );
 ?>

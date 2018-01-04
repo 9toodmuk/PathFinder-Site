@@ -5,13 +5,13 @@ use Config\Database;
 use Controller\View\Language;
 
 class Postings {
-  public static function addpostings($name, $responsibility, $qualification, $benefit, $capacity, $cap_type, $salary, $salarytype, $negetiable, $location, $type, $level, $exp_req, $edu_req, $category, $company){
+  public static function addpostings($name, $responsibility, $qualification, $benefit, $capacity, $cap_type, $disability_req, $salary, $salarytype, $negetiable, $location, $type, $level, $exp_req, $edu_req, $category, $company){
     $conn = Database::connection();
     $type = Postings::joinType($type);
 
     $created_date = date("Y-m-d H:i:s");
 
-    $sql = "INSERT INTO job_lists (name, responsibilities, qualification, benefit, capacity, cap_type, salary, salary_type, negetiable, location, type, level, exp_req, edu_req, category_id, company_id, created_at) VALUES ('$name', '$responsibility', '$qualification', '$benefit', '$capacity', '$cap_type', '$salary', '$salarytype', '$negetiable', '$location', '$type', '$level', '$exp_req', '$edu_req', '$category', '$company', '$created_date');";
+    $sql = "INSERT INTO job_lists (name, responsibilities, qualification, benefit, capacity, cap_type, disability_req, salary, salary_type, negetiable, location, type, level, exp_req, edu_req, category_id, company_id, created_at) VALUES ('$name', '$responsibility', '$qualification', '$benefit', '$capacity', '$cap_type', '$disability_req', '$salary', '$salarytype', '$negetiable', '$location', '$type', '$level', '$exp_req', '$edu_req', '$category', '$company', '$created_date');";
     if($conn->query($sql)){
       echo "Success";
     }else{
@@ -19,11 +19,11 @@ class Postings {
     }
   }
 
-  public static function editpostings($id, $name, $responsibility, $qualification, $benefit, $capacity, $cap_type, $salary, $salarytype, $negetiable, $location, $type, $level, $exp_req, $edu_req, $category, $company){
+  public static function editpostings($id, $name, $responsibility, $qualification, $benefit, $capacity, $cap_type, $disability_req, $salary, $salarytype, $negetiable, $location, $type, $level, $exp_req, $edu_req, $category, $company){
     $conn = Database::connection();
     $type = Postings::joinType($type);
 
-    $sql = "UPDATE job_lists SET name = '$name', responsibilities = '$responsibility', qualification = '$qualification', benefit = '$benefit', capacity = '$capacity', cap_type = '$cap_type', salary = '$salary', salary_type = '$salarytype',";
+    $sql = "UPDATE job_lists SET name = '$name', responsibilities = '$responsibility', qualification = '$qualification', benefit = '$benefit', capacity = '$capacity', cap_type = '$cap_type', disability_req = '$disability_req', salary = '$salary', salary_type = '$salarytype',";
     $sql .= "negetiable = '$negetiable', location = '$location', type = '$type', level = '$level', exp_req = '$exp_req', edu_req = '$edu_req', category_id = '$category', company_id = '$company' WHERE id = '$id'";
 
     if($conn->query($sql)){

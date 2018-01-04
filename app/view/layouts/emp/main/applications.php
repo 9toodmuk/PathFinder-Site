@@ -1,5 +1,6 @@
 <?php
 use Controller\Employer\Detail;
+use Controller\User\Profile;
 use Controller\Admin\Users;
 use Controller\Admin\Postings;
 $compid = Detail::getEmpId($_SESSION['emp_id']);
@@ -38,16 +39,18 @@ $compid = Detail::getEmpId($_SESSION['emp_id']);
           </thead>
           <tbody>
             <?php
-              while ($row = $lastpostings->fetch_array()){
+              while ($row = $lastpostings->fetch_array()){  
+                $user = Profile::profileload($row['user_id']);
+                $user = mysqli_fetch_assoc($user);
             ?>
             <tr id="<?=$row['id']?>">
               <td style="text-align: center;">
-                <a class="btn btn-info" data-title="Edit" data-toggle="modal" data-target="#edit" data-post-id="<?=$row['id']?>"><em class="fa fa-pencil"></em> รายละเอียด</a>
-                <a class="btn btn-success" data-title="Delete" data-toggle="modal" data-target="#delete" data-post-id="<?=$row['id']?>"><em class="fa fa-trash"></em> ตอบกลับ</a>
+                <a class="btn btn-info" href="detail/<?=$row['id']?>"><em class="fa fa-envelope-open"></em> รายละเอียด</a>
+                <a class="btn btn-success" data-title="Reply" data-toggle="modal" data-target="#reply" data-post-id="<?=$row['id']?>"><em class="fa fa-reply"></em> ตอบกลับ</a>
               </td>
+              <td><?=$user['first_name']." ".$user['last_name']?></td>
               <td><?=$row['name']?></td>
-              <td><?=$row['name']?></td>
-              <td><?=$row['name']?></td>
+              <td><?=$lang[Detail::getApplyStatus($row['status'])]?></td>
               <td><?=$row['created_at']?></td>
             </tr>
           <?php } ?>
@@ -61,36 +64,35 @@ $compid = Detail::getEmpId($_SESSION['emp_id']);
 
 </div>
 
-<?php include_once 'app/view/layouts/emp/main/form/addpostings.php' ?>
-
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content" id="editorbody">
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+<div class="modal fade" id="reply" tabindex="-1" role="reply" aria-labelledby="delete" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title custom_align" id="Heading">ลบใบประกาศนี้</h4>
+        <h4 class="modal-title custom_align" id="Heading">ตอบกลับ</h4>
       </div>
       <div class="modal-body">
+      <div class="alert alert-danger" id="errorbox" style="display:none;"></div>
 
-        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> แน่ใจหรือไม่ว่าต้องการลบใบประกาศนี้?</div>
+        <form role="form" id="replyapplyform" class="form-horizontal" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">ข้อความ</label>
+                <div class="col-sm-10">
+                  <div id='message'></div>
+                </div>
+            </div>
 
       </div>
       <div class="modal-footer">
-        <a onclick="remove(this)" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> ใช่</a>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> ไม่ใช่</button>
+        <a onclick="reply(this)" class="btn btn-success"><span class="fa fa-reply"></span> ตอบกลับ</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="fa fa-times"></span> ยกเลิก</button>
       </div>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
+
   $(function() {
     $('#datatables').DataTable({
       tabIndex: -1,
@@ -100,70 +102,41 @@ $compid = Detail::getEmpId($_SESSION['emp_id']);
       bLengthChange: false,
       responsive: true
     });
-  });
 
-  $('#addpostingsform').on('submit', function(e){
-    e.preventDefault();
-    add();
-  });
-
-  $("#edit").on("show.bs.modal", function(e) {
-    var id = $(e.relatedTarget).data('post-id');
-
-    $.ajax({
-      url: '/utilities/postingeditor/',
-      type: 'POST',
-      data: {id: id},
-      success: function (result) {
-        $('#editorbody').html(result);
-      }
+    $('div#message').summernote({
+      height: 150,
+      disableDragAndDrop: true,
+      dialogsFade: true,
+      tabsize: 2,
+      toolbar: [
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+      ]
     });
   });
 
-  $("#delete").on("show.bs.modal", function(e) {
+  $("#reply").on("show.bs.modal", function(e) {
     var id = $(e.relatedTarget).data('post-id');
     $(e.currentTarget).find('a.btn-success').attr("id", id);
   });
 
-  function newpost(){
-    $('#posting-modal').modal("show");
-  }
-
-  function remove(element){
+  function reply(element){
     var id = $(element).attr('id');
+    var message = $('div#message').summernote('code');
     $.ajax({
-      url: '/employer/rempost/',
+      url: '/employer/replyapply/',
       type: 'POST',
-      data: {id: id},
+      data: {id: id, message: message},
       dataType: "json",
       success: function (result) {
-        if(result.success){
-          $('tr#'+id).remove();
-          $('#delete').modal("hide");
-        }else if(result == "Success"){
-          $("#alertbox").html("<?=$lang['AlertErrorText']?>");
-          $("#alertbox").fadeIn();
-          $('#alertbox').delay(5000).fadeOut(1000);
-        }
-      }
-    });
-  }
-
-  function add(){
-    $.ajax({
-      url: '/employer/newpostings/',
-      type: 'POST',
-      data: $("#addpostingsform").serialize(),
-      success: function (result) {
-        if(result == "Error"){
+        if(!result.status){
           $('#errorbox').fadeIn();
           $('#errorbox').delay(5000).fadeOut(1000);
-        }else if(result == "Success"){
+        }else{
           $("#errorbox").removeClass("alert-danger");
           $("#errorbox").addClass("alert-success");
-          $("#errorbox").html("<strong>Success!</success> Add new postings successfully.");
+          $("#errorbox").html("<strong>Success!</success> Replied the application.");
           $("#errorbox").fadeIn();
-          setTimeout(function(){ window.location = "/employer/postings/"; }, 3000);
+          setTimeout(function(){ window.location = "/employer/applications/"; }, 3000);
         }
       }
     });

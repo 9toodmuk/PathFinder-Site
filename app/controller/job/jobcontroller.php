@@ -49,6 +49,26 @@ class JobController {
     return $conn->query($sql);
   }
 
+  public static function setApplicationStatus($id, $status){
+    $stage = JobController::getApplicationStatus($id);
+    if($status > $stage){
+      $conn = Database::connection();
+      $sql = "UPDATE application_lists SET status = '$status' WHERE id = '$id'";
+      return $conn->query($sql);
+    }else{
+      return true;
+    }
+  }
+
+  public static function getApplicationStatus($id){
+    $conn = Database::connection();
+    $sql = "SELECT * FROM application_lists WHERE id = '$id'";
+    $result = $conn->query($sql);
+    $result = mysqli_fetch_assoc($result);
+
+    return $result['status'];
+  }
+
   public static function getRecommendedJob($id, $limit = 0){
     $conn = Database::connection();
     $user = Profile::profileload($id);
@@ -56,7 +76,7 @@ class JobController {
 
     $disability = $user['disability'];
 
-    $sql = "SELECT * FROM job_lists WHERE disability_req = '$disability' ORDER BY RAND()";
+    $sql = "SELECT * FROM job_lists WHERE disability_req = '$disability' OR disability_req = '0' ORDER BY RAND()";
     if($limit != 0){
       $sql = $sql . " LIMIT $limit";
     }
@@ -122,7 +142,7 @@ class JobController {
     $category = $current['category_id'];
     $disability = $current['disability_req'];
     $conn = Database::connection();
-    $sql = "SELECT * FROM job_lists WHERE category_id = '$category' AND disability_req = '$disability' LIMIT 3";
+    $sql = "SELECT * FROM job_lists WHERE category_id = '$category' AND (disability_req = '$disability' OR disability_req = '0') LIMIT 3";
     return $conn->query($sql);
   }
 

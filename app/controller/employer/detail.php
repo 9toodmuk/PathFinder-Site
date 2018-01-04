@@ -2,6 +2,7 @@
 namespace Controller\Employer;
 
 use Config\Database;
+use Controller\Job\JobController;
 
 class Detail {
   public static function edit($field, $data, $id){
@@ -189,7 +190,7 @@ class Detail {
 
   public static function getLastApplications($id, $lastest = false, $offset = NULL, $limit = NULL){
     $conn = Database::connection();
-    $sql = "SELECT * FROM application_lists JOIN job_lists ON application_lists.job_id = job_lists.id WHERE job_lists.company_id = '$id'";
+    $sql = "SELECT * FROM job_lists JOIN application_lists ON application_lists.job_id = job_lists.id WHERE job_lists.company_id = '$id'";
 
     if($lastest){
       $sql .= " ORDER BY 'created_at' DESC";
@@ -203,6 +204,32 @@ class Detail {
     }
 
     return $conn->query($sql);
+  }
+
+  public static function replyApplication($apply_id, $message){
+    $conn = Database::connection();
+    $created_date = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO application_reply_lists (apply_id, message, created_at) VALUES ('$apply_id', '$message', '$created_date');";
+    if($conn->query($sql)){
+      if(JobController::setApplicationStatus($apply_id, 2)){
+        $result = array(
+          'status' => true
+        );
+        return json_encode($result);
+      }
+    }else{
+      $result = array(
+        'status' => false
+      );
+      return json_encode($result);
+    }
+  }
+
+  public static function getApplicationDetails($id){
+    $conn = Database::connection();
+    $sql = "SELECT * FROM application_lists WHERE id = '$id'";
+    $result = $conn->query($sql);
+    return mysqli_fetch_assoc($result);
   }
 
   public static function getLocation($id, $primary = false, $bycomp = true){
@@ -238,6 +265,29 @@ class Detail {
         'errorUpdate' => $conn->error
       );
       return $result;
+    }
+  }
+
+  public static function getApplyStatus($status){
+    switch($status){
+      case 0:
+        return 'APPLICATIONS_SENT';
+        break;
+      case 1:
+        return 'APPLICATIONS_OPEN';
+        break;
+      case 2:
+        return 'APPLICATIONS_REPLY';
+        break;
+      case 3:
+        return 'APPLICATIONS_INTERVIEWED';
+        break;
+      case 4:
+        return 'APPLICATIONS_REJECTED';
+        break;
+      case 5:
+        return 'APPLICATIONS_ACCEPTED';
+        break;
     }
   }
 }

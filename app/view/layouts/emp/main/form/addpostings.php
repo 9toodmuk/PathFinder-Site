@@ -89,7 +89,7 @@ $location = Detail::getLocation($compid);
                   <div class="input-group">
                     <input type="text" name="capacity" id="capacity" class="form-control" placeholder="จำนวนอัตรา" required>
                     <span class="input-group-addon"><label class="checkbox-inline" style="padding-top:0px;">
-                      <input type="checkbox" name="many" id="many">หลายอัตรา</label>
+                      <input type="checkbox" name="many" id="many">ไม่จำกัด</label>
                     </span>
                   </div>
                 </div>
@@ -98,7 +98,7 @@ $location = Detail::getLocation($compid);
             <div class="form-group">
                 <label for="" class="col-sm-2 control-label">จำกัดผู้พิการ</label>
                 <div class="col-sm-10">
-                <select name="editjoblevel" id="editjoblevel" class="form-control" required>
+                <select name="disability_req" id="disability_req" class="form-control" required>
                   <option value="">กรุณาเลือก</option>
                   <option value="0">ไม่จำกัด</option>
                     <?php

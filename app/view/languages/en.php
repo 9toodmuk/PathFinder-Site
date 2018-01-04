@@ -222,5 +222,12 @@
     'acceptrequest' => 'Accept Request',
     'friend' => 'Friend',
     'UpdatePhoto' => 'Upload Photo',
+    'APPLICATIONS_SENT' => 'Sent Applications',
+    'APPLICATIONS_OPEN' => 'Openned',
+    'APPLICATIONS_REPLY' => 'Replied',
+    'APPLICATIONS_INTERVIEWED' => 'Interviewed',
+    'APPLICATIONS_REJECTED' => 'Rejected',
+    'APPLICATIONS_ACCEPTED' => 'Accepted',
+    'APPLY_DETAILS' => 'Application Details'
   );
 ?>

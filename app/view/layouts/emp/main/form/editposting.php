@@ -117,13 +117,21 @@ $location = Detail::getLocation($compid);
             <div class="form-group">
                 <label for="" class="col-sm-2 control-label">จำกัดผู้พิการ</label>
                 <div class="col-sm-10">
-                <select name="editjoblevel" id="editjoblevel" class="form-control" required>
+                <select name="editdisability_req" id="editdisability_req" class="form-control" required>
                   <option value="">กรุณาเลือก</option>
                   <option value="0">ไม่จำกัด</option>
                     <?php
                     $disability = JobController::getAllDisabilityType();
                     while($row = $disability->fetch_assoc()){
-                      echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                      echo "<option value='".$row['id']."'";
+                      if($postings['disability_req'] == $row['id']){
+                        echo " selected";
+                      }
+                      if($language == 'th'){
+                        echo ">".$row['name']."</option>";
+                      }else{
+                        echo ">".$row['name_eng']."</option>";
+                      }
                     }
                     ?>
                   </select>
