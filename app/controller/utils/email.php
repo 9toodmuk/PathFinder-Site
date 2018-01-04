@@ -14,7 +14,7 @@ class Email {
         $emailBody = Email::createEmail($type);
 
         $headers = 'Content-type: text/html; charset=UTF-8' . "\r\n" .
-        'From: PathFinder <contact@'.SITE_DOMAIN.'>';
+        'From: PathFinder <no-reply@pathfinder.in.th>';
 
         return mail(
             $user['email'],
