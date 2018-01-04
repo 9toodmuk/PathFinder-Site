@@ -4,6 +4,7 @@ use Controller\View\View;
 use Controller\Auth\Login;
 use Controller\Auth\Register;
 use Controller\User\Profile;
+use Controller\Utils\Email;
 
 class Home extends Controller{
   protected $indexlayout = 'app/view/layouts/index.php';
@@ -11,6 +12,7 @@ class Home extends Controller{
   protected $timeline = 'app/view/layouts/main/timeline/index.php';
   protected $formlogin = 'app/view/layouts/index/forms/formlogin.php';
   protected $registerlogin = 'app/view/layouts/index/forms/formregister.php';
+  protected $recoverform = 'app/view/layouts/index/forms/formforgotpassword.php';
   protected $createprofile = 'app/view/layouts/index/forms/formcreateprofile.php';
   protected $favorite = 'app/view/layouts/main/user/favorite.php';
 
@@ -39,6 +41,24 @@ class Home extends Controller{
       exit();
     }else{
       echo View::render($this->indexlayout, $this->registerlogin);
+    }
+  }
+
+  public static function recover(){
+    if(isset($_SESSION['social_id'])){
+      echo View::render($this->indexlayout, $this->recoverform);
+    }else{
+      header("Location: /");
+      exit();
+    }
+  }
+
+  public static function sendRecover(){
+    if(isset($_SESSION['social_id'])){
+      Email::sendEmail($_SESSION['social_id'], 1);
+    }else{
+      header("Location: /");
+      exit();
     }
   }
 
