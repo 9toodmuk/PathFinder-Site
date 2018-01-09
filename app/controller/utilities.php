@@ -238,6 +238,85 @@ class Utilities extends Controller{
     }
   }
 
+  public static function getRecommendJob($uid){
+    $result = JobController::getRecommendedJob($uid);
+    $jsonData = array();
+    while ($row = mysqli_fetch_array($result)) {
+      $category = JobController::getJobCategory($row['category_id']);
+      $category = $category['name'];
+      if(is_numeric($row['location'])){
+        $location = Detail::getLocation($row['location'], false, false);
+        $location = mysqli_fetch_array($location);
+        $location = $location['province'];
+      }else{
+        $location = $row['location'];
+      }
+      $arr = array('id' => $row['id'],
+          'name' => $row['name'],
+          'responsibilities' => $row['responsibilities'],
+          'qualification' => $row['qualification'],
+          'benefit' => $row['benefit'],
+          'capacity' => $row['capacity'],
+          'cap_type' => $row['cap_type'],
+          'salary' => $row['salary'],
+          'salary_type' => $row['salary_type'],
+          'negotiable' => JobController::isNegetiable($row['negetiable']),
+          'location' => Address::getProvinceName($location),
+          'type' => $row['type'],
+          'level' => $row['level'],
+          'exp_req' => $row['exp_req'],
+          'edu_req' => $row['edu_req'],
+          'category' => $category,
+          'company_id' => $row['company_id'],
+          'created_at' => $row['created_at'],
+          'favorite' => JobController::getSaveStatus($uid, $row['id']),
+          'apply' => JobController::getApplyStatus($uid, $row['id']),
+        );
+        array_push($jsonData, $arr);
+    }
+    echo json_encode($jsonData, JSON_UNESCAPED_UNICODE);
+  }
+
+  public static function getSimilarJob($jid){
+    $uid = $_POST['uid'];
+    $result = JobController::getSimilarJob($jid);
+    $jsonData = array();
+    while ($row = mysqli_fetch_array($result)) {
+      $category = JobController::getJobCategory($row['category_id']);
+      $category = $category['name'];
+      if(is_numeric($row['location'])){
+        $location = Detail::getLocation($row['location'], false, false);
+        $location = mysqli_fetch_array($location);
+        $location = $location['province'];
+      }else{
+        $location = $row['location'];
+      }
+      $arr = array('id' => $row['id'],
+          'name' => $row['name'],
+          'responsibilities' => $row['responsibilities'],
+          'qualification' => $row['qualification'],
+          'benefit' => $row['benefit'],
+          'capacity' => $row['capacity'],
+          'cap_type' => $row['cap_type'],
+          'salary' => $row['salary'],
+          'salary_type' => $row['salary_type'],
+          'negotiable' => JobController::isNegetiable($row['negetiable']),
+          'location' => Address::getProvinceName($location),
+          'type' => $row['type'],
+          'level' => $row['level'],
+          'exp_req' => $row['exp_req'],
+          'edu_req' => $row['edu_req'],
+          'category' => $category,
+          'company_id' => $row['company_id'],
+          'created_at' => $row['created_at'],
+          'favorite' => JobController::getSaveStatus($uid, $row['id']),
+          'apply' => JobController::getApplyStatus($uid, $row['id']),
+        );
+        array_push($jsonData, $arr);
+    }
+    echo json_encode($jsonData, JSON_UNESCAPED_UNICODE);
+  }
+
   public static function getEmpDetail($id){
     if(isset($id)){
       $result = Employer::loadEMP($id);
