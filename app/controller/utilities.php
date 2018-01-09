@@ -238,8 +238,8 @@ class Utilities extends Controller{
     }
   }
 
-  public static function getRecommendJob($uid){
-    $result = JobController::getRecommendedJob($uid);
+  public static function getRecommendJob($uid, $limit){
+    $result = JobController::getRecommendedJob($uid, $limit);
     $jsonData = array();
     while ($row = mysqli_fetch_array($result)) {
       $category = JobController::getJobCategory($row['category_id']);
