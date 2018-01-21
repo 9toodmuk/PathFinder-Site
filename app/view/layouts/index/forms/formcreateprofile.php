@@ -270,7 +270,6 @@ $user = mysqli_fetch_assoc($user);
 
 		picture.change(function(){
 			readURL(this);
-      console.log(profilepic.files.length);
       $('#editprofilepic').modal('show');
 		});
   }
@@ -296,8 +295,6 @@ $user = mysqli_fetch_assoc($user);
       type: "POST",
       dataType: 'json',
       success: function(result){
-        console.log(result);
-
         if(result.status){
           setTimeout(function(){ window.location = "/home/"; }, 100);
         }else{
@@ -318,8 +315,6 @@ $user = mysqli_fetch_assoc($user);
 
     $.each($(this).serializeArray(), function(_, field) { formData.append(field.name, field.value); });
 
-    console.log(formData);
-
     $('#btnSubmit').button('loading');
 
     $.ajax({
@@ -330,8 +325,6 @@ $user = mysqli_fetch_assoc($user);
       contentType: false,
       processData: false,
       success: function(result){
-        console.log(result);
-
         if(result.status){
           $("#errorbox").removeClass("alert-danger");
           $("#errorbox").addClass("alert-success");
