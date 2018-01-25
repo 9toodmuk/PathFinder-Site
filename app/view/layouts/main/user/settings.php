@@ -42,29 +42,24 @@ $user = mysqli_fetch_array($user);
             <div class="form-group col-md-12">
               <label class="col-md-4 control-label" for="newpassword">ตัวเลือกสำหรับตาบอดสี</label>
               <div class="col-md-8">
-                <span><?=$user['email']?></span>
+                <select name="" class="form-control" id="">
+                  <option value="">ปิด</option>
+                  <option value="">DEUTERANOPIA</option>
+                  <option value="">PROTANOPIA</option>
+                  <option value="">TRITANOPIA</option>
+                </select>
               </div>
             </div>
-
-            <legend>ตั้งค่าการสมัครงาน</legend>
             <div class="form-group col-md-12">
-              <label class="col-md-4 control-label" for="checkboxes">ตั้งค่าการรับสมัคร</label>
+              <label class="col-md-4 control-label" for="newpassword">ขนาดตัวอักษร</label>
               <div class="col-md-8">
-
-                <div class="input-group">
-                  <label for="sendemail">
-                    <input type="checkbox" name="sendemail" id="sendemail" value="1" <?php if($settings['sendemail'] == 1) echo "checked" ?>>
-                    ส่งอีเมล์แจ้งเตือนเมื่อมีผู้ส่งใบสมัคร
-                  </label>
-                </div>
-
-                <div class="input-group">
-                  <label for="senddetail">
-                    <input type="checkbox" name="senddetail" id="senddetail" value="1" <?php if($settings['senddetail'] == 1) echo "checked" ?>>
-                    ส่งรายละเอียดผู้สมัครไปที่อีเมล์ของคุณ
-                  </label>
-                </div>
-
+                <select name="" class="form-control" id="">
+                  <option value="">ปกติ</option>
+                  <option value="">เล็กที่สุด</option>
+                  <option value="">เล็ก</option>
+                  <option value="">ใหญ่</option>
+                  <option value="">ใหญ่ที่สุด</option>
+                </select>
               </div>
             </div>
 
