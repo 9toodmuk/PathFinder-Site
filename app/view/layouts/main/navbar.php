@@ -45,7 +45,7 @@ $currentuser = mysqli_fetch_array($currentuser);
             <li><a href="/admin/"><?=$lang['GotoAdminPage']?></a></li>
             <?php } ?>
             <li class="divider"></li>
-            <!-- <li><a href="/user/settings/"><?=$lang['Settings']?></a></li> -->
+            <li><a href="/user/settings/"><?=$lang['Settings']?></a></li>
             <li><a href="/home/logout/"><?=$lang['LogOut']?></a></li>
           </ul>
         </li>

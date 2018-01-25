@@ -15,11 +15,13 @@ use Controller\Utils\Utils;
 
 class User extends Controller{
   protected $homelayout = 'app/view/layouts/userpage.php';
+  protected $mainlayout = 'app/view/layouts/home.php';
   protected $timeline = 'app/view/layouts/main/user/index.php';
   protected $post = 'app/view/layouts/main/timeline/block/post.php';
   protected $comment = 'app/view/layouts/main/timeline/block/comment.php';
   protected $about = 'app/view/layouts/main/user/about.php';
   protected $friendslist = 'app/view/layouts/main/user/friendslist.php';
+  protected $settings = 'app/view/layouts/main/user/settings.php';
   protected $edit = 'app/view/layouts/main/user/edit.php';
 
   public function __construct(){
@@ -60,7 +62,16 @@ class User extends Controller{
     if(isset($_SESSION['social_id'])){
       echo View::render($this->homelayout, array("edit", $this->edit, $_SESSION['social_id']));
     }else{
-      header("Location: /user/$id");
+      header("Location: /");
+      exit();
+    }
+  }
+
+  public static function settings(){
+    if(isset($_SESSION['social_id'])){
+      echo View::render($this->mainlayout, array("settings", $this->settings, $_SESSION['social_id']));
+    }else{
+      header("Location: /");
       exit();
     }
   }
