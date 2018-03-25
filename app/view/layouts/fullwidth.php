@@ -24,32 +24,10 @@ $lang = Language::loadLanguage($language);
   <div class="wrapper no-alert-top">
     <?php include_once 'app/view/layouts/main/navbar.php'; ?>
 
-    <div class="container">
-      <?php if(Login::checkStatus($_SESSION['social_id']) == 0) { ?>
-      <div class="alert-message alert-message-notice" id="errorbox">
-        <a href="/user/edit/" class="btn btn-xs btn-warning pull-right"><?=$lang['CreateProfile']?></a>
-        <?=$lang['NoProfileAlert']?>
-      </div>
-      <?php } ?>
-      <div class="row">
-        <div class="col-md-8">
-          <?php
-            if($variables == "home"){
-              include_once 'app/view/layouts/main/block/topjob.php';
-              include_once 'app/view/layouts/main/block/recommendjob.php';
-              include_once 'app/view/layouts/main/block/topemp.php';
-            }else{
-              include_once $variables[1];
-            }
-          ?>
-        </div>
+    <?php
+      include_once $variables[1];
+    ?>
 
-        <div class="col-md-4" id="sidebar">
-          <?php include_once 'app/view/layouts/main/sidebar.php'; ?>
-        </div>
-      </div>
-    </div>
-    
     <?php include_once 'app/view/layouts/main/footer.php'; ?>
   </div>
 

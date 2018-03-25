@@ -44,107 +44,110 @@ if($count > 0){
 </head>
 
 <body>
-  <?php include_once 'app/view/layouts/main/navbar.php'; ?>
+  <div class="wrapper no-alert-top">
+    <?php include_once 'app/view/layouts/main/navbar.php'; ?>
 
-  <div class="container" style="margin-top: 90px">
-    <?php if(Login::checkStatus($_SESSION['social_id']) == 0) { ?>
-    <div class="alert-message alert-message-notice" id="errorbox">
-      <a href="/user/edit/" class="btn btn-xs btn-warning pull-right"><?=$lang['CreateProfile']?></a>
-      <?=$lang['NoProfileAlert']?>
-    </div>
-    <?php } ?>
-    <div class="row">
-      <div class="col-md-8">
-    <?php if($count > 0){ ?>
-      <?php if(sizeof($jobs) > 0){ ?>
-        <div class="row" id="jobs">
-          <div class="portlet margin-bottom-30">
-            <div class="portlet-title">
-              <div class="caption caption-green">
-                <i class="fa fa-tasks" aria-hidden="true"></i>
-                <span class="caption-subject text-uppercase"> Jobs</span>
-              </div>
-            </div>
-            <div class="portlet-body">
-              <div class="row">
-                <?php
-                  foreach($jobs as $value){
-                    $row = JobController::loadJobPosting($value);
-                    include 'app/view/layouts/main/job/jobcard.php';
-                  }
-                ?>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="container" style="margin-top: 90px">
+      <?php if(Login::checkStatus($_SESSION['social_id']) == 0) { ?>
+      <div class="alert-message alert-message-notice" id="errorbox">
+        <a href="/user/edit/" class="btn btn-xs btn-warning pull-right"><?=$lang['CreateProfile']?></a>
+        <?=$lang['NoProfileAlert']?>
+      </div>
       <?php } ?>
-
-      <?php if(sizeof($users) > 0){ ?>
-        <div class="row" id="users">
-          <div class="portlet margin-bottom-30">
-            <div class="portlet-title">
-              <div class="caption caption-green">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <span class="caption-subject text-uppercase"> Users</span>
+      <div class="row">
+        <div class="col-md-8">
+      <?php if($count > 0){ ?>
+        <?php if(sizeof($jobs) > 0){ ?>
+          <div class="row" id="jobs">
+            <div class="portlet margin-bottom-30">
+              <div class="portlet-title">
+                <div class="caption caption-green">
+                  <i class="fa fa-tasks" aria-hidden="true"></i>
+                  <span class="caption-subject text-uppercase"> Jobs</span>
+                </div>
               </div>
-            </div>
-            <div class="portlet-body">
-              <div class="row">
-                <?php
-                  foreach($users as $value){
-                    $ruser = Profile::profileLoad($value);
-                    $ruser = mysqli_fetch_array($ruser);
-                    $friendship = Profile::getFriendship($_SESSION['social_id'], $ruser['id']);
-                    if($_SESSION['social_id'] === $ruser['id']){
-                      $friendship = 4;
+              <div class="portlet-body">
+                <div class="row">
+                  <?php
+                    foreach($jobs as $value){
+                      $row = JobController::loadJobPosting($value);
+                      include 'app/view/layouts/main/job/jobcard.php';
                     }
-                    include 'app/view/layouts/main/user/block/friend.php';
-                  }
-                ?>
+                  ?>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      <?php } ?>
+        <?php } ?>
 
-      <?php if(sizeof($company) > 0){ ?>
-        <div class="row" id="employer">
-          <div class="portlet margin-bottom-30">
-            <div class="portlet-title">
-              <div class="caption caption-green">
-                <i class="fa fa-building" aria-hidden="true"></i>
-                <span class="caption-subject text-uppercase"> Employers</span>
+        <?php if(sizeof($users) > 0){ ?>
+          <div class="row" id="users">
+            <div class="portlet margin-bottom-30">
+              <div class="portlet-title">
+                <div class="caption caption-green">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <span class="caption-subject text-uppercase"> Users</span>
+                </div>
               </div>
-            </div>
-            <div class="portlet-body">
-              <div class="row">
-                <?php
-                  foreach($company as $value){
-                    $row = Employer::loadEMP($value);
-                    $row = mysqli_fetch_assoc($row);
-                    include 'app/view/layouts/main/search/block/companyblock.php';
-                  }
-                ?>
+              <div class="portlet-body">
+                <div class="row">
+                  <?php
+                    foreach($users as $value){
+                      $ruser = Profile::profileLoad($value);
+                      $ruser = mysqli_fetch_array($ruser);
+                      $friendship = Profile::getFriendship($_SESSION['social_id'], $ruser['id']);
+                      if($_SESSION['social_id'] === $ruser['id']){
+                        $friendship = 4;
+                      }
+                      include 'app/view/layouts/main/user/block/friend.php';
+                    }
+                  ?>
+                </div>
               </div>
             </div>
           </div>
+        <?php } ?>
+
+        <?php if(sizeof($company) > 0){ ?>
+          <div class="row" id="employer">
+            <div class="portlet margin-bottom-30">
+              <div class="portlet-title">
+                <div class="caption caption-green">
+                  <i class="fa fa-building" aria-hidden="true"></i>
+                  <span class="caption-subject text-uppercase"> Employers</span>
+                </div>
+              </div>
+              <div class="portlet-body">
+                <div class="row">
+                  <?php
+                    foreach($company as $value){
+                      $row = Employer::loadEMP($value);
+                      $row = mysqli_fetch_assoc($row);
+                      include 'app/view/layouts/main/search/block/companyblock.php';
+                    }
+                  ?>
+                </div>
+              </div>
+            </div>
+          </div>
+        <?php } ?>
+      <?php }else{ ?>
+
+        <div class="alert alert-info">
+          ไม่พบข้อมูล
         </div>
+
       <?php } ?>
-    <?php }else{ ?>
 
-      <div class="alert alert-info">
-        ไม่พบข้อมูล
-      </div>
+        </div>
 
-    <?php } ?>
-
-      </div>
-
-      <div class="col-md-4" id="sidebar">
-        <?php include_once 'app/view/layouts/main/sidebar/searchbox.php'; ?>
-        <?php include_once 'app/view/layouts/main/footer.php'; ?>
+        <div class="col-md-4" id="sidebar">
+          <?php include_once 'app/view/layouts/main/sidebar/searchbox.php'; ?>
+        </div>
       </div>
     </div>
+
+    <?php include_once 'app/view/layouts/main/footer.php'; ?>
   </div>
 
   <script type="text/javascript">

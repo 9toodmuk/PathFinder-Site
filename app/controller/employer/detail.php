@@ -39,8 +39,7 @@ class Detail {
   public static function getDetails($id){
     $conn = Database::connection();
     $sql = "SELECT * FROM company JOIN users WHERE company.user_id = '$id' AND users.id = '$id';";
-    $result = $conn->query($sql);
-    return mysqli_fetch_array($result);
+    return mysqli_fetch_array($conn->query($sql));
   }
 
   public static function getLogo($id){
@@ -206,10 +205,10 @@ class Detail {
     return $conn->query($sql);
   }
 
-  public static function replyApplication($apply_id, $message){
+  public static function replyApplication($apply_id, $message, $sender, $reciever){
     $conn = Database::connection();
     $created_date = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO application_reply_lists (apply_id, message, created_at) VALUES ('$apply_id', '$message', '$created_date');";
+    $sql = "INSERT INTO message (title, text, sender, reciever, type, sent_at) VALUES ('JOBREPLY', '$message', '$sender', '$reciever', '2', '$created_date');";
     if($conn->query($sql)){
       if(JobController::setApplicationStatus($apply_id, 2)){
         $result = array(

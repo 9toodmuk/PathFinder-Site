@@ -46,9 +46,9 @@ $compid = Detail::getEmpId($_SESSION['emp_id']);
             <tr id="<?=$row['id']?>">
               <td style="text-align: center;">
                 <a class="btn btn-info" href="detail/<?=$row['id']?>"><em class="fa fa-envelope-open"></em> รายละเอียด</a>
-                <a class="btn btn-success" data-title="Reply" data-toggle="modal" data-target="#reply" data-post-id="<?=$row['id']?>"><em class="fa fa-reply"></em> ตอบกลับ</a>
+                <a class="btn btn-success" data-title="Reply" data-toggle="modal" data-target="#reply" data-post-id="<?=$row['id']?>" data-post-reciever="<?=$user['id']?>"><em class="fa fa-reply"></em> ตอบกลับ</a>
               </td>
-              <td><?=$user['first_name']." ".$user['last_name']?></td>
+              <td><?=$user['first_name']." ".$user['last_name']." (".$user['email'].")"?></td>
               <td><?=$row['name']?></td>
               <td><?=$lang[Detail::getApplyStatus($row['status'])]?></td>
               <td><?=$row['created_at']?></td>
@@ -75,13 +75,15 @@ $compid = Detail::getEmpId($_SESSION['emp_id']);
       <div class="alert alert-danger" id="errorbox" style="display:none;"></div>
 
         <form role="form" id="replyapplyform" class="form-horizontal" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="" class="col-sm-2 control-label">ข้อความ</label>
-                <div class="col-sm-10">
-                  <div id='message'></div>
-                </div>
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">ข้อความ</label>
+            <div class="col-sm-10">
+              <div id='message'></div>
             </div>
-
+            <input type="hidden" id="sender" value="<?=$_SESSION['emp_id']?>">
+            <input type="hidden" id="receiver">
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <a onclick="reply(this)" class="btn btn-success"><span class="fa fa-reply"></span> ตอบกลับ</a>
@@ -116,16 +118,20 @@ $compid = Detail::getEmpId($_SESSION['emp_id']);
 
   $("#reply").on("show.bs.modal", function(e) {
     var id = $(e.relatedTarget).data('post-id');
+    var reciever = $(e.relatedTarget).data('post-reciever');
     $(e.currentTarget).find('a.btn-success').attr("id", id);
+    $(e.currentTarget).find('input#receiver').val(reciever);
   });
 
   function reply(element){
     var id = $(element).attr('id');
     var message = $('div#message').summernote('code');
+    var sender = $('input#sender').val();
+    var reciever = $('input#receiver').val();
     $.ajax({
       url: '/employer/replyapply/',
       type: 'POST',
-      data: {id: id, message: message},
+      data: {id: id, message: message, sender: sender, reciever: reciever},
       dataType: "json",
       success: function (result) {
         if(!result.status){

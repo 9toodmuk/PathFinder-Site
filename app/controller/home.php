@@ -9,12 +9,15 @@ use Controller\Utils\Email;
 class Home extends Controller{
   protected $indexlayout = 'app/view/layouts/index.php';
   protected $homelayout = 'app/view/layouts/home.php';
+  protected $nosidebar = 'app/view/layouts/nosidebar.php';
+  protected $fullwidth = 'app/view/layouts/fullwidth.php';
   protected $timeline = 'app/view/layouts/main/timeline/index.php';
   protected $formlogin = 'app/view/layouts/index/forms/formlogin.php';
   protected $registerlogin = 'app/view/layouts/index/forms/formregister.php';
   protected $recoverform = 'app/view/layouts/index/forms/formforgotpassword.php';
   protected $createprofile = 'app/view/layouts/index/forms/formcreateprofile.php';
   protected $favorite = 'app/view/layouts/main/user/favorite.php';
+  protected $inbox = 'app/view/layouts/main/user/message/inbox.php';
 
   public function __construct(){
 
@@ -84,6 +87,20 @@ class Home extends Controller{
   public static function favorites(){
     if(isset($_SESSION['social_id'])){
       echo View::render($this->homelayout, array("favorite", $this->favorite));
+    }else{
+      header("Location: /");
+      exit();
+    }
+  }
+
+  public static function messages($page = NULL){
+    if(isset($_SESSION['social_id'])){
+      if ($page == NULL) {
+        header("Location: /home/messages/inbox");
+        exit();
+      } else if ($page == 'inbox') {
+        echo View::render($this->fullwidth, array("inbox", $this->inbox));
+      }
     }else{
       header("Location: /");
       exit();

@@ -22,28 +22,32 @@ $lang = Language::loadLanguage($language);
 
 
 <body>
-  <?php include_once 'app/view/layouts/main/navbar.php'; ?>
+  <div class="wrapper no-alert-top">
+    <?php include_once 'app/view/layouts/main/navbar.php'; ?>
 
-  <div class="container" style="margin-top: 90px">
-    <?php if(Login::checkStatus($_SESSION['social_id']) == 0) { ?>
-    <div class="alert-message alert-message-notice" id="errorbox">
-      <a href="/user/edit/" class="btn btn-xs btn-warning pull-right"><?=$lang['CreateProfile']?></a>
-      <?=$lang['NoProfileAlert']?>
-    </div>
-    <?php } ?>
-    <div class="row">
-      <?php include 'app/view/layouts/main/user/block/header.php'; ?>
-      <div class="col-md-8">
-        <?php
-            include_once $variables[1];
-        ?>
+    <div class="container" style="margin-top: 90px">
+      <?php if(Login::checkStatus($_SESSION['social_id']) == 0) { ?>
+      <div class="alert-message alert-message-notice" id="errorbox">
+        <a href="/user/edit/" class="btn btn-xs btn-warning pull-right"><?=$lang['CreateProfile']?></a>
+        <?=$lang['NoProfileAlert']?>
       </div>
+      <?php } ?>
+      <div class="row">
+        <?php include 'app/view/layouts/main/user/block/header.php'; ?>
+        <div class="col-md-8">
+          <?php
+              include_once $variables[1];
+          ?>
+        </div>
 
-      <div class="col-md-4" id="sidebar">
-        <?php include_once 'app/view/layouts/main/sidebar.php'; ?>
-        <?php include_once 'app/view/layouts/main/footer.php'; ?>
+        <div class="col-md-4" id="sidebar">
+          <?php include_once 'app/view/layouts/main/sidebar.php'; ?>
+        </div>
       </div>
     </div>
+
+    <?php include_once 'app/view/layouts/main/footer.php'; ?>
+
   </div>
 
   <input type="hidden" value="<?=$_SESSION['social_id']?>" id="uid"/>

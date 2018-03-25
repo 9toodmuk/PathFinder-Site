@@ -14,12 +14,12 @@ $row = JobController::loadJobPosting($application['job_id']);
 $emp = Employer::loadEMP($row['company_id']);
 $emp = mysqli_fetch_array($emp);
 
-$currentuser = Profile::profileLoad($_SESSION['social_id']);
+$currentuser = Profile::profileLoad($application['user_id']);
 $currentuser = mysqli_fetch_array($currentuser);
 
-$edu = Educations::eduLoad($_SESSION['social_id']);
-$exp = Experiences::expLoad($_SESSION['social_id']);
-$skill = Skills::skillLoad($_SESSION['social_id']);
+$edu = Educations::eduLoad($application['user_id']);
+$exp = Experiences::expLoad($application['user_id']);
+$skill = Skills::skillLoad($application['user_id']);
 ?>
 
 <div class="portlet margin-bottom-30">

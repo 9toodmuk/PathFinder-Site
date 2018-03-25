@@ -228,6 +228,11 @@
     'APPLICATIONS_INTERVIEWED' => 'สัมภาษณ์แล้ว',
     'APPLICATIONS_REJECTED' => 'ปฏิเสธ',
     'APPLICATIONS_ACCEPTED' => 'ตอบรับ',
-    'APPLY_DETAILS' => 'รายละเอียดใบสมัครงาน'
+    'APPLY_DETAILS' => 'รายละเอียดใบสมัครงาน',
+    'Inbox' => 'กล่องข้อความเข้า',
+    'SentBox' => 'กล่องข้อความออก',
+    'Drafts' => 'แบบร่าง',
+    'Trash' => 'รายการที่ถูกลบ',
+    'JOBREPLY' => 'ตอบกลับใบสมัครงานของคุณ',
   );
 ?>

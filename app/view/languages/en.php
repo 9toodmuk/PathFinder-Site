@@ -228,6 +228,11 @@
     'APPLICATIONS_INTERVIEWED' => 'Interviewed',
     'APPLICATIONS_REJECTED' => 'Rejected',
     'APPLICATIONS_ACCEPTED' => 'Accepted',
-    'APPLY_DETAILS' => 'Application Details'
+    'APPLY_DETAILS' => 'Application Details',
+    'Inbox' => 'Inbox',
+    'SentBox' => 'Sent',
+    'Drafts' => 'Drafts',
+    'Trash' => 'Trash',
+    'JOBREPLY' => 'Reply for your job applications',
   );
 ?>

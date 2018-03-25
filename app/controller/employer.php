@@ -62,7 +62,9 @@ class Employer extends Controller{
   public static function replyapply(){
     $apply_id = $_POST['id'];
     $message = $_POST['message'];
-    echo Detail::replyApplication($apply_id, $message);
+    $sender = $_POST['sender'];
+    $reciever = $_POST['reciever'];
+    echo Detail::replyApplication($apply_id, $message, $sender, $reciever);
   }
 
   public static function details(){
