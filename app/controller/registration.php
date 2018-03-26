@@ -59,4 +59,9 @@ class Registration extends Controller{
 
     Register::updateprofile($uid,'','',$sex,$birthday,$address,$subdistrict,$district,$province,$postcode,$telephone,$min,$max,$exp);
   }
+
+  function session() {
+    $_SESSION['social_id'] = $_POST['id'];
+    $_SESSION['language'] = $_POST['lang'];
+  }
 }

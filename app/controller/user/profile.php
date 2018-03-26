@@ -40,7 +40,7 @@ class Profile{
 
   public static function profileLoad($uid){
     $conn = Database::connection();
-    $sql = "SELECT users.id, users.guid, users.email, users.user_group, users.status, users.skip, users.on_order, users.validate,
+    $sql = "SELECT users.id, users.email, users.user_group, users.status, users.skip, users.on_order, users.validate,
     users.profile_image, users.header_image, personal_details.first_name, personal_details.last_name, personal_details.sex, personal_details.birthdate,
     personal_details.telephone, personal_details.facebook, personal_details.twitter, personal_details.line, personal_details.other_link, personal_details.disability
     FROM users JOIN personal_details ON users.id = personal_details.user_id WHERE users.id = '$uid';";
@@ -50,7 +50,7 @@ class Profile{
 
   public static function allProfilesLoad(){
     $conn = Database::connection();
-    $sql = "SELECT users.id, users.guid, users.email, users.user_group, users.status, users.skip, users.on_order, users.validate,
+    $sql = "SELECT users.id, users.email, users.user_group, users.status, users.skip, users.on_order, users.validate,
     users.profile_image, users.header_image, personal_details.first_name, personal_details.last_name, personal_details.sex, personal_details.birthdate,
     personal_details.telephone, personal_details.facebook, personal_details.twitter, personal_details.line, personal_details.other_link, personal_details.disability
     FROM users JOIN personal_details ON users.id = personal_details.user_id;";

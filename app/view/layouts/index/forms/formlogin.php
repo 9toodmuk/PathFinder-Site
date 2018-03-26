@@ -14,7 +14,7 @@
       <form id="login-form" method="post" role="form" style="display: block;">
         <div class="form-group">
           <label class="sr-only" for="email"><?=$lang['email']?></label>
-          <input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="<?=$lang['email']?>" value="" required>
+          <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="<?=$lang['email']?>" value="" required>
         </div>
         <div class="form-group">
           <label class="sr-only" for="password"><?=$lang['password']?></label>
@@ -54,28 +54,51 @@
     var $button = $('#btnLogin');
     $button.button('loading');
 
+    if (!isEmail(email)) {
+      $("#errorbox").html("<?=$lang['EnterValidEmail']?>");
+      $("#errorbox").fadeIn();
+      $("div#errorbox").delay(3000).fadeOut(300);
+      $button.button('reset');
+    }
+
     $.ajax({
-      url: '/home/login/',
+      url: '<?=$_ENV['API_LOCATION']?>/auth/login',
       type: 'POST',
       data: {email: email, password: pass},
       dataType: 'json',
       success: function (result) {
-        if (result.status) {
-          setTimeout(function(){ window.location.reload(); }, 3000);
-        } else {
-          if (result.error == 1) {
-            $("#errorbox").html("<?=$lang['AlertErrorText']?>");
-            $("#errorbox").fadeIn();
-            $("div#errorbox").delay(3000).fadeOut(300);
-            $button.button('reset');
-          } else if (result.error = 2) {
-            $("#errorbox").html("<?=$lang['LoginNoUser']?>");
-            $("#errorbox").fadeIn();
-            $("div#errorbox").delay(3000).fadeOut(300);
-            $button.button('reset');
+        $.ajax({
+          url: 'registration/session',
+          type: 'POST',
+          data: {id: result.id, lang: result.language},
+          success: function (result) {
+            setTimeout(function(){ window.location.reload(); }, 1000);
           }
+        });
+      },
+      error: function (xhr, status, err) {
+        if (xhr.status == 401) {
+          $("#errorbox").html("<?=$lang['AlertErrorText']?>");
+          $("#errorbox").fadeIn();
+          $("div#errorbox").delay(3000).fadeOut(300);
+          $button.button('reset');
+        } else if (xhr.status == 404) {
+          $("#errorbox").html("<?=$lang['LoginNoUser']?>");
+          $("#errorbox").fadeIn();
+          $("div#errorbox").delay(3000).fadeOut(300);
+          $button.button('reset');
+        } else if (xhr.status == 422) {
+          $("#errorbox").html("<?=$lang['LoginNoUser']?>");
+          $("#errorbox").fadeIn();
+          $("div#errorbox").delay(3000).fadeOut(300);
+          $button.button('reset');
         }
       }
     });
+  }
+
+  function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
   }
 </script>

@@ -1,7 +1,6 @@
 <?php
 use App\Controller\User\Profile;
 use App\Controller\Message\Message;
-$api_location = getenv('API_LOCATION');
 
 $messages = Message::getMessage($variables[2]);
 
@@ -223,7 +222,7 @@ $count = Message::count($_SESSION['social_id']);
       var type = $('input#type').val();
 
       $.ajax({
-        url: '<?=$api_location?>/messages',
+        url: '<?=$_ENV['API_LOCATION']?>/messages',
         type: 'POST',
         data: {title: title, text: message, sender: sender, reciever: receiver, type: type},
         dataType: "json",
@@ -231,10 +230,9 @@ $count = Message::count($_SESSION['social_id']);
           swal({
             type: 'success',
             title: '<?=$lang['Success']?>',
-            timer: 3000,
             showConfirmButton: false,
           });
-          setTimeout(function(){ window.location = "/employer/applications/"; }, 3000);
+          setTimeout(function(){ window.location = "/home/messages/inbox/"; }, 3000);
         },
         error: function (result) {
           swal({

@@ -13,9 +13,7 @@ class Register{
     $newpass = Utils::passhash($pass);
     $conn = Database::connection();
 
-    $guid = Utils::getGUID();
-
-    $sql = "INSERT INTO users (guid, email, password, user_group, created_at) VALUES ('$guid', '$email', '$newpass', '$group', '$created_date');";
+    $sql = "INSERT INTO users (email, password, user_group, created_at) VALUES ('$email', '$newpass', '$group', '$created_date');";
     if ($conn->query($sql)) {
       $userid = $conn->insert_id;
       $sql = "INSERT INTO personal_details (first_name, last_name, user_id) VALUES ('$fname', '$lname', '$userid');";

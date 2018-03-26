@@ -145,7 +145,7 @@ $count = Message::count($_SESSION['social_id']);
               <?php
                 foreach($messages as $message) {
               ?>
-              <tr data-href="./reader/<?=$message['id']?>" <?=$message['isReaded'] ? '':'class="unread"'?>>
+              <tr data-href="/home/messages/reader/<?=$message['id']?>" <?=$message['isReaded'] ? '':'class="unread"'?>>
                 <td class="view-message dont-show"><?=$message['sender']?></td>
                 <?php
                   if ($message['type'] == 1) {

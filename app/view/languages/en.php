@@ -108,6 +108,7 @@
     'LoginNoUser' => "<strong>Error!</strong> No user found. Please check your e-mail and password again.",
     'AlertSuccessText' => "<strong>Success!</strong> Everthing is fine.",
     'AlertErrorText' => "<strong>Error!</strong> Something went wrong.",
+    'EnterValidEmail' => "<strong>Error!</strong> Please enter a valid e-mail address.",
     'AllJobTitle' => "Jobs Centre",
     'AllEmployer' => "Employer Centre",
     'NoProfileAlert' => "<h4>No Profile Found</h4><p>You still not update your profile yet.<br/>Please update it before apply for any job.</p>",
