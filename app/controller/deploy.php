@@ -75,7 +75,7 @@ class Deploy extends Controller {
             fwrite($shell, 'git pull' . "\n");
             fwrite($shell, 'echo ' . escapeshellarg($endSentinel) . "\n");
             while (true) {
-                $o = stream_get_contents($shell, 15);
+                $o = stream_get_contents($shell, 5);
                 if ($o === false) {
                     throw new Exception('Failed while reading output from shell');
                 }
