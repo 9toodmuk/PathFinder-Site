@@ -1,8 +1,8 @@
 <?php
-use Controller\Job\Employer;
-use Controller\Employer\Detail;
-use Controller\Job\JobController;
-use Controller\Utils\Address;
+use App\Controller\Job\Employer;
+use App\Controller\Employer\Detail;
+use App\Controller\Job\JobController;
+use App\Controller\Utils\Address;
 
 if(!isset($currentjob)){
   $result = Employer::loadEMP($variables[2]);

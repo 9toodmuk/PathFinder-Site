@@ -1,16 +1,16 @@
 <?php
-use Controller\User\Location;
-use Controller\Timeline\Notification;
-use Controller\User\Profile;
-use Controller\User\Experiences;
-use Controller\User\Educations;
-use Controller\Timeline\Post;
-use Controller\Timeline\Like;
-use Controller\Timeline\Comment;
-use Controller\Job\JobController;
-use Controller\Job\Employer;
-use Controller\Employer\Detail;
-use Controller\Utils\Address;
+use App\Controller\User\Location;
+use App\Controller\Timeline\Notification;
+use App\Controller\User\Profile;
+use App\Controller\User\Experiences;
+use App\Controller\User\Educations;
+use App\Controller\Timeline\Post;
+use App\Controller\Timeline\Like;
+use App\Controller\Timeline\Comment;
+use App\Controller\Job\JobController;
+use App\Controller\Job\Employer;
+use App\Controller\Employer\Detail;
+use App\Controller\Utils\Address;
 
 class Utilities extends Controller{
   public function __construct(){

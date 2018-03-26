@@ -1,8 +1,8 @@
 <?php
-namespace Controller\Auth;
+namespace App\Controller\Auth;
 
-use Controller\Utils\Utils;
-use Config\Database;
+use App\Controller\Utils\Utils;
+use App\Config\Database;
 
 class Login{
 

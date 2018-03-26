@@ -1,10 +1,10 @@
 <?php
 
-use Controller\View\View;
-use Controller\Auth\Login;
-use Controller\Auth\Register;
-use Controller\User\Profile;
-use Controller\Utils\Email;
+use App\Controller\View\View;
+use App\Controller\Auth\Login;
+use App\Controller\Auth\Register;
+use App\Controller\User\Profile;
+use App\Controller\Utils\Email;
 
 class Home extends Controller{
   protected $indexlayout = 'app/view/layouts/index.php';
@@ -104,7 +104,13 @@ class Home extends Controller{
       } else if ($page == 'reader') {
         if ($id != NULL) {
           echo View::render($this->fullwidth, array("reader", $this->reader, $id));
+        } else {
+          header("Location: /");
+          exit();
         }
+      } else {
+        header("Location: /");
+        exit();
       }
     }else{
       header("Location: /");

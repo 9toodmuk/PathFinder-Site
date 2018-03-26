@@ -1,6 +1,6 @@
 <?php
-use Controller\User\Profile;
-use Controller\Message\Message;
+use App\Controller\User\Profile;
+use App\Controller\Message\Message;
 
 $messages = Message::getInbox($_SESSION['social_id']);
 

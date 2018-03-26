@@ -1,6 +1,6 @@
 <?php
-use Controller\User\Profile;
-use Controller\Job\JobController;
+use App\Controller\User\Profile;
+use App\Controller\Job\JobController;
 
 $result = Profile::getFavJobs($_SESSION['social_id']);
 ?>

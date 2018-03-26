@@ -1,9 +1,9 @@
 <?php
-use Controller\Admin\Postings;
-use Controller\Admin\Applications;
-use Controller\Admin\Users;
-use Controller\Admin\Employer;
-use Controller\Utils\Utils;
+use App\Controller\Admin\Postings;
+use App\Controller\Admin\Applications;
+use App\Controller\Admin\Users;
+use App\Controller\Admin\Employer;
+use App\Controller\Utils\Utils;
 ?>
 
 <div class="row">

@@ -98,7 +98,7 @@
                             <?php
                             for ($i=0; $i < 5 ; $i++) {
                                 echo '<option value="'.$i.'">';
-                                Controller\Admin\Postings::jobLevel($i);
+                                App\Controller\Admin\Postings::jobLevel($i);
                                 echo '</option>';
                             }
                             ?>
@@ -112,7 +112,7 @@
                             <?php
                             for ($i=0; $i < 6 ; $i++) {
                                 echo '<option value="'.$i.'">';
-                                Controller\Admin\Postings::eduLevel($i);
+                                App\Controller\Admin\Postings::eduLevel($i);
                                 echo '</option>';
                             }
                             ?>

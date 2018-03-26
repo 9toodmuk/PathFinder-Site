@@ -39,7 +39,7 @@
                           <td><?php echo $row["first_name"] ?></td>
                           <td><?php echo $row["last_name"] ?></td>
                           <td><?php echo $row["email"] ?></td>
-                          <td><?php echo Controller\Admin\Users::getGroupName($row["user_group"]); ?></td>
+                          <td><?php echo App\Controller\Admin\Users::getGroupName($row["user_group"]); ?></td>
                         </tr>
                         <?php
                           }
@@ -92,7 +92,7 @@
                     <label for="group">กลุ่มผู้ใช้</label>
                     <select class="form-control" name="group" id="group">
                       <?php
-                        $group = Controller\Admin\Users::getAllGroup();
+                        $group = App\Controller\Admin\Users::getAllGroup();
                         while ($row = $group->fetch_assoc()){
                           echo '<option value='.$row['id'].'>'.$row['name'].'</option>';
                         }

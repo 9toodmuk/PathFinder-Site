@@ -1,9 +1,9 @@
 <?php
-namespace Controller\Job;
+namespace App\Controller\Job;
 
-use Config\Database;
-use Controller\User\Profile;
-use Controller\View\View;
+use App\Config\Database;
+use App\Controller\User\Profile;
+use App\Controller\View\View;
 
 class JobController {
   public static function loadAllPosting($limit = NULL, $offset = NULL, $id = NULL){

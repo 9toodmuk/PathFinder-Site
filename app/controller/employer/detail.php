@@ -1,8 +1,8 @@
 <?php
-namespace Controller\Employer;
+namespace App\Controller\Employer;
 
-use Config\Database;
-use Controller\Job\JobController;
+use App\Config\Database;
+use App\Controller\Job\JobController;
 
 class Detail {
   public static function edit($field, $data, $id){

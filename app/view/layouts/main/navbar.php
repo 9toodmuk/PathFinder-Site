@@ -1,6 +1,6 @@
 <?php
-use Controller\User\Profile;
-use Controller\Timeline\Notification;
+use App\Controller\User\Profile;
+use App\Controller\Timeline\Notification;
 
 $notifications = Notification::getByRecipient($_SESSION['social_id']);
 $currentuser = Profile::profileLoad($_SESSION['social_id']);

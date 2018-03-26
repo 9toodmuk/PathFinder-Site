@@ -1,5 +1,5 @@
 <?php
-use Controller\View\View;
+use App\Controller\View\View;
 
 class Location extends Controller{
   protected $homelayout = 'app/view/layouts/home.php';

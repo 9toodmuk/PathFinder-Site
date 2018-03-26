@@ -1,7 +1,7 @@
 <?php
-namespace Controller\Search;
+namespace App\Controller\Search;
 
-use Config\Database;
+use App\Config\Database;
 
 class SearchController {
   public static function search($query){

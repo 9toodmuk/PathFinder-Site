@@ -1,8 +1,8 @@
 <?php
-namespace Controller\Utils;
+namespace App\Controller\Utils;
 
-use Config\Database;
-use Controller\User\Profile;
+use App\Config\Database;
+use App\Controller\User\Profile;
 
 class Email {
 

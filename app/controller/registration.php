@@ -1,7 +1,7 @@
 <?php
 
-use Controller\View\View;
-use Controller\Auth\Register;
+use App\Controller\View\View;
+use App\Controller\Auth\Register;
 
 class Registration extends Controller{
   protected $indexpage = 'app/view/layouts/register.php';

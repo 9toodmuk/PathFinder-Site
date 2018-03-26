@@ -1681,3 +1681,14 @@ ul {
 .footer a:visited {
   color: #ddd;
 }
+
+.panel-default>.panel-heading>.profile-image {
+  display: inline-block;
+  width: 75px;
+  vertical-align: top;
+}
+
+.panel-default>.panel-heading>.message-title {
+  display: inline-block;
+  padding: 0 20px;
+}

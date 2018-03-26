@@ -1,8 +1,8 @@
 <?php
-use Controller\Config\Database;
-use Controller\Job\JobController;
-use Controller\Utils\Address;
-use Controller\Employer\Detail;
+use App\Controller\Config\Database;
+use App\Controller\Job\JobController;
+use App\Controller\Utils\Address;
+use App\Controller\Employer\Detail;
 
 JobController::addCount($variables[2]);
 

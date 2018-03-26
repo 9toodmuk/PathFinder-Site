@@ -1,7 +1,7 @@
 <?php
-namespace Controller\User;
+namespace App\Controller\User;
 
-use Config\Database;
+use App\Config\Database;
 
 class Experiences{
   public static function newExp($id, $title, $emp, $start, $end, $now){

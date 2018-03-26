@@ -1,5 +1,5 @@
 <?php
-use Controller\Employer\Detail;
+use App\Controller\Employer\Detail;
 $emp = Detail::getDetails($_SESSION['emp_id']);
 ?>
 <div class="row">

@@ -1,5 +1,5 @@
 <?php
-use Controller\Job\JobController;
+use App\Controller\Job\JobController;
 $recommendjob = JobController::getRecommendedJob($_SESSION['social_id'], 3);
 ?>
 <div class="portlet margin-bottom-30">

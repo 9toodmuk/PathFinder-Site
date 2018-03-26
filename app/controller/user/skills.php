@@ -1,7 +1,7 @@
 <?php
-namespace Controller\User;
+namespace App\Controller\User;
 
-use Config\Database;
+use App\Config\Database;
 
 class Skills{
   public static function skillLoad($uid){

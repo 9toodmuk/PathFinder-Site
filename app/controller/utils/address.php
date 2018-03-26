@@ -1,7 +1,7 @@
 <?php
-namespace Controller\Utils;
+namespace App\Controller\Utils;
 
-use Config\Database;
+use App\Config\Database;
 
 class Address {
   public static function getAllProvince($thai = true){

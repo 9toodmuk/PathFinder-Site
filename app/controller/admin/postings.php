@@ -1,8 +1,8 @@
 <?php
-namespace Controller\Admin;
+namespace App\Controller\Admin;
 
-use Config\Database;
-use Controller\View\Language;
+use App\Config\Database;
+use App\Controller\View\Language;
 
 class Postings {
   public static function addpostings($name, $responsibility, $qualification, $benefit, $capacity, $cap_type, $disability_req, $salary, $salarytype, $negetiable, $location, $type, $level, $exp_req, $edu_req, $category, $company){

@@ -1,10 +1,10 @@
 <?php
-namespace Controller\Timeline;
+namespace App\Controller\Timeline;
 
-use Config\Database;
-use Controller\Utils\FCM;
-use Controller\User\Profile;
-use Controller\View\Language;
+use App\Config\Database;
+use App\Controller\Utils\FCM;
+use App\Controller\User\Profile;
+use App\Controller\View\Language;
 
 class Notification {
   public static function get($id, $limit = 20, $offset = 0){

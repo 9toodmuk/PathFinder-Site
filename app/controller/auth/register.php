@@ -1,9 +1,9 @@
 <?php
-namespace Controller\Auth;
+namespace App\Controller\Auth;
 
-use Controller\Utils\Utils;
-use Controller\Auth\Login;
-use Config\Database;
+use App\Controller\Utils\Utils;
+use App\Controller\Auth\Login;
+use App\Config\Database;
 
 class Register{
   public static function register($email, $pass, $fname, $lname, $group = 1){

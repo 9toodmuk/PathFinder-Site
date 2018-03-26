@@ -1,5 +1,5 @@
 <?php
-use Controller\User\Profile;
+use App\Controller\User\Profile;
 $user = Profile::profileLoad($_SESSION['social_id']);
 $user = mysqli_fetch_array($user);
 ?>

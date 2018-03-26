@@ -1,8 +1,8 @@
 <?php
-use Controller\Job\JobController;
-use Controller\Employer\Detail;
-use Controller\Admin\Postings;
-use Controller\View\Language;
+use App\Controller\Job\JobController;
+use App\Controller\Employer\Detail;
+use App\Controller\Admin\Postings;
+use App\Controller\View\Language;
 
 if(!isset($_SESSION['language'])){
   $language = isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]) ? substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2) : '';

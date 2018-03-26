@@ -1,11 +1,11 @@
 <?php
-use Controller\Job\JobController;
-use Controller\User\Profile;
-use Controller\User\Experiences;
-use Controller\User\Educations;
-use Controller\User\Skills;
-use Controller\Admin\Postings;
-use Controller\Utils\Utils;
+use App\Controller\Job\JobController;
+use App\Controller\User\Profile;
+use App\Controller\User\Experiences;
+use App\Controller\User\Educations;
+use App\Controller\User\Skills;
+use App\Controller\Admin\Postings;
+use App\Controller\Utils\Utils;
 $user = Profile::profileLoad($variables[2]);
 $user = mysqli_fetch_array($user);
 $birthdate = $startdate = date("d F Y", strtotime($user['birthdate']));

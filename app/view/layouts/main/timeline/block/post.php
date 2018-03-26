@@ -1,9 +1,9 @@
 <?php
-use Controller\User\Profile;
-use Controller\Timeline\Like;
-use Controller\Timeline\Comment;
-use Controller\Utils\Utils;
-use Controller\View\Language;
+use App\Controller\User\Profile;
+use App\Controller\Timeline\Like;
+use App\Controller\Timeline\Comment;
+use App\Controller\Utils\Utils;
+use App\Controller\View\Language;
 $author = Profile::profileload($row['author']);
 $author = mysqli_fetch_array($author);
 $reader = NULL;

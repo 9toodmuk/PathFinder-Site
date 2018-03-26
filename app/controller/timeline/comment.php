@@ -1,9 +1,9 @@
 <?php
-namespace Controller\Timeline;
+namespace App\Controller\Timeline;
 
-use Config\Database;
-use Controller\Timeline\Notification;
-use Controller\Timeline\Post;
+use App\Config\Database;
+use App\Controller\Timeline\Notification;
+use App\Controller\Timeline\Post;
 
 class Comment {
 

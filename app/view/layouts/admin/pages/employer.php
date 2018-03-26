@@ -39,7 +39,7 @@
                     </td>
                     <td class="hidden-xs" id="tid<?php echo $row['id'] ?>"><?php echo $row["id"] ?></td>
                     <td id="nm<?php echo $row['id'] ?>"><?php echo $row["name"] ?></td>
-                    <td id="cat<?php echo $row['id'] ?>"><?php $catname = Controller\Admin\Categories\EmployerController::loadCategories($row["category_id"]); echo $catname['name']; ?></td>
+                    <td id="cat<?php echo $row['id'] ?>"><?php $catname = App\Controller\Admin\Categories\EmployerController::loadCategories($row["category_id"]); echo $catname['name']; ?></td>
                     <td id="pro<?php echo $row['id'] ?>"><?php echo $row["province"] ?></td>
                     <td id="ct<?php echo $row['id'] ?>"><?php echo $row["country"] ?></td>
                     <td id="tp<?php echo $row['id'] ?>"><?php echo $row["telephone"] ?></td>

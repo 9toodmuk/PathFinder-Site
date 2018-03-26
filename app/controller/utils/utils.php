@@ -1,9 +1,9 @@
 <?php
-namespace Controller\Utils;
+namespace App\Controller\Utils;
 
-use Controller\User\Profile;
-use Controller\Employer\Detail;
-use Controller\Volunteer\VolunteerController;
+use App\Controller\User\Profile;
+use App\Controller\Employer\Detail;
+use App\Controller\Volunteer\VolunteerController;
 
 class Utils {
   public static function time_elapsed_string($date, $granularity=1, $full = false)

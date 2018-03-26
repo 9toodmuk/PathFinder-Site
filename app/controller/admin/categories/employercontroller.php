@@ -1,7 +1,7 @@
 <?php
-namespace Controller\Admin\Categories;
+namespace App\Controller\Admin\Categories;
 
-use Config\Database;
+use App\Config\Database;
 
 class EmployerController{
   public static function addCategories($name){

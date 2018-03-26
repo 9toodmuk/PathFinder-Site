@@ -1,5 +1,5 @@
 <?php
-use Config\Database;
+use App\Config\Database;
 $conn = Database::connection();
 ?>
 <div class="portlet margin-bottom-30">

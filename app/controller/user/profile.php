@@ -1,9 +1,9 @@
 <?php
-namespace Controller\User;
+namespace App\Controller\User;
 
-use Config\Database;
-use Controller\Auth\Login;
-use Controller\Timeline\Notification;
+use App\Config\Database;
+use App\Controller\Auth\Login;
+use App\Controller\Timeline\Notification;
 
 class Profile{
   public static function createProfile($id, $first_name, $last_name, $sex, $birthdate, $telephone, $facebook, $twitter, $line, $disability){

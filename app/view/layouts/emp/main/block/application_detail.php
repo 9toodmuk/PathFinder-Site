@@ -1,11 +1,11 @@
 <?php
-use Controller\Employer\Detail;
-use Controller\Job\JobController;
-use Controller\Job\Employer;
-use Controller\User\Profile;
-use Controller\User\Experiences;
-use Controller\User\Educations;
-use Controller\User\Skills;
+use App\Controller\Employer\Detail;
+use App\Controller\Job\JobController;
+use App\Controller\Job\Employer;
+use App\Controller\User\Profile;
+use App\Controller\User\Experiences;
+use App\Controller\User\Educations;
+use App\Controller\User\Skills;
 
 JobController::setApplicationStatus($variables[2], 1);
 $application = Detail::getApplicationDetails($variables[2]);

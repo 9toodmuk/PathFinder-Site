@@ -1,13 +1,13 @@
 <?php
 
-use Controller\View\View;
-use Controller\Admin\Categories\JobController;
-use Controller\Admin\Categories\EmployerController;
-use Controller\Admin\Employer;
-use Controller\Admin\Users;
-use Controller\Admin\Auth\Auth;
-use Controller\Admin\Postings;
-use Controller\Admin\Applications;
+use App\Controller\View\View;
+use App\Controller\Admin\Categories\JobController;
+use App\Controller\Admin\Categories\EmployerController;
+use App\Controller\Admin\Employer;
+use App\Controller\Admin\Users;
+use App\Controller\Admin\Auth\Auth;
+use App\Controller\Admin\Postings;
+use App\Controller\Admin\Applications;
 
 class Admin extends Controller{
   protected $mainlayout = 'app/view/layouts/admin/main.php';

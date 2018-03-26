@@ -1,7 +1,7 @@
 <?php
-use Controller\Volunteer\VolunteerController;
-use Controller\Auth\Register;
-use Controller\Utils\Utils;
+use App\Controller\Volunteer\VolunteerController;
+use App\Controller\Auth\Register;
+use App\Controller\Utils\Utils;
 
 class Volunteer extends Controller{
   public function __construct(){

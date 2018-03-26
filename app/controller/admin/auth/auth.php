@@ -1,8 +1,8 @@
 <?php
-namespace Controller\Admin\Auth;
+namespace App\Controller\Admin\Auth;
 
-use Controller\Utils\Utils;
-use Config\Database;
+use App\Controller\Utils\Utils;
+use App\Config\Database;
 
 class Auth{
   public static function signAdminIn($name, $pass){

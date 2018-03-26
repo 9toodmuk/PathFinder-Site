@@ -1,7 +1,7 @@
 <?php
-namespace Controller\Job;
+namespace App\Controller\Job;
 
-use Config\Database;
+use App\Config\Database;
 
 class Employer{
   public static function loadEMP($id = NULL){

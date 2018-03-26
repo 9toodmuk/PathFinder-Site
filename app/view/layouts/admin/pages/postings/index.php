@@ -1,7 +1,7 @@
 <?php
-use Controller\Admin\Employer;
-use Controller\Admin\Postings;
-use Controller\Admin\Categories\JobController;
+use App\Controller\Admin\Employer;
+use App\Controller\Admin\Postings;
+use App\Controller\Admin\Categories\JobController;
 ?>
       <div class="row">
           <div class="col-lg-12">

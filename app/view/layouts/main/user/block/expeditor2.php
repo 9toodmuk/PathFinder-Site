@@ -1,6 +1,6 @@
 <?php
-use Controller\View\Language;
-use Controller\User\Experiences;
+use App\Controller\View\Language;
+use App\Controller\User\Experiences;
 
 if(!isset($_SESSION['language'])){
   $language = isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]) ? substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2) : '';

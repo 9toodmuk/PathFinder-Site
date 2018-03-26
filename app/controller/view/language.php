@@ -1,5 +1,5 @@
 <?php
-namespace Controller\View;
+namespace App\Controller\View;
 
 class Language{
   public static function loadLanguage($language = "th"){

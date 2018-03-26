@@ -1,8 +1,8 @@
 <?php
-use Controller\Utils\Utils;
-use Controller\User\Profile;
-use Controller\Timeline\Notification;
-use Controller\View\Language;
+use App\Controller\Utils\Utils;
+use App\Controller\User\Profile;
+use App\Controller\Timeline\Notification;
+use App\Controller\View\Language;
 
 $date = Utils::time_elapsed_string($row['created_at']);
 $date = explode(" ", $date);

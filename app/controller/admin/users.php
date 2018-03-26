@@ -1,8 +1,8 @@
 <?php
-namespace Controller\Admin;
+namespace App\Controller\Admin;
 
-use Config\Database;
-use Controller\Utils\Utils;
+use App\Config\Database;
+use App\Controller\Utils\Utils;
 
 class Users {
   public static function addAccount($email, $pass, $fname, $lname, $ugp){

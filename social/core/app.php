@@ -36,4 +36,10 @@ class App{
       return $url = explode('/',filter_var(rtrim($_GET['url'],'/')), FILTER_SANITIZE_URL);
     }
   }
+
+  function __autoload($className){
+    $filename =  "app/".str_replace('\\', '/', $className) . '.php';
+    $filename = strtolower($filename);
+    require_once $filename;
+  }
 }

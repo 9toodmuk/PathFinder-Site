@@ -1,8 +1,8 @@
 <?php
-namespace Controller\Timeline;
+namespace App\Controller\Timeline;
 
-use Config\Database;
-use Controller\Timeline\Notification;
+use App\Config\Database;
+use App\Controller\Timeline\Notification;
 
 class Post {
   public static function addPost($message, $id, $fid = NULL){

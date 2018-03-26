@@ -1,6 +1,6 @@
 <?php
-use Controller\Employer\Detail;
-use Controller\Job\JobController;
+use App\Controller\Employer\Detail;
+use App\Controller\Job\JobController;
 $compid = Detail::getEmpId($_SESSION['emp_id']);
 ?>
 <div class="portlet margin-bottom-30">

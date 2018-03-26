@@ -1,6 +1,6 @@
 <?php
-use Controller\Employer\Detail;
-use Controller\Job\JobController;
+use App\Controller\Employer\Detail;
+use App\Controller\Job\JobController;
 
 $compid = Detail::getEmpId($_SESSION['emp_id']);
 $location = Detail::getLocation($compid);
@@ -119,7 +119,7 @@ $location = Detail::getLocation($compid);
                     <?php
                     for ($i=0; $i < 5 ; $i++) {
                         echo '<option value="'.$i.'">';
-                        Controller\Admin\Postings::jobLevel($i);
+                        App\Controller\Admin\Postings::jobLevel($i);
                         echo '</option>';
                     }
                     ?>
@@ -133,7 +133,7 @@ $location = Detail::getLocation($compid);
                     <?php
                     for ($i=0; $i < 6 ; $i++) {
                         echo '<option value="'.$i.'">';
-                        Controller\Admin\Postings::eduLevel($i);
+                        App\Controller\Admin\Postings::eduLevel($i);
                         echo '</option>';
                     }
                     ?>

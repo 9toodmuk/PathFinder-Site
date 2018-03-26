@@ -1,7 +1,7 @@
 <?php
-use Controller\Employer\Detail;
-use Controller\Job\JobController;
-use Controller\Admin\Postings;
+use App\Controller\Employer\Detail;
+use App\Controller\Job\JobController;
+use App\Controller\Admin\Postings;
 $compid = Detail::getEmpId($_SESSION['emp_id']);
 ?>
 

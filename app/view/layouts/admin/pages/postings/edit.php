@@ -1,5 +1,5 @@
 <?php
-use Controller\Admin\Postings;
+use App\Controller\Admin\Postings;
 
 $postings = Postings::getPosting($variables[2]);
 ?>
@@ -124,7 +124,7 @@ $postings = Postings::getPosting($variables[2]);
                               }else{
                                 echo '<option value="'.$i.'">';
                               }
-                              Controller\Admin\Postings::jobLevel($i);
+                              App\Controller\Admin\Postings::jobLevel($i);
                               echo '</option>';
                             }
                             ?>
@@ -142,7 +142,7 @@ $postings = Postings::getPosting($variables[2]);
                               }else{
                                 echo '<option value="'.$i.'">';
                               }
-                              Controller\Admin\Postings::eduLevel($i);
+                              App\Controller\Admin\Postings::eduLevel($i);
                               echo '</option>';
                             }
                             ?>

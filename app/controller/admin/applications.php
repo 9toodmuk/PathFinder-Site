@@ -1,7 +1,7 @@
 <?php
-namespace Controller\Admin;
+namespace App\Controller\Admin;
 
-use Config\Database;
+use App\Config\Database;
 
 class Applications {
   public static function addApplication($uid, $jid, $status){

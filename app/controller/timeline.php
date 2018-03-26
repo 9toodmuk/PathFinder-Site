@@ -1,11 +1,11 @@
 <?php
-use Controller\View\View;
-use Controller\Auth\Login;
-use Controller\Auth\Register;
-use Controller\Timeline\Post;
-use Controller\Timeline\Like;
-use Controller\Timeline\Comment;
-use Controller\User\Profile;
+use App\Controller\View\View;
+use App\Controller\Auth\Login;
+use App\Controller\Auth\Register;
+use App\Controller\Timeline\Post;
+use App\Controller\Timeline\Like;
+use App\Controller\Timeline\Comment;
+use App\Controller\User\Profile;
 
 class Timeline extends Controller{
   protected $homelayout = 'app/view/layouts/home.php';

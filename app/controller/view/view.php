@@ -1,7 +1,7 @@
 <?php
-namespace Controller\View;
+namespace App\Controller\View;
 
-use Controller\User\Profile;
+use App\Controller\User\Profile;
 
 class View{
     public static function render($file, $variables = []) {

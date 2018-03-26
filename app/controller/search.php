@@ -1,11 +1,11 @@
 <?php
-use Controller\View\View;
-use Controller\Job\JobController;
-use Controller\Job\Employer;
-use Controller\User\Profile;
-use Controller\Search\SearchController;
-use Controller\Employer\Detail;
-use Controller\Utils\Address;
+use App\Controller\View\View;
+use App\Controller\Job\JobController;
+use App\Controller\Job\Employer;
+use App\Controller\User\Profile;
+use App\Controller\Search\SearchController;
+use App\Controller\Employer\Detail;
+use App\Controller\Utils\Address;
 
 class Search extends Controller{
   protected $homelayout = 'app/view/layouts/search.php';

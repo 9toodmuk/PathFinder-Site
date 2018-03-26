@@ -1,7 +1,7 @@
 <?php
-use Controller\Job\JobController;
-use Controller\User\Profile;
-use Controller\Admin\Postings;
+use App\Controller\Job\JobController;
+use App\Controller\User\Profile;
+use App\Controller\Admin\Postings;
 
 $disability = JobController::getAllDisabilityType();
 $user = Profile::profileLoad($_SESSION['social_id']);

@@ -1,9 +1,9 @@
 <?php
-use Controller\User\Profile;
-use Controller\User\Experiences;
-use Controller\User\Educations;
-use Controller\User\Skills;
-use Controller\Job\JobController;
+use App\Controller\User\Profile;
+use App\Controller\User\Experiences;
+use App\Controller\User\Educations;
+use App\Controller\User\Skills;
+use App\Controller\Job\JobController;
 $user = Profile::profileLoad($variables[2]);
 $user = mysqli_fetch_array($user);
 $relate = Profile::getRelatives($variables[2]);

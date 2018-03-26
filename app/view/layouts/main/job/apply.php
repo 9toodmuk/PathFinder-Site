@@ -1,10 +1,10 @@
 <?php
-use Controller\Job\JobController;
-use Controller\Job\Employer;
-use Controller\User\Profile;
-use Controller\User\Experiences;
-use Controller\User\Educations;
-use Controller\User\Skills;
+use App\Controller\Job\JobController;
+use App\Controller\Job\Employer;
+use App\Controller\User\Profile;
+use App\Controller\User\Experiences;
+use App\Controller\User\Educations;
+use App\Controller\User\Skills;
 
 $row = JobController::loadJobPosting($variables[2]);
 $emp = Employer::loadEMP($row['company_id']);

@@ -1,10 +1,10 @@
 <?php
-namespace Controller\Timeline;
+namespace App\Controller\Timeline;
 
-use Config\Database;
-use Controller\Timeline\Notification;
-use Controller\Timeline\Post;
-use Controller\Timeline\Comment;
+use App\Config\Database;
+use App\Controller\Timeline\Notification;
+use App\Controller\Timeline\Post;
+use App\Controller\Timeline\Comment;
 
 class Like {
   public static function addNewLike($id, $pid, $type){

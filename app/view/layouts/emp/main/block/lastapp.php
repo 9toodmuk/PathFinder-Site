@@ -1,7 +1,7 @@
 <?php
-use Controller\Employer\Detail;
-use Controller\Admin\Users;
-use Controller\Admin\Postings;
+use App\Controller\Employer\Detail;
+use App\Controller\Admin\Users;
+use App\Controller\Admin\Postings;
 $compid = Detail::getEmpId($_SESSION['emp_id']);
 ?>
 <div class="portlet margin-bottom-30">

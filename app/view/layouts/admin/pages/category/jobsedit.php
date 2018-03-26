@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-4 col-sm-offset-2">
           <?php
-            $data = Controller\Admin\Categories\JobController::loadCategories($variables[2]);
+            $data = App\Controller\Admin\Categories\JobController::loadCategories($variables[2]);
           ?>
           <form role="form" action="/admin/categories/edit/job/" method="post">
             <div class="form-group float-label-control">

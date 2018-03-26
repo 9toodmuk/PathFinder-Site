@@ -1,5 +1,5 @@
 <?php
-use Controller\Admin\Postings;
+use App\Controller\Admin\Postings;
 ?>
 <div>
   <table class="table table-bordered" id="<?=$row['id']?>">

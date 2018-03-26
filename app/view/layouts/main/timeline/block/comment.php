@@ -1,8 +1,8 @@
 <?php
-use Controller\User\Profile;
-use Controller\Timeline\Like;
-use Controller\Utils\Utils;
-use Controller\View\Language;
+use App\Controller\User\Profile;
+use App\Controller\Timeline\Like;
+use App\Controller\Utils\Utils;
+use App\Controller\View\Language;
 
 if(!isset($_SESSION['language'])){
   $language = isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]) ? substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2) : '';

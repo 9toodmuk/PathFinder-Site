@@ -1,17 +1,17 @@
 <?php
 
-use Controller\View\View;
-use Controller\Auth\Login;
-use Controller\Auth\Register;
-use Controller\Job\JobController;
-use Controller\Timeline\Post;
-use Controller\Timeline\Like;
-use Controller\Timeline\Comment;
-use Controller\User\Profile;
-use Controller\User\Experiences;
-use Controller\User\Educations;
-use Controller\User\Skills;
-use Controller\Utils\Utils;
+use App\Controller\View\View;
+use App\Controller\Auth\Login;
+use App\Controller\Auth\Register;
+use App\Controller\Job\JobController;
+use App\Controller\Timeline\Post;
+use App\Controller\Timeline\Like;
+use App\Controller\Timeline\Comment;
+use App\Controller\User\Profile;
+use App\Controller\User\Experiences;
+use App\Controller\User\Educations;
+use App\Controller\User\Skills;
+use App\Controller\Utils\Utils;
 
 class User extends Controller{
   protected $homelayout = 'app/view/layouts/userpage.php';

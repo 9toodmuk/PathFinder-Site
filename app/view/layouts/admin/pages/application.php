@@ -1,8 +1,8 @@
 <?php
-use Config\Database;
-use Controller\Admin\Applications;
-use Controller\Admin\Users;
-use Controller\Admin\Postings;
+use App\Config\Database;
+use App\Controller\Admin\Applications;
+use App\Controller\Admin\Users;
+use App\Controller\Admin\Postings;
 ?>
 
       <div class="row">

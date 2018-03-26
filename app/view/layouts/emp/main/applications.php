@@ -1,9 +1,11 @@
 <?php
-use Controller\Employer\Detail;
-use Controller\User\Profile;
-use Controller\Admin\Users;
-use Controller\Admin\Postings;
+use App\Controller\Employer\Detail;
+use App\Controller\User\Profile;
+use App\Controller\Admin\Users;
+use App\Controller\Admin\Postings;
 $compid = Detail::getEmpId($_SESSION['emp_id']);
+
+$api_location = getenv('API_LOCATION');
 ?>
 
 <div class="row">
@@ -129,21 +131,25 @@ $compid = Detail::getEmpId($_SESSION['emp_id']);
     var sender = $('input#sender').val();
     var reciever = $('input#receiver').val();
     $.ajax({
-      url: '/employer/replyapply/',
+      url: '<?=$api_location?>/messages',
       type: 'POST',
-      data: {id: id, message: message, sender: sender, reciever: reciever},
+      data: {title: 'JOBREPLY', text: message, sender: sender, reciever: reciever, type: 2},
       dataType: "json",
       success: function (result) {
-        if(!result.status){
-          $('#errorbox').fadeIn();
-          $('#errorbox').delay(5000).fadeOut(1000);
-        }else{
-          $("#errorbox").removeClass("alert-danger");
-          $("#errorbox").addClass("alert-success");
-          $("#errorbox").html("<strong>Success!</success> Replied the application.");
-          $("#errorbox").fadeIn();
-          setTimeout(function(){ window.location = "/employer/applications/"; }, 3000);
-        }
+        swal({
+          type: 'success',
+          title: '<?=$lang['Success']?>',
+          timer: 3000,
+          showConfirmButton: false,
+        });
+        setTimeout(function(){ window.location = "/employer/applications/"; }, 3000);
+      },
+      error: function (result) {
+        swal({
+          type: 'error',
+          title: '<?=$lang['AlertErrorText']?>',
+          timer: 1000
+        });
       }
     });
   }

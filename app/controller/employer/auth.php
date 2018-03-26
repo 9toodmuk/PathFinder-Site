@@ -1,9 +1,9 @@
 <?php
-namespace Controller\Employer;
+namespace App\Controller\Employer;
 
-use Config\Database;
-use Controller\Utils\Utils;
-use Controller\Auth\Login;
+use App\Config\Database;
+use App\Controller\Utils\Utils;
+use App\Controller\Auth\Login;
 
 class Auth {
   public static function login($email, $pass){

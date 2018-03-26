@@ -1,7 +1,7 @@
 <?php
-use Controller\Employer\Detail;
-use Controller\Job\Employer;
-use Controller\Job\JobController;
+use App\Controller\Employer\Detail;
+use App\Controller\Job\Employer;
+use App\Controller\Job\JobController;
 $emp = Detail::getDetails($_SESSION['emp_id']);
 ?>
 <div class="row">

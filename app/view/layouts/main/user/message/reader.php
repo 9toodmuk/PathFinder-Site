@@ -1,6 +1,7 @@
 <?php
-use Controller\User\Profile;
-use Controller\Message\Message;
+use App\Controller\User\Profile;
+use App\Controller\Message\Message;
+$api_location = getenv('API_LOCATION');
 
 $messages = Message::getMessage($variables[2]);
 
@@ -144,7 +145,15 @@ $count = Message::count($_SESSION['social_id']);
         <div class="inbox-body">
           <div class="panel panel-default">
             <div class="panel-heading">
-            <div class="profile-image"></div>
+            <div class="profile-image">
+              <?php
+                if ($messages['type'] == 1) {
+                  echo '<img src="/uploads/profile_image/'.$sender['profile_image'].'" width="75px">';
+                } else {
+                  echo '<img src="/uploads/logo_images/'.$sender['logo'].'" width="75px">';
+                }
+              ?>
+            </div>
               <div class="message-title">
                 <?php
                   if ($messages['type'] == 1) {
@@ -153,7 +162,7 @@ $count = Message::count($_SESSION['social_id']);
                     echo 'Title: '.$lang[$messages['title']].'<br/>';
                   }
                 ?>
-                From: <?=$sender['name']?> <?=$sender['lastName'] ? $sender['lastName']: ''?></br>
+                From: <?=$sender['name']?></br>
                 To: <?=$receiver['name']?>
               </div>
             </div>
@@ -165,21 +174,22 @@ $count = Message::count($_SESSION['social_id']);
           <div class="panel panel-default">
             <div class="panel-heading">Reply</div>
             <div class="panel-body">
-              <form role="form" class="form-horizontal">
+              <form role="form" class="form-horizontal" id="replyform">
                 <div class="form-group">
                   <label class="col-lg-2 control-label">Message</label>
                   <div class="col-lg-10">
-                    <textarea rows="10" cols="30" class="form-control" id="" name=""></textarea>
+                    <div id="message"></div>
                   </div>
                 </div>
 
                 <input type="hidden" id="sender" value="<?=$_SESSION['social_id']?>">
                 <input type="hidden" id="receiver" value="<?=$messages['sender']?>">
                 <input type="hidden" id="type" value="<?=$messages['type']?>">
+                <input type="hidden" id="title" value="<?=$messages['title']?>">
 
                 <div class="form-group">
                   <div class="col-lg-offset-2 col-lg-10">
-                    <button class="btn btn-send" type="submit">Send</button>
+                    <button class="btn btn-send" type="button" onclick="reply()">Send</button>
                   </div>
                 </div>
               </form>
@@ -194,4 +204,45 @@ $count = Message::count($_SESSION['social_id']);
     $('tr[data-href]').on('click', function (e) {
       document.location = $(this).data('href');
     });
+
+    $('div#message').summernote({
+      height: 150,
+      disableDragAndDrop: true,
+      dialogsFade: true,
+      tabsize: 2,
+      toolbar: [
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+      ]
+    });
+
+    function reply() {
+      var title = $('input#title').val();
+      var message = $('div#message').summernote('code');
+      var sender = $('input#sender').val();
+      var receiver = $('input#receiver').val();
+      var type = $('input#type').val();
+
+      $.ajax({
+        url: '<?=$api_location?>/messages',
+        type: 'POST',
+        data: {title: title, text: message, sender: sender, reciever: receiver, type: type},
+        dataType: "json",
+        success: function (result) {
+          swal({
+            type: 'success',
+            title: '<?=$lang['Success']?>',
+            timer: 3000,
+            showConfirmButton: false,
+          });
+          setTimeout(function(){ window.location = "/employer/applications/"; }, 3000);
+        },
+        error: function (result) {
+          swal({
+            type: 'error',
+            title: '<?=$lang['AlertErrorText']?>',
+            timer: 1000
+          });
+        }
+      });
+    }
   </script>

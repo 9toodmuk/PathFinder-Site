@@ -1,8 +1,8 @@
 <?php
-use Controller\Utils\Utils;
-use Controller\Employer\Detail;
-use Controller\Job\JobController;
-use Controller\Utils\Address;
+use App\Controller\Utils\Utils;
+use App\Controller\Employer\Detail;
+use App\Controller\Job\JobController;
+use App\Controller\Utils\Address;
 
 $emp = Detail::getDetails($_SESSION['emp_id']);
 $cid = Detail::getEmpId($_SESSION['emp_id']);

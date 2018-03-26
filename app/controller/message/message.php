@@ -1,9 +1,9 @@
 <?php
-namespace Controller\Message;
-use Config\Database;
-use Controller\Employer\Detail;
-use Controller\User\Profile;
-use Controller\Utils\Utils;
+namespace App\Controller\Message;
+use App\Config\Database;
+use App\Controller\Employer\Detail;
+use App\Controller\User\Profile;
+use App\Controller\Utils\Utils;
 
 class Message {
     public static function getMessage($id){
@@ -41,7 +41,7 @@ class Message {
                 'title' => $message['title'],
                 'message' => $message['text'],
                 'sender' => Message::getSender($message['sender'], $message['type']),
-                'sentAt' => Utils::time_elapsed_string($message['sent_at']),
+                'sentAt' => Utils::time_elapsed_string($message['created_at']),
                 'isReaded' => Message::isRead($message['readed']),
                 'type' => $message['type']
             );
@@ -80,8 +80,7 @@ class Message {
             case '1':
                 $user = mysqli_fetch_assoc(Profile::profileLoad($id));
                 $sender = array(
-                    'name' => $user['first_name'],
-                    'lastName' => $user['last_name'],
+                    'name' => $user['first_name']." ".$user['last_name'],
                     'email' => $user['email'],
                     'profile_image' => $user['profile_image']
                 );

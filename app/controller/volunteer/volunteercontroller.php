@@ -1,8 +1,8 @@
 <?php
-namespace Controller\Volunteer;
+namespace App\Controller\Volunteer;
 
-use Controller\Utils\Utils;
-use Config\Database;
+use App\Controller\Utils\Utils;
+use App\Config\Database;
 
 class VolunteerController{
   public static function login($email, $pass){

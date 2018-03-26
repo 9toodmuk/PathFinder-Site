@@ -1,11 +1,11 @@
 <?php
-use Controller\Config\Database;
-use Controller\Auth\Login;
-use Controller\User\Profile;
-use Controller\Search\SearchController;
-use Controller\Job\JobController;
-use Controller\Job\Employer;
-use Controller\View\Language;
+use App\Controller\Config\Database;
+use App\Controller\Auth\Login;
+use App\Controller\User\Profile;
+use App\Controller\Search\SearchController;
+use App\Controller\Job\JobController;
+use App\Controller\Job\Employer;
+use App\Controller\View\Language;
 
 if(!isset($_SESSION['language'])){
   $language = isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]) ? substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2) : '';

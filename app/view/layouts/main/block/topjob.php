@@ -1,5 +1,5 @@
 <?php
-use Controller\Job\JobController;
+use App\Controller\Job\JobController;
 ?>
 <div class="portlet margin-bottom-30">
   <div class="portlet-title">

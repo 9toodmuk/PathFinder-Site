@@ -1,11 +1,11 @@
 <?php
 
-use Controller\View\View;
-use Controller\Employer\Auth;
-use Controller\Employer\Detail;
-use Controller\Admin\Postings;
-use Controller\Job\JobController;
-use Controller\Utils\Utils;
+use App\Controller\View\View;
+use App\Controller\Employer\Auth;
+use App\Controller\Employer\Detail;
+use App\Controller\Admin\Postings;
+use App\Controller\Job\JobController;
+use App\Controller\Utils\Utils;
 
 class Employer extends Controller{
   protected $indexlayout = 'app/view/layouts/emp.php';

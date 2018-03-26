@@ -1,5 +1,5 @@
     <?php
-      $currentuser = Controller\User\Profile::profileLoad($_SESSION['social_id']);
+      $currentuser = App\Controller\User\Profile::profileLoad($_SESSION['social_id']);
       $currentuser = mysqli_fetch_array($currentuser); ?>
     <div class="profile-sidebar margin-bottom-30">
     <div class="profile-userpic">
@@ -23,11 +23,11 @@
           <i class="fa fa-user"></i>
           <?=$lang['Profile']?> </a>
         </li>
-        <!-- <li>
-          <a>
+        <li>
+          <a href="/home/messages">
           <i class="fa fa-envelope"></i>
-          Messages </a>
-        </li> -->
+          <?=$lang['Messages']?> </a>
+        </li>
         <li>
           <a href="/home/favorites/">
           <i class="fa fa-star"></i>

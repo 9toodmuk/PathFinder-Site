@@ -1,5 +1,5 @@
 <?php
-use Controller\Job\Employer;
+use App\Controller\Job\Employer;
 ?>
 <div class="row">
   <div class="col-8 offset-2 text-center" style="margin-top: 30px; margin-bottom: 30px;">

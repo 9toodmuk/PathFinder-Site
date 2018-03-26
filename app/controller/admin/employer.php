@@ -1,7 +1,7 @@
 <?php
-namespace Controller\Admin;
+namespace App\Controller\Admin;
 
-use Config\Database;
+use App\Config\Database;
 
 class Employer{
   public static function addEmployer($name, $parent, $location, $country, $telephone, $logo){

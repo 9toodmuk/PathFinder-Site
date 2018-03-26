@@ -1,5 +1,5 @@
 <?php
-namespace Controller\Utils;
+namespace App\Controller\Utils;
 
 class FCM {
   public function send_notification($token, $payload_notification, $payload_data) {

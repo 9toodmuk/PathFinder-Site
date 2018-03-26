@@ -1,9 +1,9 @@
 <?php
-use Controller\User\Profile;
+use App\Controller\User\Profile;
 $user = Profile::profileLoad($_POST['id']);
 $user = mysqli_fetch_array($user);
 
-use Controller\View\Language;
+use App\Controller\View\Language;
 
 if(!isset($_SESSION['language'])){
   $language = isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]) ? substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2) : '';

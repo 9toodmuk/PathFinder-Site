@@ -1,5 +1,5 @@
 <?php
-use Controller\Utils\Address;
+use App\Controller\Utils\Address;
 if($language == "en"){
   $province = Address::getAllProvince(false);
 }else{
