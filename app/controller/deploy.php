@@ -73,10 +73,9 @@ class Deploy extends Controller {
             $endSentinel = "!~@#_DONE_#@~!";
             fwrite($shell, 'cd ~/public_html' . "\n");
             fwrite($shell, 'git pull' . "\n");
-            fwrite($shell, 'composer install' . "\n");
             fwrite($shell, 'echo ' . escapeshellarg($endSentinel) . "\n");
             while (true) {
-                $o = stream_get_contents($shell, 5);
+                $o = stream_get_contents($shell, 15);
                 if ($o === false) {
                     throw new Exception('Failed while reading output from shell');
                 }
@@ -85,6 +84,7 @@ class Deploy extends Controller {
                     break;
                 }
             }
+            fwrite($shell, 'composer install' . "\n");
             fclose($shell);
             $mailBody = "GitHub payload:\r\n"
                 . print_r($data, true)
