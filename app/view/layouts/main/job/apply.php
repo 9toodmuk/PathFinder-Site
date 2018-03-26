@@ -248,8 +248,13 @@ $skill = Skills::skillLoad($_SESSION['social_id']);
       type: "post",
       success: function(result){
         if(result.success){
-          alert("Success");
-          window.location.replace("/job/");
+          swal({
+            type: 'success',
+            title: '<?=$lang['Success']?>',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          setTimeout(function(){ window.location.replace("/job/"); }, 1500);
         }
       }
     });

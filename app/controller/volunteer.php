@@ -7,18 +7,18 @@ class Volunteer extends Controller{
   public function __construct(){
   }
 
-  public static function index(){
+  function index(){
     header("HTTP/1.0 404 Not Found");
     exit();
   }
 
-  public static function login(){
+  function login(){
     $email = $_POST['email'];
     $pass = $_POST['password'];
     VolunteerController::login($email, $pass);
   }
 
-  public static function register(){
+  function register(){
     $email = $_POST['email'];
     $pass = $_POST['password'];
     $fname = $_POST['fname'];
@@ -26,7 +26,7 @@ class Volunteer extends Controller{
     VolunteerController::register($email, $pass, $fname, $lname);
   }
 
-  public static function duty($status){
+  function duty($status){
     if(isset($status)){
       if(isset($_POST['id'])){
         $id = $_POST['id'];
@@ -42,7 +42,7 @@ class Volunteer extends Controller{
     }
   }
 
-  public static function setToken(){
+  function setToken(){
     if(isset($_POST['id'])){
       $id = $_POST['id'];
       $token = $_POST['token'];
@@ -50,7 +50,7 @@ class Volunteer extends Controller{
     }
   }
 
-  public static function setLocation(){
+  function setLocation(){
     if(isset($_POST['id'])){
       $id = $_POST['id'];
       $lat = $_POST['lat'];
@@ -59,7 +59,7 @@ class Volunteer extends Controller{
     }
   }
 
-  public static function getAllCat(){
+  function getAllCat(){
     $category = VolunteerController::getCategory();
     $jsonArray = array();
     while($row = mysqli_fetch_assoc($category)){
@@ -72,7 +72,7 @@ class Volunteer extends Controller{
     echo json_encode($jsonArray, JSON_UNESCAPED_UNICODE);
   }
 
-  public static function getUserDetail($id){
+  function getUserDetail($id){
     $volunteer = VolunteerController::getVolunteer($id);
     $jsonArray = array();
     $arr = array('id' => $volunteer['id'],
@@ -91,7 +91,7 @@ class Volunteer extends Controller{
     echo str_replace(array('[', ']'), '', json_encode($arr, JSON_UNESCAPED_UNICODE));
   }
 
-  public static function getVolunteerLocation(){
+  function getVolunteerLocation(){
     $result = VolunteerController::getLocation();
     $jsonArray = array();
     while($row = mysqli_fetch_assoc($result)){
@@ -115,7 +115,7 @@ class Volunteer extends Controller{
     echo json_encode($jsonArray, JSON_UNESCAPED_UNICODE);
   }
 
-  public static function requestVolunteer(){
+  function requestVolunteer(){
     $uid = $_POST['id'];
     $lat = $_POST['lat'];
     $lng = $_POST['lng'];
@@ -123,7 +123,7 @@ class Volunteer extends Controller{
     VolunteerController::requestVolunteer($uid, $vcat, $lat, $lng);
   }
 
-  public static function checkOrderStatus($id = NULL){
+  function checkOrderStatus($id = NULL){
     if($id != NULL){
       $result = VolunteerController::checkOrderStatus($id);
       if($result['status'] == 1){
@@ -139,7 +139,7 @@ class Volunteer extends Controller{
     }
   }
 
-  public static function setOrderStatus($id = NULL){
+  function setOrderStatus($id = NULL){
     if($id != NULL){
       if(isset($_POST['volunteer_id'])){
         VolunteerController::setOrderStatus($id, $_POST['status'], $_POST['volunteer_id']);
@@ -152,7 +152,7 @@ class Volunteer extends Controller{
     }
   }
 
-  public static function getAllOrder($category = NULL){
+  function getAllOrder($category = NULL){
     $order = VolunteerController::getAllOrder();
     $jsonArray = array();
     if($category != NULL){
@@ -169,12 +169,12 @@ class Volunteer extends Controller{
     echo json_encode($jsonArray, JSON_UNESCAPED_UNICODE);
   }
 
-  public static function editProfilePic($id, $filename){
+  function editProfilePic($id, $filename){
       $file = $_FILES['file'];
       echo Utils::uploadPic($file, $id, false, $filename);
   }
 
-  public static function editProfile($id){
+  function editProfile($id){
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     VolunteerController::editProfile($firstname, $lastname, $id);

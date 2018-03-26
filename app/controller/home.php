@@ -18,12 +18,13 @@ class Home extends Controller{
   protected $createprofile = 'app/view/layouts/index/forms/formcreateprofile.php';
   protected $favorite = 'app/view/layouts/main/user/favorite.php';
   protected $inbox = 'app/view/layouts/main/user/message/inbox.php';
+  protected $reader = 'app/view/layouts/main/user/message/reader.php';
 
   public function __construct(){
 
   }
 
-  public static function index(){
+  function index(){
     if(isset($_SESSION['social_id'])){
       $user = Profile::profileLoad($_SESSION['social_id']);
       $user = mysqli_fetch_assoc($user);
@@ -38,7 +39,7 @@ class Home extends Controller{
     }
   }
 
-  public static function registration(){
+  function registration(){
     if(isset($_SESSION['social_id'])){
       header("Location: /");
       exit();
@@ -47,7 +48,7 @@ class Home extends Controller{
     }
   }
 
-  public static function recover(){
+  function recover(){
     if(isset($_SESSION['social_id'])){
       echo View::render($this->indexlayout, $this->recoverform);
     }else{
@@ -56,7 +57,7 @@ class Home extends Controller{
     }
   }
 
-  public static function sendRecover(){
+  function sendRecover(){
     if(isset($_SESSION['social_id'])){
       Email::sendEmail($_SESSION['social_id'], 1);
     }else{
@@ -65,7 +66,7 @@ class Home extends Controller{
     }
   }
 
-  public static function createprofile(){
+  function createprofile(){
     if(!isset($_SESSION['social_id'])){
       header("Location: /");
       exit();
@@ -84,7 +85,7 @@ class Home extends Controller{
     }
   }
 
-  public static function favorites(){
+  function favorites(){
     if(isset($_SESSION['social_id'])){
       echo View::render($this->homelayout, array("favorite", $this->favorite));
     }else{
@@ -93,13 +94,17 @@ class Home extends Controller{
     }
   }
 
-  public static function messages($page = NULL){
+  function messages($page = NULL, $id = NULL){
     if(isset($_SESSION['social_id'])){
       if ($page == NULL) {
         header("Location: /home/messages/inbox");
         exit();
       } else if ($page == 'inbox') {
         echo View::render($this->fullwidth, array("inbox", $this->inbox));
+      } else if ($page == 'reader') {
+        if ($id != NULL) {
+          echo View::render($this->fullwidth, array("reader", $this->reader, $id));
+        }
       }
     }else{
       header("Location: /");
@@ -107,18 +112,18 @@ class Home extends Controller{
     }
   }
 
-  public static function login(){
+  function login(){
     $email = $_POST['email'];
     $pass = $_POST['password'];
 
     Login::login($email, $pass);
   }
 
-  public static function logout(){
+  function logout(){
     Login::logout();
   }
 
-  public static function changelanguage(){
+  function changelanguage(){
     $_SESSION['language'] = $_GET['language'];
     if(isset($_SESSION['social_id'])){
       Login::setUserLang($_SESSION['social_id'], $_GET['language']);

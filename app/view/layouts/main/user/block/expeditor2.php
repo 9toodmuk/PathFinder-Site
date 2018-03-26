@@ -112,8 +112,13 @@ $exp = Experiences::expLoadbyId($_POST['id']);
       data: {id: id, title: title, emp: emp, start: startdate, end: enddate, now: now},
       success: function(result){
         if(result == "Success"){
-          alert("Success");
-          setTimeout(function(){ window.location.reload(); }, 100);
+          swal({
+            type: 'success',
+            title: '<?=$lang['Success']?>',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          setTimeout(function(){ window.location.reload(); }, 1000);
         }
       }
     });

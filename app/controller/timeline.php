@@ -17,7 +17,7 @@ class Timeline extends Controller{
 
   }
 
-  public static function index(){
+  function index(){
     if(isset($_SESSION['social_id'])){
       echo View::render($this->homelayout, array("timeline", $this->timeline));
     }else{
@@ -26,7 +26,7 @@ class Timeline extends Controller{
     }
   }
 
-  public static function load(){
+  function load(){
     if(isset($_POST['id'])){
       if(isset($_POST['limit'])){
         $result = Post::postload($_POST['id'], $_POST['limit']);
@@ -40,7 +40,7 @@ class Timeline extends Controller{
     }
   }
 
-  public static function post(){
+  function post(){
     $id = $_POST['id'];
     $message = $_POST['message'];
 
@@ -56,7 +56,7 @@ class Timeline extends Controller{
     }
   }
 
-  public static function comment(){
+  function comment(){
     $id = $_POST['id'];
     $pid = $_POST['pid'];
     $message = $_POST['message'];
@@ -68,7 +68,7 @@ class Timeline extends Controller{
     }
   }
 
-  public static function commentload(){
+  function commentload(){
     if(isset($_POST['limit'])){
       if(isset($_POST['perpage'])){
         $id = $_POST['id'];
@@ -82,7 +82,7 @@ class Timeline extends Controller{
     }
   }
 
-  public static function like(){
+  function like(){
     $id = $_POST['id'];
     $uid = $_POST['uid'];
     $type = $_POST['type'];

@@ -229,10 +229,13 @@
     'APPLICATIONS_REJECTED' => 'Rejected',
     'APPLICATIONS_ACCEPTED' => 'Accepted',
     'APPLY_DETAILS' => 'Application Details',
+    'Compose' => 'Compose',
     'Inbox' => 'Inbox',
     'SentBox' => 'Sent',
     'Drafts' => 'Drafts',
     'Trash' => 'Trash',
     'JOBREPLY' => 'Reply for your job applications',
+    'Success' => 'Success',
+    'You' => 'You'
   );
 ?>

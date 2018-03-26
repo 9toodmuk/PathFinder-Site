@@ -8,7 +8,7 @@ class Location extends Controller{
   public function __construct(){
   }
 
-  public static function index(){
+  function index(){
     if(isset($_SESSION['social_id'])){
       echo View::render($this->homelayout, array("location", $this->locationlayout));
     }else{
@@ -17,7 +17,7 @@ class Location extends Controller{
     }
   }
 
-  public static function user($id = NULL){
+  function user($id = NULL){
     if(isset($_SESSION['social_id'])){
       if(!is_null($id)){
         echo View::render($this->homelayout, array("relativelocation", $this->locationlayout, $id));

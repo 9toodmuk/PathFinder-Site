@@ -66,7 +66,11 @@ $lang = Language::loadLanguage($language);
       data: {id: id, data: data, field: field},
       success: function(result){
         if(result == 'Success'){
-          alert("Success");
+          swal({
+            type: 'success',
+            title: '<?=$lang['Success']?>',
+            timer: 1500
+          });
           $("td#"+field).html(text);
         }
       }

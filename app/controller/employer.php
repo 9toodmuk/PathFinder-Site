@@ -23,7 +23,7 @@ class Employer extends Controller{
 
   }
 
-  public static function index(){
+  function index(){
     if(isset($_SESSION['emp_id'])){
       echo View::render($this->homelayout, array("Dashboard", $this->dashboardlayout));
     }else{
@@ -31,7 +31,7 @@ class Employer extends Controller{
     }
   }
 
-  public static function postings(){
+  function postings(){
     if(isset($_SESSION['emp_id'])){
       echo View::render($this->homelayout, array("Postings", $this->postinglayout));
     }else{
@@ -40,7 +40,7 @@ class Employer extends Controller{
     }
   }
 
-  public static function applications($page = NULL, $id = NULL){
+  function applications($page = NULL, $id = NULL){
     if(isset($_SESSION['emp_id'])){
       if($page != NULL){
         if($page == "detail")
@@ -59,7 +59,7 @@ class Employer extends Controller{
     }
   }
 
-  public static function replyapply(){
+  function replyapply(){
     $apply_id = $_POST['id'];
     $message = $_POST['message'];
     $sender = $_POST['sender'];
@@ -67,7 +67,7 @@ class Employer extends Controller{
     echo Detail::replyApplication($apply_id, $message, $sender, $reciever);
   }
 
-  public static function details(){
+  function details(){
     if(isset($_SESSION['emp_id'])){
       echo View::render($this->homelayout, array("Details", $this->detailslayout));
     }else{
@@ -76,7 +76,7 @@ class Employer extends Controller{
     }
   }
 
-  public static function settings(){
+  function settings(){
     if(isset($_SESSION['emp_id'])){
       echo View::render($this->homelayout, array("Settings", $this->settingslayout));
     }else{
@@ -85,7 +85,7 @@ class Employer extends Controller{
     }
   }
 
-  public static function register(){
+  function register(){
     if(isset($_SESSION['emp_id'])){
       header("Location: /employer/");
       exit();
@@ -94,14 +94,14 @@ class Employer extends Controller{
     }
   }
 
-  public static function login(){
+  function login(){
     $email = $_POST['email'];
     $pass = $_POST['password'];
 
     Auth::login($email, $pass);
   }
 
-  public static function signup(){
+  function signup(){
     $email = $_POST['email'];
     $pass = $_POST['password'];
     $name = $_POST['name'];
@@ -117,7 +117,7 @@ class Employer extends Controller{
 
     Auth::register($email, $pass, $name, $contact, $category, $contactemail, $section, $telephone);
   }
-  public static function newpostings(){
+  function newpostings(){
     $name = $_POST['name'];
     $company = $_POST['id'];
     $cat = $_POST['parent'];
@@ -145,7 +145,7 @@ class Employer extends Controller{
     Postings::addpostings($name, $responsibility, $qualification, $benefit, $capacity, $cap_type, $disability_req, $salary, $salarytype, $negetiable, $location, $type, $level, $exp, $edulevel, $cat, $company);
   }
 
-  public static function editpostings(){
+  function editpostings(){
     $id = $_POST['jid'];
     $name = $_POST['editname'];
     $company = $_POST['id'];
@@ -174,25 +174,25 @@ class Employer extends Controller{
     Postings::editpostings($id, $name, $responsibility, $qualification, $benefit, $capacity, $cap_type, $disability_req, $salary, $salarytype, $negetiable, $location, $type, $level, $exp, $edulevel, $cat, $company);
   }
 
-  public static function rempost(){
+  function rempost(){
     $id = $_POST['id'];
     JobController::removePost($id);
   }
 
-  public static function edit(){
+  function edit(){
     $field = $_POST['field'];
     $data = $_POST['data'];
     $id = Detail::getEmpId($_SESSION['emp_id']);
     Detail::edit($field, $data, $id);
   }
 
-  public static function uploadlogo(){
+  function uploadlogo(){
     $uploader = $_POST['uploader'];
     $file = $_FILES['file'];
     echo Utils::uploadPic($file, $uploader);
   }
 
-  public static function addlocation(){
+  function addlocation(){
     $name = $_POST['name'];
     $address1 = $_POST['address1'];
     $address2 = $_POST['address2'];
@@ -205,7 +205,7 @@ class Employer extends Controller{
     Detail::addLocation($name, $address1, $address2, $city, $province, $postcode, $telephone, $id);
   }
 
-  public static function editlocation(){
+  function editlocation(){
     $id = $_POST['id'];
     $name = $_POST['name'];
     $address1 = $_POST['address1'];
@@ -218,19 +218,19 @@ class Employer extends Controller{
     Detail::editLocation($id, $name, $address1, $address2, $city, $province, $postcode, $telephone);
   }
 
-  public static function setMainLocation(){
+  function setMainLocation(){
     $id = $_POST['id'];
     $cid = Detail::getEmpId($_SESSION['emp_id']);
     Detail::setMainLocation($id, $cid);
   }
 
-  public static function removelocation(){
+  function removelocation(){
     $id = $_POST['id'];
     $cid = Detail::getEmpId($_SESSION['emp_id']);
     Detail::removeLocation($id, $cid);
   }
 
-  public static function editsettings(){
+  function editsettings(){
     if(Auth::checkPass($_SESSION['emp_id'], $_POST['oldpassword'])){
 
       $id = Detail::getEmpId($_SESSION['emp_id']);

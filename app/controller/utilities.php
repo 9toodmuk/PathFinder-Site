@@ -16,94 +16,94 @@ class Utilities extends Controller{
   public function __construct(){
   }
 
-  public static function index(){
+  function index(){
     header("HTTP/1.0 404 Not Found");
     exit();
   }
 
-  public static function nameeditor(){
+  function nameeditor(){
     include 'app/view/layouts/main/user/block/nameeditor.php';
   }
 
-  public static function gendereditor(){
+  function gendereditor(){
     include 'app/view/layouts/main/user/block/gendereditor.php';
   }
 
-  public static function disabilityeditor(){
+  function disabilityeditor(){
     include 'app/view/layouts/main/user/block/disabilityeditor.php';
   }
 
-  public static function fieldeditor(){
+  function fieldeditor(){
     include 'app/view/layouts/main/user/block/fieldeditor.php';
   }
 
-  public static function dateeditor(){
+  function dateeditor(){
     include 'app/view/layouts/main/user/block/dateeditor.php';
   }
 
-  public static function expeditor(){
+  function expeditor(){
     include 'app/view/layouts/main/user/block/expeditor.php';
   }
 
-  public static function expeditor2(){
+  function expeditor2(){
     include 'app/view/layouts/main/user/block/expeditor2.php';
   }
 
-  public static function edueditor(){
+  function edueditor(){
     include 'app/view/layouts/main/user/block/edueditor.php';
   }
 
-  public static function edueditor2(){
+  function edueditor2(){
     include 'app/view/layouts/main/user/block/edueditor2.php';
   }
 
-  public static function skilleditor(){
+  function skilleditor(){
     include 'app/view/layouts/main/user/block/skilleditor.php';
   }
 
-  public static function relateeditor(){
+  function relateeditor(){
     if(isset($_POST['id'])){
       $id = $_POST['id'];
     }
     include 'app/view/layouts/main/user/block/relateeditor.php';
   }
 
-  public static function postingeditor(){
+  function postingeditor(){
     $id = $_POST['id'];
     include 'app/view/layouts/emp/main/form/editposting.php';
   }
 
-  public static function malerelateoption(){
+  function malerelateoption(){
     include 'app/view/layouts/main/user/block/genderselect/male.php';
   }
 
-  public static function femalerelateoption(){
+  function femalerelateoption(){
     include 'app/view/layouts/main/user/block/genderselect/female.php';
   }
 
-  public static function empcateditor(){
+  function empcateditor(){
     include 'app/view/layouts/emp/main/form/cateditor.php';
   }
 
-  public static function compabouteditor(){
+  function compabouteditor(){
     include 'app/view/layouts/emp/main/form/abouteditor.php';
   }
 
-  public static function emplogoeditor(){
+  function emplogoeditor(){
     include 'app/view/layouts/emp/main/form/emplogoeditor.php';
   }
 
-  public static function empdetaileditor(){
+  function empdetaileditor(){
     $type = $_POST['type'];
     include 'app/view/layouts/emp/main/form/detaileditor.php';
   }
 
-  public static function locationeditor(){
+  function locationeditor(){
     $formname = $_POST['formname'];
     include 'app/view/layouts/emp/main/form/locationeditor.php';
   }
 
-  public static function notifications(){
+  function notifications(){
     if(isset($_POST['id'])){
       $id = $_POST['id'];
       $result = Notification::getByRecipient($id);
@@ -113,14 +113,14 @@ class Utilities extends Controller{
     }
   }
 
-  public static function saveJob($id = NULL){
+  function saveJob($id = NULL){
     if($id != null){
       $uid = $_POST['uid'];
       JobController::saveJob($uid, $id);
     }
   }
 
-  public static function getJobByEmp($id = NULL){
+  function getJobByEmp($id = NULL){
     if($id != null){
       $uid = $_POST['uid'];
       $result = JobController::loadAllPosting($_POST['limit'], $_POST['offset'], $id);
@@ -162,7 +162,7 @@ class Utilities extends Controller{
     }
   }
 
-  public static function getJobDetail($id = NULL){
+  function getJobDetail($id = NULL){
     if($id != null){
       $uid = $_POST['uid'];
       $row = JobController::loadJobPosting($id);
@@ -238,7 +238,7 @@ class Utilities extends Controller{
     }
   }
 
-  public static function getRecommendJob($uid, $limit){
+  function getRecommendJob($uid, $limit){
     $result = JobController::getRecommendedJob($uid, $limit);
     $jsonData = array();
     while ($row = mysqli_fetch_array($result)) {
@@ -277,7 +277,7 @@ class Utilities extends Controller{
     echo json_encode($jsonData, JSON_UNESCAPED_UNICODE);
   }
 
-  public static function getSimilarJob($jid){
+  function getSimilarJob($jid){
     $uid = $_POST['uid'];
     $result = JobController::getSimilarJob($jid);
     $jsonData = array();
@@ -317,7 +317,7 @@ class Utilities extends Controller{
     echo json_encode($jsonData, JSON_UNESCAPED_UNICODE);
   }
 
-  public static function getEmpDetail($id){
+  function getEmpDetail($id){
     if(isset($id)){
       $result = Employer::loadEMP($id);
       $jsonData = array();
@@ -340,7 +340,7 @@ class Utilities extends Controller{
     }
   }
 
-  public static function getnotis(){
+  function getnotis(){
     if(isset($_POST['id'])){
       $id = $_POST['id'];
       $result = Notification::getByRecipient($id);
@@ -356,14 +356,14 @@ class Utilities extends Controller{
     }
   }
 
-  public static function noticount(){
+  function noticount(){
     if(isset($_POST['id'])){
       $id = $_POST['id'];
       echo Notification::getUnreadsNum($id);
     }
   }
 
-  public static function saveLocation($help = false){
+  function saveLocation($help = false){
     if(isset($_POST['id'])){
       $id = $_POST['id'];
       $lat = $_POST['lat'];
@@ -377,14 +377,14 @@ class Utilities extends Controller{
     }
   }
 
-  public static function getLocation(){
+  function getLocation(){
     if(isset($_POST['id'])){
       $id = $_POST['id'];
       Location::getCurrentLocation($id);
     }
   }
 
-  public static function newtoken(){
+  function newtoken(){
     if(isset($_POST['id'])){
       $id = $_POST['id'];
       $token = $_POST['token'];
@@ -392,7 +392,7 @@ class Utilities extends Controller{
     }
   }
 
-  public static function deleteToken(){
+  function deleteToken(){
     if(isset($_POST['id'])){
       $id = $_POST['id'];
       $token = $_POST['token'];
@@ -400,14 +400,14 @@ class Utilities extends Controller{
     }
   }
 
-  public static function markread(){
+  function markread(){
     if(isset($_POST['id'])){
       $id = $_POST['id'];
       Notification::mark($id, 0);
     }
   }
 
-  public static function getFriends($id = NULL){
+  function getFriends($id = NULL){
     if($id != NULL){
       $jsonData = array();
       $friend = Profile::getFriends($id, false);
@@ -447,7 +447,7 @@ class Utilities extends Controller{
     }
   }
 
-  public static function getProfile($id = NULL){
+  function getProfile($id = NULL){
     if($id != NULL){
       $result = Profile::profileLoad($id);
       $jsonData = array();
@@ -487,7 +487,7 @@ class Utilities extends Controller{
     }
   }
 
-    public static function getAllProfiles(){
+    function getAllProfiles(){
     $result = Profile::allProfilesLoad();
 
     $jsonData = array();
@@ -526,7 +526,7 @@ class Utilities extends Controller{
     echo json_encode($jsonData, JSON_UNESCAPED_UNICODE);
   }
 
-  public static function commentload($id = NULL){
+  function commentload($id = NULL){
     if(isset($_POST['offset'])){
       if(isset($_POST['limit'])){
         $result = Comment::load($id, $_POST['offset'], $_POST['limit']);
@@ -551,7 +551,7 @@ class Utilities extends Controller{
     }
   }
 
-  public static function getpost(){
+  function getpost(){
     if(isset($_POST['offset'])){
       if(isset($_POST['limit'])){
         $result = Post::postload($_POST['offset'], $_POST['limit']);
@@ -584,7 +584,7 @@ class Utilities extends Controller{
     }
   }
 
-  public static function getPostById($id = null){
+  function getPostById($id = null){
       $result = Post::loadById($id);
       $row = mysqli_fetch_assoc($result);
       $uid = $_POST['id'];
@@ -600,7 +600,7 @@ class Utilities extends Controller{
       echo str_replace(array('[', ']'), '', htmlspecialchars(json_encode($arr, JSON_UNESCAPED_UNICODE), ENT_NOQUOTES));
   }
 
-  public static function getProfileTimeline(){
+  function getProfileTimeline(){
     if(isset($_POST['offset'])){
       if(isset($_POST['limit'])){
         $id = $_POST['pid'];
@@ -628,7 +628,7 @@ class Utilities extends Controller{
     }
   }
 
-  public static function getFriendsName($id, $norelate = false){
+  function getFriendsName($id, $norelate = false){
     $result = Profile::getFriends($id);
 
     if($norelate){
@@ -654,7 +654,7 @@ class Utilities extends Controller{
     echo json_encode($jsonData, JSON_UNESCAPED_UNICODE);
   }
 
-  public static function getExp($id = NULL){
+  function getExp($id = NULL){
     if($id != NULL){
       $result = Experiences::expLoad($id);
       $jsonData = array();
@@ -676,7 +676,7 @@ class Utilities extends Controller{
     }
   }
 
-  public static function getEdu($id = NULL){
+  function getEdu($id = NULL){
     if($id != NULL){
       $result = Educations::eduLoad($id);
       $jsonData = array();
@@ -697,7 +697,7 @@ class Utilities extends Controller{
     }
   }
 
-  public static function getAmphurList($id = NULL, $lang = "en"){
+  function getAmphurList($id = NULL, $lang = "en"){
     if($id != NULL){
       if($lang == "en"){
         $thai = false;
@@ -716,7 +716,7 @@ class Utilities extends Controller{
     }
   }
 
-  public static function getProvinceList($lang = "en"){
+  function getProvinceList($lang = "en"){
     if($lang == "en"){
       $thai = false;
     }else{

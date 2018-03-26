@@ -84,7 +84,12 @@ $lang = Language::loadLanguage($language);
       data: {id: id, institue: institue, level: level, major: major, gpa: gpa},
       success: function(result){
         if(result == "Success"){
-          alert("Success");
+          swal({
+            type: 'success',
+            title: '<?=$lang['Success']?>',
+            showConfirmButton: false,
+            timer: 1500
+          });
           setTimeout(function(){ window.location.reload(); }, 100);
         }
       }

@@ -14,13 +14,21 @@ class Login{
       $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$newpass' AND (user_group = '1' OR user_group = '3');";
       if($query = $conn->query($sql)){
         if(mysqli_num_rows($query) <= 0){
-          echo "FailedNoUsers";
+          $array = array(
+            'status' => false,
+            'error' => 2
+          );
+          echo json_encode($array);
         }else{
           $arr = mysqli_fetch_array($query);
           Login::loginSuccess($arr['id']);
         }
       }else{
-        echo "Error";
+        $array = array(
+          'status' => false,
+          'error' => 1
+        );
+        echo json_encode($array);
       }
     }
   }
@@ -84,7 +92,11 @@ class Login{
   public static function loginSuccess($id){
     $_SESSION['social_id'] = $id;
     $_SESSION['language'] = Login::getUserLang($id);
-    echo "Success".$id;
+    $array = array(
+      'status' => true,
+      'userid' => $id
+    );
+    echo json_encode($array);
   }
 
   public static function logout(){

@@ -28,7 +28,7 @@ class User extends Controller{
 
   }
 
-  public static function index($id = NULL, $page = NULL){
+  function index($id = NULL, $page = NULL){
     if(isset($_SESSION['social_id'])){
       if($id != NULL){
         if(Login::getUserGroup($id) != '2'){
@@ -58,7 +58,7 @@ class User extends Controller{
     }
   }
 
-  public static function edit(){
+  function edit(){
     if(isset($_SESSION['social_id'])){
       echo View::render($this->homelayout, array("edit", $this->edit, $_SESSION['social_id']));
     }else{
@@ -67,7 +67,7 @@ class User extends Controller{
     }
   }
 
-  public static function settings(){
+  function settings(){
     if(isset($_SESSION['social_id'])){
       echo View::render($this->mainlayout, array("settings", $this->settings, $_SESSION['social_id']));
     }else{
@@ -76,14 +76,14 @@ class User extends Controller{
     }
   }
 
-  public static function add(){
+  function add(){
     $uid = $_POST['uid'];
     $fid = $_POST['fid'];
 
     Profile::sendRequest($uid, $fid);
   }
 
-  public static function update(){
+  function update(){
     $id = $_POST['id'];
     $data = $_POST['data'];
     $fieldname = $_POST['field'];
@@ -96,7 +96,7 @@ class User extends Controller{
     Profile::update($id, $data, $fieldname);
   }
 
-  public static function load(){
+  function load(){
     if(isset($_POST['limit'])){
       if(isset($_POST['perpage'])){
         $id = $_POST['pid'];
@@ -110,7 +110,7 @@ class User extends Controller{
     }
   }
 
-  public static function newexp(){
+  function newexp(){
     $id = $_POST['id'];
     $title = $_POST['title'];
     $emp = $_POST['emp'];
@@ -124,7 +124,7 @@ class User extends Controller{
     echo Experiences::newExp($id, $title, $emp, $start, $end, $now);
   }
 
-  public static function newedu(){
+  function newedu(){
     $id = $_POST['id'];
     $institue = $_POST['institue'];
     $level = $_POST['level'];
@@ -134,7 +134,7 @@ class User extends Controller{
     echo Educations::newEdu($id, $institue, $level, $major, $gpa);
   }
 
-  public static function editexp(){
+  function editexp(){
     $id = $_POST['id'];
     $title = $_POST['title'];
     $emp = $_POST['emp'];
@@ -148,7 +148,7 @@ class User extends Controller{
     echo Experiences::editExp($id, $title, $emp, $start, $end, $now);
   }
 
-  public static function editedu(){
+  function editedu(){
     $id = $_POST['id'];
     $institue = $_POST['institue'];
     $level = $_POST['level'];
@@ -158,35 +158,35 @@ class User extends Controller{
     echo Educations::editEdu($id, $institue, $level, $major, $gpa);
   }
 
-  public static function removeexp(){
+  function removeexp(){
     $id = $_POST['id'];
 
     echo Experiences::removeExp($id);
   }
 
-  public static function removeedu(){
+  function removeedu(){
     $id = $_POST['id'];
 
     echo Educations::removeEdu($id);
   }
 
-  public static function uploadpic(){
+  function uploadpic(){
     $uploader = $_POST['uploader'];
     $file = $_FILES['file'];
     echo Utils::uploadPic($file, $uploader);
   }
 
-  public static function removepropic(){
+  function removepropic(){
     $id = $_POST['id'];
     Utils::removeProPic($id);
   }
 
-  public static function editprofilepic($uid, $filename){
+  function editprofilepic($uid, $filename){
     $file = $_FILES['file'];
     echo Utils::uploadPic($file, $uid, true, $filename);
   }
 
-  public static function addRelative(){
+  function addRelative(){
     $user1 = $_POST['user1'];
     $user2 = $_POST['user2'];
     $relation = $_POST['relationship'];
@@ -194,7 +194,7 @@ class User extends Controller{
     Profile::addRelative($user1, $user2, $relation);
   }
 
-  public static function editRelative(){
+  function editRelative(){
     $user1 = $_POST['user1'];
     $user2 = $_POST['user2'];
     $relation = $_POST['relationship'];
@@ -202,34 +202,34 @@ class User extends Controller{
     Profile::editRelative($user1, $user2, $relation);
   }
 
-  public static function removeRelative(){
+  function removeRelative(){
     $user1 = $_POST['user1'];
     $user2 = $_POST['user2'];
 
     Profile::removeRelative($user1, $user2);
   }
 
-  public static function newSkill(){
+  function newSkill(){
     $skill = $_POST['skill'];
     $id = $_SESSION['social_id'];
 
     Skills::newSkill($skill, $id);
   }
 
-  public static function editSkill(){
+  function editSkill(){
     $skill = $_POST['skill'];
     $id = $_POST['id'];
 
     Skills::editSkill($skill, $id);
   }
 
-  public static function removeSkill(){
+  function removeSkill(){
     $id = $_POST['id'];
 
     Skills::removeSkill($id);
   }
 
-  public static function skipCreateProfile(){
+  function skipCreateProfile(){
     if($_SERVER['REQUEST_METHOD'] == "POST"){
       echo Profile::skipCreateProfile($_SESSION['social_id']);
     }else{
@@ -238,7 +238,7 @@ class User extends Controller{
     }
   }
 
-  public static function createProfile(){
+  function createProfile(){
     if($_SERVER['REQUEST_METHOD'] == "POST"){
       if(isset($_POST['id'])){
         $uid = $_POST['id'];
@@ -321,7 +321,7 @@ class User extends Controller{
     }
   }
 
-  public static function getAllDisabilityType(){
+  function getAllDisabilityType(){
     $disability = JobController::getAllDisabilityType();
     $jsonData = array();
     while($row = $disability->fetch_assoc()){

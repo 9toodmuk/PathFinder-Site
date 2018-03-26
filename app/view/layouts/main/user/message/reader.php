@@ -2,10 +2,28 @@
 use Controller\User\Profile;
 use Controller\Message\Message;
 
-$messages = Message::getInbox($_SESSION['social_id']);
+$messages = Message::getMessage($variables[2]);
+
+if ($messages['sender'] == $_SESSION['social_id']) {
+  $sender = array(
+    'name' => $lang['You']
+  );
+} else {
+  $sender = Message::getFullSender($messages['sender'], $messages['type']);
+}
+
+$readed = Message::setAsReaded($variables[2]);
 
 $user = Profile::profileLoad($_SESSION['social_id']);
 $user = mysqli_fetch_array($user);
+
+if ($messages['reciever'] == $_SESSION['social_id']) {
+  $receiver = array(
+    'name' => $lang['You']
+  );
+} else {
+  $receiver = Message::getFullSender($messages['receiver'], 1);
+}
 
 $count = Message::count($_SESSION['social_id']);
 ?>
@@ -84,7 +102,7 @@ $count = Message::count($_SESSION['social_id']);
           <!-- /.modal -->
         </div>
         <ul class="inbox-nav inbox-divider">
-          <li class="active">
+          <li>
             <a href="/home/messages/inbox">
               <i class="fa fa-inbox"></i> <?=$lang['Inbox']?>
               <?php
@@ -113,66 +131,60 @@ $count = Message::count($_SESSION['social_id']);
       </aside>
       <aside class="lg-side">
         <div class="inbox-head">
-          <h2 style="margin: 0"><?=$lang['Inbox']?></h2>
+          <h2 style="margin: 0">
+          <?php
+            if ($messages['type'] == 1) {
+              echo $messages['title'];
+            } else {
+              echo $lang[$messages['title']];
+            }
+          ?>
+          </h2>
         </div>
         <div class="inbox-body">
-          <div class="mail-option">
-
-            <div class="btn-group">
-              <a data-original-title="Refresh" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
-                <i class=" fa fa-refresh"></i>
-              </a>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+            <div class="profile-image"></div>
+              <div class="message-title">
+                <?php
+                  if ($messages['type'] == 1) {
+                    echo 'Title: '.$messages['title'].'<br/>';
+                  } else {
+                    echo 'Title: '.$lang[$messages['title']].'<br/>';
+                  }
+                ?>
+                From: <?=$sender['name']?> <?=$sender['lastName'] ? $sender['lastName']: ''?></br>
+                To: <?=$receiver['name']?>
+              </div>
             </div>
-
-            <ul class="unstyled inbox-pagination">
-              <li>
-                <span>1-<?=count($messages) > 10 ? 10 : count($messages)?> of <?=count($messages)?></span>
-              </li>
-              <li>
-                <a class="np-btn" href="#">
-                  <i class="fa fa-angle-left  pagination-left"></i>
-                </a>
-              </li>
-              <li>
-                <a class="np-btn" href="#">
-                  <i class="fa fa-angle-right pagination-right"></i>
-                </a>
-              </li>
-            </ul>
+            <div class="panel-body">
+              <?=$messages['text']?>
+            </div>
           </div>
-          <table class="table table-inbox table-hover">
-            <tbody>
-              <?php
-                foreach($messages as $message) {
-              ?>
-              <tr data-href="./reader/<?=$message['id']?>" <?=$message['isReaded'] ? '':'class="unread"'?>>
-                <td class="view-message dont-show"><?=$message['sender']?></td>
-                <?php
-                  if ($message['type'] == 1) {
-                    echo '<td class="view-message">'.$message['title'].'</td>';
-                  } else if ($message['type'] == 2) {
-                    echo '<td class="view-message">'.$lang[$message['title']].'</td>';
-                  }
-                ?>
-                <td class="view-message inbox-small-cells">
-                  <i class="fa fa-paperclip"></i>
-                </td>
-                <td class="view-message  text-right">
-                <?php
-                  if($message['sentAt'] == "justnow"){
-                    echo $lang[$message['sentAt']];
-                  }else{
-                    $date = explode(" ", $message['sentAt']);
-                    echo $date[0]." ".$lang[$date[1]].$lang[$date[2]];
-                  }
-                ?>
-                </td>
-              </tr>
-              <?php
-                }
-              ?>
-            </tbody>
-          </table>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">Reply</div>
+            <div class="panel-body">
+              <form role="form" class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Message</label>
+                  <div class="col-lg-10">
+                    <textarea rows="10" cols="30" class="form-control" id="" name=""></textarea>
+                  </div>
+                </div>
+
+                <input type="hidden" id="sender" value="<?=$_SESSION['social_id']?>">
+                <input type="hidden" id="receiver" value="<?=$messages['sender']?>">
+                <input type="hidden" id="type" value="<?=$messages['type']?>">
+
+                <div class="form-group">
+                  <div class="col-lg-offset-2 col-lg-10">
+                    <button class="btn btn-send" type="submit">Send</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </aside>
     </div>

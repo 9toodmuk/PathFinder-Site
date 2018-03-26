@@ -12,7 +12,7 @@ class Message {
         if(!is_null($id)){
             $sql .= " WHERE id = '$id'";
         }
-        return Message::queryMessage($conn->query($sql));
+        return mysqli_fetch_assoc($conn->query($sql));
     }
 
     public static function getSentMessages($id){
@@ -74,6 +74,27 @@ class Message {
         return $sender;
     }
 
+    function getFullSender($id, $type) {
+        $sender = 'SYSTEM';
+        switch ($type) {
+            case '1':
+                $user = mysqli_fetch_assoc(Profile::profileLoad($id));
+                $sender = array(
+                    'name' => $user['first_name'],
+                    'lastName' => $user['last_name'],
+                    'email' => $user['email'],
+                    'profile_image' => $user['profile_image']
+                );
+            case '2':
+                $employer = Detail::getDetails($id, true);
+                $sender = array(
+                    'name' => $employer['name'],
+                    'logo' => $employer['logo']
+                );
+        };
+        return $sender;
+    }
+
     function count($id) {
         $conn = Database::connection();
         $sql = "SELECT * FROM message WHERE reciever = '$id' AND readed = '0'";
@@ -81,5 +102,15 @@ class Message {
         return array(
             'inbox' => mysqli_num_rows($inbox)
         );
+    }
+
+    function setAsReaded($id) {
+        $conn = Database::connection();
+        $sql = "UPDATE message SET readed = '1' WHERE id = '$id'";
+        if ($conn->query($sql)) {
+            return $sql;
+        } else {
+            return $sql;
+        }
     }
 }

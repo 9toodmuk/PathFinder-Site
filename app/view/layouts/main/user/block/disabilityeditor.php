@@ -64,7 +64,11 @@ $user = mysqli_fetch_array($user);
       data: {id: id, data: disability, field: "disability"},
       success: function(result){
         if(result == 'Success'){
-          alert("Success");
+          swal({
+            type: 'success',
+            title: '<?=$lang['Success']?>',
+            timer: 1500
+          });
           $("td#disability").html(text);
         }
       }

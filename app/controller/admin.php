@@ -23,11 +23,11 @@ class Admin extends Controller{
   protected $editpostings = 'app/view/layouts/admin/pages/postings//edit.php';
   protected $applications = 'app/view/layouts/admin/pages/application.php';
 
-  public function __construct(){
+  function __construct(){
 
   }
 
-  public static function index(){
+  function index(){
     if(!isset($_SESSION['admin_id'])){
       header("Location: /admin/login/");
       exit();
@@ -35,7 +35,7 @@ class Admin extends Controller{
     echo View::render($this->mainlayout, array("Dashboard", $this->dashboard));
   }
 
-  public static function login($fid = 0){
+  function login($fid = 0){
     if(isset($_SESSION['admin_id'])){
       header("Location: /admin/");
       exit();
@@ -44,18 +44,18 @@ class Admin extends Controller{
     }
   }
 
-  public static function signin(){
+  function signin(){
     $user = $_POST['email'];
     $pass = $_POST['password'];
 
     Auth::signAdminIn($user, $pass);
   }
 
-  public static function signout(){
+  function signout(){
     Auth::logout();
   }
 
-  public static function categories($page = NULL, $modify = NULL, $id = NULL){
+  function categories($page = NULL, $modify = NULL, $id = NULL){
     if(!isset($_SESSION['admin_id'])){
       header("Location: /admin/login/");
       exit();
@@ -117,7 +117,7 @@ class Admin extends Controller{
     }
   }
 
-  public static function employer($page = NULL, $id = NULL){
+  function employer($page = NULL, $id = NULL){
     if(!isset($_SESSION['admin_id'])){
       header("Location: /admin/login/");
       exit();
@@ -170,7 +170,7 @@ class Admin extends Controller{
     }
   }
 
-  public static function users($page = NULL, $id = NULL){
+  function users($page = NULL, $id = NULL){
     if(!isset($_SESSION['admin_id'])){
       header("Location: /admin/login/");
       exit();
@@ -197,7 +197,7 @@ class Admin extends Controller{
     }
   }
 
-  public static function applications($page = NULL, $id = NULL){
+  function applications($page = NULL, $id = NULL){
     if(!isset($_SESSION['admin_id'])){
       header("Location: /admin/login/");
       exit();
@@ -220,7 +220,7 @@ class Admin extends Controller{
     }
   }
 
-  public static function postings($page = NULL, $id = NULL){
+  function postings($page = NULL, $id = NULL){
     if(!isset($_SESSION['admin_id'])){
       header("Location: /admin/login/");
       exit();

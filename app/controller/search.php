@@ -15,12 +15,12 @@ class Search extends Controller{
 
   }
 
-  public static function index($query = NULL){
+  function index($query = NULL){
     header("Location: /");
     exit();
   }
 
-  public static function term($query = NULL){
+  function term($query = NULL){
     if(isset($_SESSION['social_id'])){
       if($query != NULL){
         echo View::render($this->homelayout, array("Search", $query));
@@ -34,7 +34,7 @@ class Search extends Controller{
     }
   }
 
-  public static function advance(){
+  function advance(){
     if(isset($_SESSION['social_id'])){
 
       if(isset($_GET['keyword'])){
@@ -70,7 +70,7 @@ class Search extends Controller{
     }
   }
 
-  public static function search($query = NULL){
+  function search($query = NULL){
     $result = SearchController::search($query);
     $count = mysqli_num_rows($result);
     $uid = $_POST['id'];

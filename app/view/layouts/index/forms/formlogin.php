@@ -58,19 +58,22 @@
       url: '/home/login/',
       type: 'POST',
       data: {email: email, password: pass},
+      dataType: 'json',
       success: function (result) {
-        if(~result.indexOf("Success")){
+        if (result.status) {
           setTimeout(function(){ window.location.reload(); }, 3000);
-        }else if(result == "FailedNoUsers"){
-          $("#errorbox").html("<?=$lang['LoginNoUser']?>");
-          $("#errorbox").fadeIn();
-          $("div#errorbox").delay(3000).fadeOut(300);
-          $button.button('reset');
-        }else{
-          $("#errorbox").html("<?=$lang['AlertErrorText']?>");
-          $("#errorbox").fadeIn();
-          $("div#errorbox").delay(3000).fadeOut(300);
-          $button.button('reset');
+        } else {
+          if (result.error == 1) {
+            $("#errorbox").html("<?=$lang['AlertErrorText']?>");
+            $("#errorbox").fadeIn();
+            $("div#errorbox").delay(3000).fadeOut(300);
+            $button.button('reset');
+          } else if (result.error = 2) {
+            $("#errorbox").html("<?=$lang['LoginNoUser']?>");
+            $("#errorbox").fadeIn();
+            $("div#errorbox").delay(3000).fadeOut(300);
+            $button.button('reset');
+          }
         }
       }
     });

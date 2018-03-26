@@ -10,7 +10,7 @@ class Registration extends Controller{
   public function __construct(){
   }
 
-  public static function updateexp(){
+  function updateexp(){
     $uid = $_SESSION['social_id'];
     $edu = $_POST['education'];
     $exp = $_POST['workexperience'];
@@ -34,7 +34,7 @@ class Registration extends Controller{
     Register::createExp($uid, $edu, $exp, $company, $status, $start, $end, $name, $min, $max);
   }
 
-  public static function signup(){
+  function signup(){
     $fname = $_POST['firstname'];
     $lname = $_POST['lastname'];
     $email = $_POST['email'];
@@ -43,7 +43,7 @@ class Registration extends Controller{
     Register::register($email, $pass, $fname, $lname);
   }
 
-  public static function updateprofile(){
+  function updateprofile(){
     $uid = $_SESSION['social_id'];
     $sex = $_POST['sex'];
     $birthday = $_POST['birthday'];

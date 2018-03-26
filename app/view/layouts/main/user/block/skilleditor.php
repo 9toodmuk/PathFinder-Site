@@ -60,7 +60,12 @@ if(isset($_POST['id'])){
       dataType: "json",
       success: function(result){
         if(result.status){
-          alert("Success");
+          swal({
+            type: 'success',
+            title: '<?=$lang['Success']?>',
+            showConfirmButton: false,
+            timer: 1500
+          });
           setTimeout(function(){ window.location.reload(); }, 100);
         }
       }

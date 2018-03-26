@@ -21,7 +21,7 @@ class Job extends Controller{
   public function __construct(){
   }
 
-  public static function index(){
+  function index(){
     if(!isset($_SESSION['social_id'])){
       header("Location: /");
       exit();
@@ -29,7 +29,7 @@ class Job extends Controller{
     echo View::render($this->homelayout, array("home", $this->jobmain));
   }
 
-  public static function categories($id = NULL){
+  function categories($id = NULL){
     if($id != null){
       echo View::render($this->catpage, $id);
     }else{
@@ -38,7 +38,7 @@ class Job extends Controller{
     }
   }
 
-  public static function detail($id = NULL, $error = 0){
+  function detail($id = NULL, $error = 0){
     if($id != null){
       echo View::render($this->homelayout, array("detailpage", $this->detailpage, $id));
     }else{
@@ -47,7 +47,7 @@ class Job extends Controller{
     }
   }
 
-  public static function apply($id = NULL){
+  function apply($id = NULL){
     if($id != null){
       echo View::render($this->homelayout, array("applypage", $this->applypage, $id));
     }else{
@@ -56,7 +56,7 @@ class Job extends Controller{
     }
   }
 
-  public static function employer($id = NULL, $error = 0){
+  function employer($id = NULL, $error = 0){
     if($id != null){
       echo View::render($this->homelayout, array("empdetailpage", $this->empmain, $id, $error));
     }else{
@@ -64,7 +64,7 @@ class Job extends Controller{
     }
   }
 
-  public static function loadmore(){
+  function loadmore(){
     if(isset($_POST['limit'])){
       if(isset($_POST['perpage'])){
         $result = JobController::loadAllPosting($_POST['perpage'], $_POST['limit']);
@@ -75,7 +75,7 @@ class Job extends Controller{
     }
   }
 
-  public static function loademp(){
+  function loademp(){
     if(isset($_POST['id'])){
       if(isset($_POST['limit'])){
         if(isset($_POST['perpage'])){
@@ -88,7 +88,7 @@ class Job extends Controller{
     }
   }
 
-  public static function getallemp(){
+  function getallemp(){
     if(isset($_POST['offset'])){
       if(isset($_POST['limit'])){
         $result = Employer::loadAllEMP($_POST['offset'], $_POST['limit']);
@@ -99,7 +99,7 @@ class Job extends Controller{
     }
   }
 
-  public static function sendapply(){
+  function sendapply(){
     if(isset($_POST['id'])){
       $jid = $_POST['id'];
       $message = $_POST['message'];
@@ -108,7 +108,7 @@ class Job extends Controller{
     }
   }
 
-  public static function loadallemp(){
+  function loadallemp(){
     $result = Employer::loadEMP();
     $jsonData = array();
     while ($arr = mysqli_fetch_assoc($result)) {
@@ -117,7 +117,7 @@ class Job extends Controller{
     echo json_encode($jsonData, JSON_UNESCAPED_UNICODE);
   }
 
-  public static function save(){
+  function save(){
     if(isset($_POST['id'])){
       $id = $_POST['id'];
       $uid = $_SESSION['social_id'];
@@ -125,7 +125,7 @@ class Job extends Controller{
     }
   }
 
-  public static function getByCategory($category, $limit = 10, $offset = 0){
+  function getByCategory($category, $limit = 10, $offset = 0){
     $result = JobController::loadByCategory($category, $limit, $offset);
     $jsonData = array();
     while($row = mysqli_fetch_assoc($result)){
@@ -134,7 +134,7 @@ class Job extends Controller{
     echo json_encode($jsonData, JSON_UNESCAPED_UNICODE);
   }
 
-  public static function getFavJobs($id){
+  function getFavJobs($id){
     $result = Profile::getFavJobs($id);
 
     $jsonData = array();
