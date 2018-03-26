@@ -98,10 +98,12 @@ class Deploy extends Controller {
     function sendEmail($success, $message) {
         $mail = new PHPMailer(true);
         try {
+            $mail->Host = 'smtp.gmail.com';
             $mail->isSMTP();
             $mail->Host = $_ENV['SMTP_HOST'];
             $mail->Port = $_ENV['SMTP_PORT'];
             $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'tls';
             $mail->Username = $_ENV['SMTP_USER'];
             $mail->Password = $_ENV['SMTP_PASS'];
 
