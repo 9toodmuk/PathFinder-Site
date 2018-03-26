@@ -16,8 +16,6 @@ class Deploy extends Controller {
     public function __construct(){ }
 
     public function index() {
-        print_r($_ENV);
-
         try {
             $signature = $_SERVER['HTTP_X_GITHUB_EVENT'];
             if (is_null($signature) || $signature != 'push') {
