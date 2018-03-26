@@ -100,10 +100,10 @@ class Deploy extends Controller {
         try {
             $mail->isSMTP();
             $mail->Host = $_ENV['SMTP_HOST'];
+            $mail->Port = $_ENV['SMTP_PORT'];
             $mail->SMTPAuth = true;
             $mail->Username = $_ENV['SMTP_USER'];
             $mail->Password = $_ENV['SMTP_PASS'];
-            $mail->Port = $_ENV['SMTP_PORT'];
 
             $mail->setFrom($_ENV['SMTP_USER'], 'PathFinder');
             $mail->addAddress($_ENV['ADMIN_EMAIL']);
