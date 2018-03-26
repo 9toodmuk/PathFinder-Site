@@ -99,7 +99,7 @@ class Deploy extends Controller {
         }
         if(!$mailSuccess) {
             header('HTTP/1.0 500 Internal Server Error');
-            die('Failed to send email to admin!');
+            die('Failed to send email to admin!<br>'.$_ENV['SMTP_USER']);
         }
         die("All good here!");
     }
