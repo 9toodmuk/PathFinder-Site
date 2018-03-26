@@ -41,6 +41,7 @@ pyvenv.cfg
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+.editorconfig
 
 ### Windows ###
 # Windows thumbnail cache files
