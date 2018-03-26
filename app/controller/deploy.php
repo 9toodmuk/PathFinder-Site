@@ -93,9 +93,9 @@ class Deploy extends Controller {
                 . $output
                 . "\r\n"
                 . 'That\'s all, toodles!';
-            $mailSuccess = sendEmail(true, $mailBody);
+            $mailSuccess = $this->sendEmail(true, $mailBody);
         } catch (Exception $e) {
-            $mailSuccess = sendEmail(false, strval($e));
+            $mailSuccess = $this->sendEmail(false, strval($e));
         }
         if(!$mailSuccess) {
             header('HTTP/1.0 500 Internal Server Error');
