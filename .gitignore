@@ -1,7 +1,38 @@
+# Created by https://www.gitignore.io/api/git,venv,windows,composer,visualstudiocode
+### htaccess ###
 .htaccess
+
+### deploy.php ###
 deploy.php
 
-# Created by https://www.gitignore.io/api/windows,visualstudiocode
+### ENV ###
+.env
+
+### Composer ###
+composer.phar
+/vendor/
+
+# Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
+# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
+# composer.lock
+
+### Git ###
+*.orig
+
+### venv ###
+# Linux
+bin/ 
+lib/
+include/
+
+# Window
+Include/
+Lib/
+Scripts/
+
+# Shared
+pyvenv.cfg
+
 
 ### VisualStudioCode ###
 .vscode/*
@@ -10,23 +41,6 @@ deploy.php
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
-
-# dotenv environment variables file
-.env
-
-# Optional npm cache directory
-.npm
-
-# Dependency directories
-node_modules/
-jspm_packages/
-
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -49,10 +63,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.gitignore.io/api/windows,visualstudiocode
 
-/vendor
-/.idea
-Homestead.json
-Homestead.yaml
-.env
+# End of https://www.gitignore.io/api/git,venv,windows,composer,visualstudiocode
