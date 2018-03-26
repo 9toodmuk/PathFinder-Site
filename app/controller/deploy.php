@@ -67,7 +67,7 @@ class Deploy extends Controller {
                 throw new Exception('Failed to open shell');
             }
             stream_set_blocking($shell, true);
-            stream_set_timeout($shell, 15);
+            stream_set_timeout($shell, 5);
             // run the commands
             $output = '';
             $endSentinel = "!~@#_DONE_#@~!";
