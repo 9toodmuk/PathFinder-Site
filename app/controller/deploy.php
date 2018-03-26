@@ -104,25 +104,33 @@ class Deploy extends Controller {
         die("All good here!");
     }
 
-    function sendEmail($success, $message)
-    {
-        $headers = 'Content-type: text/plain' . "\r\n" .
-            'From: PathFinder <contact@'.SITE_DOMAIN.'>';
-        $subject = '['.SITE_DOMAIN.'] ';
-        if ($success) {
-            $subject .= 'Deploy success';
-        } else {
-            $subject .= 'Deploy failure';
-            $headers .= "\r\n" .
-                'X-Priority: 1 (Highest)' . "\r\n" .
-                'X-MSMail-Priority: High' . "\r\n" .
-                'Importance: High';
+    function sendEmail($success, $message) {
+        $mail = new PHPMailer(true);
+        try {
+            $mail->SMTPDebug = 2;
+            $mail->isSMTP();
+            $mail->Host = $_ENV['SMTP_HOST'];
+            $mail->SMTPAuth = true;
+            $mail->Username = $_ENV['SMTP_USER'];
+            $mail->Password = $_ENV['SMTP_PASS'];
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = $_ENV['SMTP_PORT'];
+
+            $mail->setFrom($_ENV['SMTP_USER'], 'PathFinder');
+            $mail->addAddress(EMAIL_RECIPIENT);
+
+            if ($success) {
+                $mail->Subject = '['.SITE_DOMAIN.'] Deploy failure';
+            } else {
+                $mail->Subject = '['.SITE_DOMAIN.'] Deploy failure';
+            }
+
+            $mail->Body = $message;
+            $mail->send();
+
+            return true;
+        } catch (Exception $e) {
+            return false;
         }
-        return mail(
-            EMAIL_RECIPIENT,
-            $subject,
-            $message,
-            $headers
-        );
     }
 }
