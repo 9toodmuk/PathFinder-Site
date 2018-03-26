@@ -117,7 +117,7 @@ class Deploy extends Controller {
             $mail->Port = $_ENV['SMTP_PORT'];
 
             $mail->setFrom($_ENV['SMTP_USER'], 'PathFinder');
-            $mail->addAddress(EMAIL_RECIPIENT);
+            $mail->addAddress($_ENV['ADMIN_EMAIL']);
 
             if ($success) {
                 $mail->Subject = '['.SITE_DOMAIN.'] Deploy failure';
