@@ -3,7 +3,7 @@
 .htaccess
 
 ### deploy.php ###
-deploy.php
+/deploy.php
 
 ### ENV ###
 .env
