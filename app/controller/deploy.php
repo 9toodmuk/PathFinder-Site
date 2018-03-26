@@ -3,15 +3,6 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-define('GITHUB_SECRET', '82JMdZ6MagqnugfBCnsv');
-define('GITHUB_BRANCH', 'master');
-define('EMAIL_RECIPIENT', 'misterzemz@outlook.com');
-define('SITE_DOMAIN', 'pathfinder.in.th');
-define('SSH_PORT', 22);
-define('SSH_USERNAME', 'cp525119');
-define('KEYPAIR_NAME', 'deploy');
-define('KEYPAIR_PASSPHRASE', 'Um(P9ZiHH_]J');
-
 class Deploy extends Controller {
     public function __construct(){ }
 
@@ -32,7 +23,7 @@ class Deploy extends Controller {
             $sigAlgo = $sigParts[0];
             $sigHash = $sigParts[1];
             // verify that the signature is correct
-            $hash = hash_hmac($sigAlgo, $payload, GITHUB_SECRET);
+            $hash = hash_hmac($sigAlgo, $payload, $_ENV['GITHUB_SECRET']);
             if ($hash === false) {
                 throw new Exception("Unknown signature algo: $sigAlgo");
             }
@@ -46,17 +37,17 @@ class Deploy extends Controller {
             }
             // make sure it's the right branch
             $branchRef = $data->ref;
-            if ($branchRef != 'refs/heads/'.GITHUB_BRANCH) {
+            if ($branchRef != 'refs/heads/'.$_ENV['GITHUB_BRANCH']) {
                 die("Ignoring push to '$branchRef'");
             }
             // ssh into the local server
-            $sshSession = ssh2_connect('localhost', SSH_PORT);
+            $sshSession = ssh2_connect('localhost', $_ENV['SSH_PORT']);
             $authSuccess = ssh2_auth_pubkey_file(
                 $sshSession,
-                SSH_USERNAME,
-                '/home/'.SSH_USERNAME.'/.ssh/'.KEYPAIR_NAME.'.pub',
-                '/home/'.SSH_USERNAME.'/.ssh/'.KEYPAIR_NAME,
-                KEYPAIR_PASSPHRASE
+                $_ENV['SSH_USERNAME'],
+                '/home/'.$_ENV['SSH_USERNAME'].'/.ssh/'.$_ENV['KEYPAIR_NAME'].'.pub',
+                '/home/'.$_ENV['SSH_USERNAME'].'/.ssh/'.$_ENV['KEYPAIR_NAME'],
+                $_ENV['KEYPAIR_PASSPHRASE']
             );
             if (!$authSuccess) {
                 throw new Exception('SSH authentication failure');
@@ -120,9 +111,9 @@ class Deploy extends Controller {
             $mail->addAddress($_ENV['ADMIN_EMAIL']);
 
             if ($success) {
-                $mail->Subject = '['.SITE_DOMAIN.'] Deploy failure';
+                $mail->Subject = '['.$_ENV['SITE_DOMAIN'].'] Deploy Success';
             } else {
-                $mail->Subject = '['.SITE_DOMAIN.'] Deploy failure';
+                $mail->Subject = '['.$_ENV['SITE_DOMAIN'].'] Deploy Failure';
             }
 
             $mail->Body = $message;
@@ -130,6 +121,8 @@ class Deploy extends Controller {
 
             return true;
         } catch (Exception $e) {
+            header('HTTP/1.0 500 Internal Server Error');
+            die($mail->ErrorInfo);
             return false;
         }
     }
