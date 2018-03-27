@@ -242,20 +242,25 @@ $skill = Skills::skillLoad($_SESSION['social_id']);
     var uid = <?=$_SESSION['social_id']?>;
     var message = $('div#message').summernote('code');
     $.ajax({
-      url: "/job/sendapply/",
-      data: {id: id, message: message, uid: uid},
+      url: "<?=$_ENV['API_LOCATION']?>/applications",
+      data: { user_id: uid, job_id: id, message: message},
       dataType: "json",
       type: "post",
-      success: function(result){
-        if(result.success){
-          swal({
-            type: 'success',
-            title: '<?=$lang['Success']?>',
-            showConfirmButton: false,
-            timer: 1500
-          });
-          setTimeout(function(){ window.location.replace("/job/"); }, 1500);
-        }
+      success: function (result){
+        swal({
+          type: 'success',
+          title: '<?=$lang['NewApplicationSuccess']?>',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        setTimeout(function(){ window.location.replace("/job/"); }, 1500);
+      },
+      error: function (xhr) {
+        swal({
+          type: 'error',
+          title: '<?=$lang['AlertErrorText']?>',
+          timer: 1500
+        });
       }
     });
   }
