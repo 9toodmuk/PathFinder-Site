@@ -28,13 +28,23 @@ $skill = Skills::skillLoad($application['user_id']);
       <span class="caption-subject text-uppercase"> จัดการใบสมัครงาน</span>
   </div>
   <div class="portlet-body">
+    <?php
+      if ($application['status'] > 3) {
+    ?>
     <div class="row">
       <div class="col-sm-12">
-        <button class="btn btn-success"><em class="fa fa fa-check"></em> ตอบรับ</button>
-        <button class="btn btn-danger"><em class="fa fa fa-times"></em> ปฏิเสธ</button>
+        สถานะใบสมัครงาน: <?=$lang[Detail::getApplyStatus($application['status'])]?>
+      </div>
+    </div>
+    <?php } else { ?>
+    <div class="row">
+      <div class="col-sm-12">
+        <button class="btn btn-success" onclick="updateStatus(5)"><em class="fa fa fa-check"></em> ตอบรับ</button>
+        <button class="btn btn-danger" onclick="updateStatus(4)"><em class="fa fa fa-times"></em> ปฏิเสธ</button>
         <!-- <a class="btn btn-info" data-title="Reply" data-toggle="modal" data-target="#reply"><em class="fa fa-paper-plane"></em> ส่งข้อความ</a> -->
       </div>
     </div>
+    <?php } ?>
   </div>
 </div>
 
@@ -297,6 +307,32 @@ $(function() {
     ]
   });
 });
+
+
+function updateStatus(status) {
+  $.ajax({
+    url: '<?=$_ENV['API_LOCATION']?>/applications/<?=$variables[2]?>/status',
+    type: 'PUT',
+    data: {status: status},
+    dataType: "json",
+    success: function (result) {
+      swal({
+        type: 'success',
+        title: '<?=$lang['Success']?>',
+        timer: 3000,
+        showConfirmButton: false,
+      });
+      setTimeout(function(){ window.location = "/employer/applications/"; }, 3000);
+    },
+    error: function (result) {
+      swal({
+        type: 'error',
+        title: '<?=$lang['AlertErrorText']?>',
+        timer: 1000
+      });
+    }
+  })
+}
 
 function reply(element){
   var id = $(element).attr('id');
