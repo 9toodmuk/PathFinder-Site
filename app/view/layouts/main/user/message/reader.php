@@ -181,6 +181,7 @@ $count = Message::count($_SESSION['social_id']);
                   </div>
                 </div>
 
+                <input type="hidden" id="messageid" value="<?=$messages['id']?>">
                 <input type="hidden" id="sender" value="<?=$_SESSION['social_id']?>">
                 <input type="hidden" id="receiver" value="<?=$messages['sender']?>">
                 <input type="hidden" id="type" value="<?=$messages['type']?>">
@@ -215,6 +216,7 @@ $count = Message::count($_SESSION['social_id']);
     });
 
     function reply() {
+      var id = $('input#messageid').val();
       var title = $('input#title').val();
       var message = $('div#message').summernote('code');
       var sender = $('input#sender').val();
@@ -224,7 +226,7 @@ $count = Message::count($_SESSION['social_id']);
       $.ajax({
         url: '<?=$_ENV['API_LOCATION']?>/messages',
         type: 'POST',
-        data: {title: title, text: message, sender: sender, reciever: receiver, type: type},
+        data: {title: title, text: message, sender: sender, reciever: receiver, type: type, reply_to: id },
         dataType: "json",
         success: function (result) {
           swal({

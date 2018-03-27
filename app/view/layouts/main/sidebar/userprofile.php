@@ -23,11 +23,11 @@
           <i class="fa fa-user"></i>
           <?=$lang['Profile']?> </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="/home/messages">
           <i class="fa fa-envelope"></i>
           <?=$lang['Messages']?> </a>
-        </li>
+        </li> -->
         <li>
           <a href="/home/favorites/">
           <i class="fa fa-star"></i>
