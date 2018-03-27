@@ -101,7 +101,7 @@ use App\Controller\Job\Employer;
           $("#errorbox").addClass("alert-success");
           $("#errorbox").html("<?=$lang['RegisterSuccess']?>");
           $("#errorbox").fadeIn();
-          setTimeout(function(){ window.location = "/home/"; }, 3000);
+          setTimeout(function(){ window.location = "/employer/"; }, 3000);
         }else{
           button.button('reset');
           if(result.reason == 1){

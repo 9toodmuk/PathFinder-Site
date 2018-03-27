@@ -158,20 +158,19 @@ $compid = Detail::getEmpId($_SESSION['emp_id']);
 
   function add(){
     $.ajax({
-      url: '/employer/newpostings/',
+      url: '<?=$_ENV['API_LOCATION']?>/jobs',
       type: 'POST',
       data: $("#addpostingsform").serialize(),
       success: function (result) {
-        if(result == "Error"){
+        $("#errorbox").removeClass("alert-danger");
+        $("#errorbox").addClass("alert-success");
+        $("#errorbox").html("<strong>Success!</success> Add new postings successfully.");
+        $("#errorbox").fadeIn();
+        setTimeout(function(){ window.location = "/employer/postings/"; }, 3000);
+      },
+      error: function (result) {
           $('#errorbox').fadeIn();
           $('#errorbox').delay(5000).fadeOut(1000);
-        }else if(result == "Success"){
-          $("#errorbox").removeClass("alert-danger");
-          $("#errorbox").addClass("alert-success");
-          $("#errorbox").html("<strong>Success!</success> Add new postings successfully.");
-          $("#errorbox").fadeIn();
-          setTimeout(function(){ window.location = "/employer/postings/"; }, 3000);
-        }
       }
     });
   }

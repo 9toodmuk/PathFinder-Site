@@ -20,7 +20,7 @@ $location = Detail::getLocation($compid);
         <div class="alert alert-danger" id="errorbox" style="display:none;"></div>
 
         <form role="form" id="addpostingsform" class="form-horizontal" method="post" enctype="multipart/form-data">
-          <input type="hidden" name="id" id="id" value="<?=$compid?>" class="form-control">
+          <input type="hidden" name="company_id" id="comany_id" value="<?=$compid?>" class="form-control">
             <div class="form-group">
                 <label for="" class="col-sm-2 control-label">ชื่อตำแหน่ง</label>
                 <div class="col-sm-10">
@@ -31,10 +31,10 @@ $location = Detail::getLocation($compid);
             <div class="form-group float-label-control">
                 <label for="parent" class="col-sm-2 control-label">หมวดหมู่</label>
                 <div class="col-sm-10">
-                  <select name="parent" id="parent" class="form-control" required>
+                  <select name="category_id" id="category_id" class="form-control" required>
                     <option value="">กรุณาเลือก</option>
                     <?php
-                      $conn = Config\Database::connection();
+                      $conn = App\Config\Database::connection();
                       $sql = "SELECT * FROM job_categories;";
                       $query = $conn->query($sql);
                       while ($row = $query->fetch_assoc()) {
@@ -46,9 +46,9 @@ $location = Detail::getLocation($compid);
             </div>
 
             <div class="form-group float-label-control">
-                <label for="responsibility" class="col-sm-2 control-label">ความรับผิดชอบ</label>
+                <label for="responsibilities" class="col-sm-2 control-label">ความรับผิดชอบ</label>
                 <div class="col-sm-10">
-                  <textarea name="responsibility" id="responsibility">
+                  <textarea name="responsibilities" id="responsibilities">
                   </textarea>
                 </div>
             </div>
@@ -89,7 +89,7 @@ $location = Detail::getLocation($compid);
                   <div class="input-group">
                     <input type="text" name="capacity" id="capacity" class="form-control" placeholder="จำนวนอัตรา" required>
                     <span class="input-group-addon"><label class="checkbox-inline" style="padding-top:0px;">
-                      <input type="checkbox" name="many" id="many">ไม่จำกัด</label>
+                      <input type="checkbox" name="cap_type" id="cap_type">ไม่จำกัด</label>
                     </span>
                   </div>
                 </div>
@@ -114,7 +114,7 @@ $location = Detail::getLocation($compid);
             <div class="form-group float-label-control">
                 <label for="joblevel" class="col-sm-2 control-label">ระดับตำแหน่งงาน</label>
                 <div class="col-sm-4">
-                  <select name="joblevel" id="joblevel" class="form-control" required>
+                  <select name="level" id="level" class="form-control" required>
                     <option value="">กรุณาเลือก</option>
                     <?php
                     for ($i=0; $i < 5 ; $i++) {
@@ -128,7 +128,7 @@ $location = Detail::getLocation($compid);
 
                 <label for="eduLevel" class="col-sm-2 control-label">ระดับการศึกษา</label>
                 <div class="col-sm-4">
-                  <select name="eduLevel" id="eduLevel" class="form-control" required>
+                  <select name="edu_req" id="edu_req" class="form-control" required>
                     <option value="">กรุณาเลือก</option>
                     <?php
                     for ($i=0; $i < 6 ; $i++) {
@@ -144,7 +144,7 @@ $location = Detail::getLocation($compid);
             <div class="form-group float-label-control">
                 <label for="exp" class="col-sm-2 control-label">อายุงาน</label>
                 <div class="col-sm-4">
-                  <select name="exp" class="form-control" id="exp" required>
+                  <select name="exp_req" class="form-control" id="exp_req" required>
                     <option value="">กรุณาเลือก</option>
                     <option value="0">ไม่จำกัด</option>
                     <?php
@@ -228,12 +228,12 @@ $location = Detail::getLocation($compid);
           });
         });
 
-        $('#many').change(function(){
+        $('#cap_type').change(function(){
           this.checked ? $('#capacity').prop('disabled', true) : $('#capacity').prop('disabled', false);
         });
 
         ClassicEditor
-          .create( document.querySelector( '#responsibility' ) , {
+          .create( document.querySelector( '#responsibilities' ) , {
             removePlugins: [ 'Heading', 'Link' ],
             toolbar: [ 'bold', 'italic', 'bulletedList' ],
           } )

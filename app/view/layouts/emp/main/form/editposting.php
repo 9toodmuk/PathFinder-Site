@@ -41,7 +41,7 @@ $location = Detail::getLocation($compid);
                   <select name="editparent" id="editparent" class="form-control" required>
                     <option value="">กรุณาเลือก</option>
                     <?php
-                      $conn = Config\Database::connection();
+                      $conn = App\Config\Database::connection();
                       $sql = "SELECT * FROM job_categories;";
                       $query = $conn->query($sql);
                       while ($row = $query->fetch_assoc()) {

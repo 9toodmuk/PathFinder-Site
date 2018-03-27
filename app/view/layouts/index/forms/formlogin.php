@@ -68,7 +68,7 @@
       dataType: 'json',
       success: function (result) {
         $.ajax({
-          url: 'registration/session',
+          url: '/registration/session',
           type: 'POST',
           data: {id: result.id, lang: result.language},
           success: function (result) {

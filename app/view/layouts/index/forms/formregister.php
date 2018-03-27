@@ -76,23 +76,25 @@
     $button.button('loading');
 
     $.ajax({
-      url: '/registration/signup/',
+      url: '<?=$_ENV['API_LOCATION']?>/auth/register',
       type: 'POST',
       data: {firstname : name, lastname: lastname, email: email, password: pass},
       success: function (result) {
         $(window).scrollTop(0);
-        if(result == "EMailUsed"){
+        $("#errorbox").removeClass("alert-danger");
+        $("#errorbox").addClass("alert-success");
+        $("#errorbox").html("<?=$lang['RegisterSuccess']?>");
+        $("#errorbox").fadeIn();
+        setTimeout(function(){ window.location = "/home/"; }, 3000);
+      },
+      error: function (xhr) {
+        if (xhr.status == 400) {
           $("#errorbox").html("<?=$lang['Emailhasbeenused']?>");
           $("#errorbox").fadeIn();
           $("#errorbox").delay(3000).fadeOut(300);
           $button.button('reset');
-        }else if(result == "Success"){
-          $("#errorbox").removeClass("alert-danger");
-          $("#errorbox").addClass("alert-success");
-          $("#errorbox").html("<?=$lang['RegisterSuccess']?>");
-          $("#errorbox").fadeIn();
-          setTimeout(function(){ window.location = "/home/"; }, 3000);
-        }else{
+        } else if (xhr.status == 500) {
+          $("#errorbox").html("<?=$lang['AlertErrorText']?>");
           $("#errorbox").fadeIn();
           $("div#errorbox").delay(3000).fadeOut(300);
           $button.button('reset');

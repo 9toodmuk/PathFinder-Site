@@ -80,14 +80,12 @@ class Auth {
     $newpass = Utils::passhash($pass);
     $conn = Database::connection();
 
-    $guid = Utils::getGUID();
-
     $group = '2';
 
-    $sql = "INSERT INTO users (guid, email, password, user_group, created_at) VALUES ('$guid', '$email', '$newpass', '$group', '$created_date');";
+    $sql = "INSERT INTO users (email, password, user_group, created_at) VALUES ('$email', '$newpass', '$group', '$created_date');";
     if ($conn->query($sql)) {
       $userid = $conn->insert_id;
-      $sql = "INSERT INTO company (name, telephone, contact_name, contact_email, section, category_id) VALUES ('$name', '$telephone', '$contact', '$contactemail', '$section', '$category');";
+      $sql = "INSERT INTO company (name, telephone, contact_name, contact_email, section, category_id, user_id) VALUES ('$name', '$telephone', '$contact', '$contactemail', '$section', '$category', '$userid');";
       if ($conn->query($sql)) {
         $sql = "INSERT INTO company_settings (user_id) VALUES ('$userid');";
         if ($conn->query($sql)) {

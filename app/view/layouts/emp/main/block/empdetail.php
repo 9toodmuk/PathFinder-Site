@@ -15,6 +15,7 @@ if($language == "en"){
   $thai = true;
 }
 ?>
+
 <div class="portlet margin-bottom-30">
   <div class="portlet-title">
     <div class="caption caption-green">
