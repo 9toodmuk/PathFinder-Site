@@ -3,10 +3,10 @@ namespace App\Config;
 
 class Database{
   public static function connection(){
-    $host = "www.pathfinder.in.th";
-    $user = "cp525119_aemza";
-    $pass = "AemzaLanla159";
-    $database = "cp525119_pathfinder";
+    $host = "";
+    $user = "";
+    $pass = "";
+    $database = "";
 
     // $host = "localhost";
     // $user = "root";
